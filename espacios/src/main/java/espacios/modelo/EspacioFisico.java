@@ -1,0 +1,148 @@
+package espacios.modelo;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.Lob;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import espacios.repositorio.Identificable;
+
+@Entity
+@Table(name = "EspacioFisico")
+public class EspacioFisico implements Identificable {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private String id;
+	private String nombre;
+	private String propietario;
+	private int capacidad;
+	private String direccion;
+	private double longitud;
+	private double latitud;
+
+	@Lob
+	private String descripcion;
+
+	@Enumerated(EnumType.STRING)
+	private EspacioFisicoEstado estado;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "EspacioFisico_PuntoInteres")
+	private List<PuntoInteres> puntosInteres;
+
+	public EspacioFisico() {
+
+	}
+
+	public EspacioFisico(String nombre, String propietario, int capacidad, String direccion, double latitud,
+			double longitud, String descripcion) {
+		this.nombre = nombre;
+		this.propietario = propietario;
+		this.capacidad = capacidad;
+		this.direccion = direccion;
+		this.longitud = longitud;
+		this.latitud = latitud;
+		this.descripcion = descripcion;
+
+		this.estado = EspacioFisicoEstado.ACTIVO;
+		this.puntosInteres = new LinkedList<PuntoInteres>();
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public int getCapacidad() {
+		return capacidad;
+	}
+
+	public void setCapacidad(int capacidad) {
+		this.capacidad = capacidad;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public double getLongitud() {
+		return longitud;
+	}
+
+	public double getLatitud() {
+		return latitud;
+	}
+
+	public List<PuntoInteres> getPuntosInteres() {
+		return new LinkedList<PuntoInteres>(puntosInteres);
+	}
+
+	public void setPuntosInteres(LinkedList<PuntoInteres> puntosInteres) {
+		this.puntosInteres.addAll(puntosInteres);
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getPropietario() {
+		return propietario;
+	}
+
+	public EspacioFisicoEstado getEstado() {
+		return estado;
+	}
+
+	public boolean isCancelado() {
+		return estado == EspacioFisicoEstado.CERRADO_TEMPORALMENTE;
+	}
+
+	public void activar() {
+		this.estado = EspacioFisicoEstado.ACTIVO;
+	}
+
+	public void cerrar() {
+		this.estado = EspacioFisicoEstado.CERRADO_TEMPORALMENTE;
+	}
+
+	public String getNombrePuntosInteresByDistancia() {
+		LinkedList<PuntoInteres> puntosInteresAux = new LinkedList<PuntoInteres>(puntosInteres);
+		puntosInteresAux.sort((p1, p2) -> Double.compare(p1.getDistancia(), p2.getDistancia()));
+		return puntosInteresAux.stream().map(p -> p.toString()).collect(Collectors.joining(""));
+	}
+
+	@Override
+	public String toString() {
+		return "EspacioFisico [nombre=" + nombre + ", direccionPostal=" + direccion + "]\n"
+				+ this.getNombrePuntosInteresByDistancia();
+	}
+
+}
