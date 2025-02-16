@@ -7,20 +7,15 @@
         <class>espacios.modelo.EspacioFisico</class>
         <class>espacios.modelo.PuntoInteres</class>
         <properties>
-            <property name="javax.persistence.jdbc.driver"
-                value="com.mysql.cj.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
             <property name="javax.persistence.jdbc.user" value="manujuli" />
-            <property name="javax.persistence.jdbc.password"
-                value="manujuli" />
+            <property name="javax.persistence.jdbc.password" value="manujuli" />
             <property name="javax.persistence.jdbc.url"
                 value="jdbc:mysql://elmanueh.es:3306/arso-espacios?serverTimezone=CET" />
-            <property name="eclipselink.ddl-generation"
-                value="create-or-extend-tables" />
+            <property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
             <!-- value = "none" /> -->
-            <property name="eclipselink.query-results-cache"
-                value="false" />
-            <property name="eclipselink.cache.shared.default"
-                value="false" />
+            <property name="eclipselink.query-results-cache" value="false" />
+            <property name="eclipselink.cache.shared.default" value="false" />
             <property name="eclipselink.cache.size.default" value="0" />
             <property name="eclipselink.refresh" value="true" />
 
