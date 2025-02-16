@@ -89,12 +89,24 @@ public class EspacioFisico implements Identificable {
 		return direccion;
 	}
 
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
 	public double getLongitud() {
 		return longitud;
 	}
 
+	public void setLongitud(double longitud) {
+		this.longitud = longitud;
+	}
+
 	public double getLatitud() {
 		return latitud;
+	}
+
+	public void setLatitud(double latitud) {
+		this.latitud = latitud;
 	}
 
 	public List<PuntoInteres> getPuntosInteres() {
@@ -115,6 +127,10 @@ public class EspacioFisico implements Identificable {
 
 	public String getPropietario() {
 		return propietario;
+	}
+
+	public void setPropietario(String propietario) {
+		this.propietario = propietario;
 	}
 
 	public EspacioFisicoEstado getEstado() {
