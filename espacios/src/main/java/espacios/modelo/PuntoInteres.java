@@ -50,6 +50,23 @@ public class PuntoInteres {
 		return url;
 	}
 
+	// Setters
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public void setDistancia(float distancia) {
+		this.distancia = distancia;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	@Override
 	public String toString() {
 		return "PuntoInteres [nombre=" + nombre + ", distancia = " + distancia + "]\n";

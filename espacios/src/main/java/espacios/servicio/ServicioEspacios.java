@@ -20,9 +20,14 @@ public class ServicioEspacios implements IServicioEspacios {
 	}
 
 	@Override
+	public EspacioFisico recuperarEspacioFisico(String idEspacioFisico)
+			throws RepositorioException, EntidadNoEncontrada {
+		return repositorioEspacioFisico.getById(idEspacioFisico);
+	}
+
+	@Override
 	public String altaEspacioFisico(String nombre, String propietario, int capacidad, String direccionPostal,
-			double latitud, double longidud,
-			String descripcion) throws RepositorioException {
+			double latitud, double longidud, String descripcion) throws RepositorioException {
 
 		if (nombre == null || nombre.isEmpty())
 			throw new IllegalArgumentException("El nombre del espacio físico no puede ser nulo o vacío.");

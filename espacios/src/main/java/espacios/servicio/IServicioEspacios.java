@@ -11,9 +11,10 @@ import espacios.repositorio.RepositorioException;
 
 public interface IServicioEspacios {
 
+	EspacioFisico recuperarEspacioFisico(String idEspacioFisico) throws RepositorioException, EntidadNoEncontrada;
+
 	String altaEspacioFisico(String nombre, String propietario, int capacidad, String direccionPostal, double latitud,
-			double longidud,
-			String descripcion) throws RepositorioException;
+			double longidud, String descripcion) throws RepositorioException;
 
 	void asignarPuntosDeInteres(String idEspacioFisico, LinkedList<PuntoInteres> puntosInteres)
 			throws RepositorioException, EntidadNoEncontrada;
