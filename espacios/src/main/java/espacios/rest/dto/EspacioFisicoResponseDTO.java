@@ -1,7 +1,9 @@
-package espacios.rest;
+package espacios.rest.dto;
 
-public class EspacioFisicoDTO {
+import java.util.LinkedList;
+import java.util.List;
 
+public class EspacioFisicoResponseDTO {
     private String id;
     private String nombre;
     private String propietario;
@@ -10,8 +12,11 @@ public class EspacioFisicoDTO {
     private double longitud;
     private double latitud;
     private String descripcion;
+    private String estado;
+    private LinkedList<String> puntosInteres;
 
-    public EspacioFisicoDTO() {
+    public EspacioFisicoResponseDTO() {
+        puntosInteres = new LinkedList<>();
     }
 
     public String getId() {
@@ -77,4 +82,21 @@ public class EspacioFisicoDTO {
     public void setLatitud(double latitud) {
         this.latitud = latitud;
     }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public List<String> getPuntosInteres() {
+        return puntosInteres;
+    }
+
+    public void setPuntosInteres(List<String> puntosInteres) {
+        this.puntosInteres = new LinkedList<>(puntosInteres);
+    }
+
 }
