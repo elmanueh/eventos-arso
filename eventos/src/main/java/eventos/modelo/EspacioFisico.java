@@ -1,19 +1,7 @@
 package eventos.modelo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+public class EspacioFisico {
 
-import eventos.repositorio.Identificable;
-
-@Entity
-@Table(name = "EspacioFisico")
-public class EspacioFisico implements Identificable {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String id;
 	private String nombre;
 	private String propietario;

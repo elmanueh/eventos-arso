@@ -2,26 +2,12 @@ package eventos.modelo;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+public class Ocupacion {
 
-import eventos.repositorio.Identificable;
-
-@Entity
-@Table(name = "Ocupacion")
-public class Ocupacion implements Identificable {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String id;
 	private LocalDateTime fechaInicio;
 	private LocalDateTime fechaFin;
 
-	@ManyToOne
 	private EspacioFisico espacioFisico;
 
 	public Ocupacion() {

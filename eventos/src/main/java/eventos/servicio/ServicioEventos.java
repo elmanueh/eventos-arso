@@ -1,29 +1,32 @@
 package eventos.servicio;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
+
+import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import eventos.modelo.Evento;
 import eventos.modelo.EventoCategoria;
-import eventos.repositorio.EntidadNoEncontrada;
-import eventos.repositorio.FactoriaRepositorios;
-import eventos.repositorio.IRepositorioAdHocEvento;
-import eventos.repositorio.RepositorioException;
+import eventos.repositorio.RepositorioEventos;
 
+@Service
+@Transactional
 public class ServicioEventos implements IServicioEventos {
 
-	private IRepositorioAdHocEvento repositorioEvento;
+	private RepositorioEventos repositorioEvento;
 
-	public ServicioEventos() {
-		repositorioEvento = FactoriaRepositorios.getRepositorio(Evento.class);
+	@Autowired
+	public ServicioEventos(RepositorioEventos repositorio) {
+		this.repositorioEvento = repositorio;
 	}
 
 	@Override
 	public String altaEvento(String nombre, String descripcion, String organizador, EventoCategoria categoria,
-			LocalDateTime fechaInicio,
-			LocalDateTime fechaFin, int numPlazas, String idEspacioFisico)
-			throws RepositorioException, EntidadNoEncontrada {
+			LocalDateTime fechaInicio, LocalDateTime fechaFin, int numPlazas, String idEspacioFisico) {
 
 		if (nombre == null || nombre.isEmpty())
 			throw new IllegalArgumentException("El nombre del evento no puede ser nulo o vacío.");
@@ -43,7 +46,7 @@ public class ServicioEventos implements IServicioEventos {
 			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo o vacío.");
 
 		// try {
-		// EspacioFisico espacioFisico = repositorioEspacio.getById(idEspacioFisico);
+		// EspacioFisico espacioFisico = repositorioEspacio.findById(idEspacioFisico);
 		// if (espacioFisico.isCancelado())
 		// throw new IllegalArgumentException("El espacio físico con id " +
 		// idEspacioFisico + " está cancelado.");
@@ -51,18 +54,15 @@ public class ServicioEventos implements IServicioEventos {
 		// throw new IllegalArgumentException(
 		// "El número de plazas supera la capacidad del espacio físico con id " +
 		// idEspacioFisico + ".");
-		//
 		// LinkedList<EspacioFisico> espaciosFisicos = new LinkedList<EspacioFisico>(
 		// repositorioEspacio.getEspaciosFisicoLibres(fechaInicio, fechaFin,
 		// numPlazas));
-		//
 		// boolean isEspacioFisicoLibre = espaciosFisicos.stream()
 		// .anyMatch(espacio -> espacio.getId().equals(idEspacioFisico));
 		// if (!isEspacioFisicoLibre)
 		// throw new IllegalArgumentException(
 		// "El espacio fisico con id " + idEspacioFisico + " no está disponible en la
 		// fecha.");
-		//
 		// Evento evento = new Evento(nombre, descripcion, organizador, numPlazas,
 		// categoria, fechaInicio, fechaFin,
 		// espacioFisico);
@@ -81,8 +81,7 @@ public class ServicioEventos implements IServicioEventos {
 
 	@Override
 	public void modificarEvento(String idEvento, String descripcion, LocalDateTime fechaInicio, LocalDateTime fechaFin,
-			int numPlazas, String idEspacioFisico)
-			throws RepositorioException, EntidadNoEncontrada {
+			int numPlazas, String idEspacioFisico) {
 
 		if (idEvento == null || idEvento.isEmpty())
 			throw new IllegalArgumentException("El id del evento no puede ser nulo o vacío.");
@@ -93,43 +92,39 @@ public class ServicioEventos implements IServicioEventos {
 		if (idEspacioFisico != null && idEspacioFisico.isEmpty())
 			throw new IllegalArgumentException("El id del espacio físico no puede ser vacío.");
 
-		try {
-			Evento evento = repositorioEvento.getById(idEvento);
+		Optional<Evento> evento2 = repositorioEvento.findById(idEvento);
+		if (!evento2.isPresent())
+			throw new EntityNotFoundException("Error al encontrar el evento con id " + idEvento + ".");
 
-			if (descripcion != null)
-				evento.setDescripcion(descripcion);
-			if (fechaInicio != null)
-				evento.setFechaInicio(fechaInicio);
-			if (fechaFin != null)
-				evento.setFechaFin(fechaFin);
-			if (numPlazas != -1)
-				evento.setPlazas(numPlazas);
-			if (idEspacioFisico != null)
-				// evento.setEspacioFisico(repositorioEspacio.getById(idEspacioFisico));
-
-				repositorioEvento.update(evento);
-		} catch (RepositorioException e) {
-			throw new RepositorioException("Error al modificar el evento con id " + idEvento + ".");
-		} catch (EntidadNoEncontrada e) {
-			throw new EntidadNoEncontrada("Error al encontrar el evento con id " + idEvento + ".");
+		Evento evento = evento2.get();
+		if (descripcion != null)
+			evento.setDescripcion(descripcion);
+		if (fechaInicio != null)
+			evento.setFechaInicio(fechaInicio);
+		if (fechaFin != null)
+			evento.setFechaFin(fechaFin);
+		if (numPlazas != -1)
+			evento.setPlazas(numPlazas);
+		if (idEspacioFisico != null) {
+			// evento.setEspacioFisico(repositorioEspacio.getById(idEspacioFisico));
 		}
+
+		repositorioEvento.save(evento);
 	}
 
 	@Override
-	public void cancelarEvento(String idEvento) throws RepositorioException, EntidadNoEncontrada {
+	public void cancelarEvento(String idEvento) {
 
 		if (idEvento == null || idEvento.isEmpty())
 			throw new IllegalArgumentException("El id del evento no puede ser nulo o vacio.");
 
-		try {
-			Evento evento = repositorioEvento.getById(idEvento);
-			evento.setCancelado();
-			repositorioEvento.update(evento);
-		} catch (RepositorioException e) {
-			throw new RepositorioException("Error al cancelar el evento con id " + idEvento + ".");
-		} catch (EntidadNoEncontrada e) {
-			throw new EntidadNoEncontrada("Error al encontrar el evento con id " + idEvento + ".");
-		}
+		Optional<Evento> evento2 = repositorioEvento.findById(idEvento);
+		if (!evento2.isPresent())
+			throw new EntityNotFoundException("Error al encontrar el evento con id " + idEvento + ".");
+
+		Evento evento = evento2.get();
+		evento.setCancelado();
+		repositorioEvento.save(evento);
 	}
 
 	@Override
@@ -140,9 +135,12 @@ public class ServicioEventos implements IServicioEventos {
 		if (año < 0)
 			throw new IllegalArgumentException("El año no puede ser negativo.");
 
-		List<Evento> eventos = repositorioEvento.getEventosDelMes(mes, año);
-		String resumenEventos = eventos.stream().map(Evento::toString).collect(Collectors.joining(""));
-		return resumenEventos;
+		// List<Evento> eventos = repositorioEvento.getEventosDelMes(mes, año);
+		// String resumenEventos =
+		// eventos.stream().map(Evento::toString).collect(Collectors.joining(""));
+		// return resumenEventos;
+
+		return "";
 	}
 
 }

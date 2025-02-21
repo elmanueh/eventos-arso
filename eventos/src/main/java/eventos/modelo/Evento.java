@@ -2,45 +2,23 @@ package eventos.modelo;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+public class Evento {
 
-import eventos.repositorio.Identificable;
-
-@Entity
-@Table(name = "Evento")
-public class Evento implements Identificable {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String id;
 	private String nombre;
-
-	@Lob
 	private String descripcion;
 	private String organizador;
 	private int plazas;
 	private boolean cancelado;
-
-	@Enumerated(EnumType.STRING)
 	private EventoCategoria categoria;
-
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Ocupacion ocupacion;
 
 	public Evento() {
 
 	}
 
-	public Evento(String nombre, String descripcion, String organizador, int plazas, EventoCategoria categoria, LocalDateTime fechaInicio,
+	public Evento(String nombre, String descripcion, String organizador, int plazas, EventoCategoria categoria,
+			LocalDateTime fechaInicio,
 			LocalDateTime fechaFin, EspacioFisico espacioFisico) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -118,7 +96,8 @@ public class Evento implements Identificable {
 
 	@Override
 	public String toString() {
-		return "Evento [Nombre=" + nombre + ", descripcion=" + descripcion + ", categoria=" + categoria + "]\n" + ocupacion.toString() + "\n";
+		return "Evento [Nombre=" + nombre + ", descripcion=" + descripcion + ", categoria=" + categoria + "]\n"
+				+ ocupacion.toString() + "\n";
 	}
 
 }
