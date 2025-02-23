@@ -2,12 +2,26 @@ package eventos.modelo;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "Ocupacion")
 public class Ocupacion {
 
+	@Id
+	@GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String id;
 	private LocalDateTime fechaInicio;
 	private LocalDateTime fechaFin;
 
+	@ManyToOne
 	private EspacioFisico espacioFisico;
 
 	public Ocupacion() {

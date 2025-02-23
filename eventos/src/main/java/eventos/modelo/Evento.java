@@ -2,15 +2,38 @@ package eventos.modelo;
 
 import java.time.LocalDateTime;
 
-public class Evento {
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "Evento")
+public class Evento {
+	
+	@Id
+	@GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String id;
 	private String nombre;
+	
+	@Lob
 	private String descripcion;
 	private String organizador;
 	private int plazas;
 	private boolean cancelado;
+	
+	@Enumerated(EnumType.STRING)
 	private EventoCategoria categoria;
+	
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Ocupacion ocupacion;
 
 	public Evento() {
@@ -97,7 +120,7 @@ public class Evento {
 	@Override
 	public String toString() {
 		return "Evento [Nombre=" + nombre + ", descripcion=" + descripcion + ", categoria=" + categoria + "]\n"
-				+ ocupacion.toString() + "\n";
+				+ ocupacion + "\n";
 	}
 
 }

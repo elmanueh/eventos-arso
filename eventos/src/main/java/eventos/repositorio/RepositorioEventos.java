@@ -1,5 +1,7 @@
 package eventos.repositorio;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
@@ -7,5 +9,7 @@ import eventos.modelo.Evento;
 
 @NoRepositoryBean
 public interface RepositorioEventos extends CrudRepository<Evento, String> {
+
+	List<Evento> getEventosDelMes(int mes, int año);
 
 }
