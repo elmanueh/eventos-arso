@@ -8,7 +8,7 @@ import eventos.repositorio.EntidadNoEncontrada;
 
 public interface IServicioEventos {
 	
-	Evento recuperarEspacioFisico(String idEvento) throws EntidadNoEncontrada;
+	Evento recuperarEvento(String idEvento) throws EntidadNoEncontrada;
 
 	String altaEvento(String nombre, String descripcion, String organizador, EventoCategoria categoria,
 			LocalDateTime fechaInicio, LocalDateTime fechaFin, int numPlazas, String idEspacioFisico) throws EntidadNoEncontrada;

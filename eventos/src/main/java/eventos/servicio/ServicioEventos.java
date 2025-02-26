@@ -29,7 +29,7 @@ public class ServicioEventos implements IServicioEventos {
 	}
 	
 	@Override
-	public Evento recuperarEspacioFisico(String idEvento) throws EntidadNoEncontrada {
+	public Evento recuperarEvento(String idEvento) throws EntidadNoEncontrada {
 		if (idEvento == null || idEvento.isEmpty())
 			throw new IllegalArgumentException("id: no debe ser nulo ni vacio");
 
