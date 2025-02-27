@@ -84,7 +84,7 @@ public class ServicioEspacios implements IServicioEspacios {
 			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo o vacío.");
 		if (nombre != null && nombre.isEmpty())
 			throw new IllegalArgumentException("El nombre del espacio físico no puede ser vacío.");
-		if (capacidad == 0 && capacidad < -1)
+		if (capacidad <= -1)
 			throw new IllegalArgumentException("La capacidad del espacio físico debe ser mayor que 0.");
 		if (descripcion != null && descripcion.isEmpty())
 			throw new IllegalArgumentException("La descripción del espacio físico no puede ser vacía.");
@@ -94,7 +94,7 @@ public class ServicioEspacios implements IServicioEspacios {
 
 			if (nombre != null)
 				espacioFisico.setNombre(nombre);
-			if (capacidad != -1)
+			if (capacidad != 0)
 				espacioFisico.setCapacidad(capacidad);
 			if (descripcion != null)
 				espacioFisico.setDescripcion(descripcion);
