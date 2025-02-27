@@ -13,9 +13,9 @@ import espacios.servicio.IServicioAuth;
 
 @Path("auth")
 public class ControladorAuth {
-	
+
 	private IServicioAuth servicio = FactoriaServicios.getServicio(IServicioAuth.class);
-	
+
 	@POST
 	@Path("/login")
 	public Response login(@FormParam("username") String username, @FormParam("password") String password) {
@@ -31,15 +31,15 @@ public class ControladorAuth {
 	}
 
 	private Map<String, Object> verificarCredenciales(String username, String password) {
-		
+
 		if (!servicio.verificarCredenciales(username, password))
 			return null;
-		
+
 		HashMap<String, Object> claims = new HashMap<String, Object>();
 		claims.put("sub", username);
 		claims.put("roles", "PROFESOR");
-		
+
 		return claims;
 	}
-	
+
 }

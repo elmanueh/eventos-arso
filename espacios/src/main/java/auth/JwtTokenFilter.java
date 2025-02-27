@@ -24,20 +24,20 @@ public class JwtTokenFilter implements ContainerRequestFilter {
 
 	@Context
 	private ResourceInfo resourceInfo;
-	
+
 	@Context
 	private HttpServletRequest servletRequest;
-	
+
 	@Override
 	public void filter(ContainerRequestContext requestContext) {
 
 		String path = requestContext.getUriInfo().getPath();
-		
-		 // Comprobamos si la ruta tiene la anotación @PermitAll
-		 if (resourceInfo.getResourceMethod().isAnnotationPresent(PermitAll.class)) {
-			 return; 
-		 }
-		
+
+		// Comprobamos si la ruta tiene la anotación @PermitAll
+		if (resourceInfo.getResourceMethod().isAnnotationPresent(PermitAll.class)) {
+			return;
+		}
+
 		// rutas públicas
 		if (path.equals("auth/login")) {
 			return; // no se controla la autorización
@@ -54,9 +54,9 @@ public class JwtTokenFilter implements ContainerRequestFilter {
 			try {
 				// Validar el token ...
 				Claims claims = JwtUtils.validateToken(token);
-				
+
 				this.servletRequest.setAttribute("claims", claims);
-				
+
 				Set<String> roles = new HashSet<>(Arrays.asList(claims.get("roles", String.class).split(",")));
 
 				// Consulta si la operación está protegida por rol
