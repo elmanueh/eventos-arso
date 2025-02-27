@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.LinkedList;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -45,6 +46,7 @@ public class ControladorEspacios {
     private UriInfo uriInfo;
 
     @POST
+    @RolesAllowed("PROPIETARIO_ESPACIOS")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createEspacio(CreateEspacioFisicoDTO espacioFisicoDTO) throws Exception {
 
@@ -60,6 +62,7 @@ public class ControladorEspacios {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({ "PROPIETARIO_ESPACIOS", "USUARIO" })
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEspacio(@PathParam("id") String idEspacioFisico) throws Exception {
         EspacioFisico espacioFisico = servicio.recuperarEspacioFisico(idEspacioFisico);
@@ -68,6 +71,7 @@ public class ControladorEspacios {
 
     @PATCH
     @Path("/{id}")
+    @RolesAllowed("PROPIETARIO_ESPACIOS")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateEspacio(@PathParam("id") String id, UpdateEspacioFisicoDTO espacioFisicoDTO)
             throws Exception {
@@ -81,6 +85,7 @@ public class ControladorEspacios {
 
     @PUT
     @Path("/{id}/estado")
+    @RolesAllowed("PROPIETARIO_ESPACIOS")
     public Response cambiarEstadoEspacio(@PathParam("id") String id, @FormParam("estado") String estado)
             throws Exception {
 
@@ -101,6 +106,7 @@ public class ControladorEspacios {
 
     @GET
     @Path("/libre")
+    @RolesAllowed({ "PROPIETARIO_ESPACIOS", "USUARIO" })
     @Produces(MediaType.APPLICATION_JSON)
     public Response buscarEspaciosFisicosLibres(@QueryParam("fechainicio") String fechaInicio,
             @QueryParam("fechafin") String fechaFin, @QueryParam("capacidad") int capacidad) throws Exception {
@@ -130,6 +136,7 @@ public class ControladorEspacios {
 
     @PUT
     @Path("/{id}/puntosinteres")
+    @RolesAllowed("PROPIETARIO_ESPACIOS")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response asignarPuntosDeInteres(@PathParam("id") String id, List<PuntoInteresDTO> puntosInteresDTO)
             throws Exception {

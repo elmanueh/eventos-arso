@@ -27,7 +27,6 @@ public class ControladorAuth {
 		} else {
 			return Response.status(Response.Status.UNAUTHORIZED).entity("Credenciales inválidas").build();
 		}
-
 	}
 
 	private Map<String, Object> verificarCredenciales(String username, String password) {
@@ -37,7 +36,7 @@ public class ControladorAuth {
 
 		HashMap<String, Object> claims = new HashMap<String, Object>();
 		claims.put("sub", username);
-		claims.put("roles", "PROFESOR");
+		claims.put("roles", servicio.obtenerRoles(username));
 
 		return claims;
 	}
