@@ -30,7 +30,7 @@ public class EspacioFisicoMapper {
         EspacioFisico espacio = new EspacioFisico();
         espacio.setNombre(dto.getNombre());
         espacio.setCapacidad(dto.getCapacidad());
-        espacio.setDireccion(dto.getDescripcion());
+        espacio.setDescripcion(dto.getDescripcion());
         return espacio;
     }
 
