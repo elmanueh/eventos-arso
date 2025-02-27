@@ -17,9 +17,9 @@ public class ServicioAuth implements IServicioAuth {
 
         roles = new HashMap<>();
         roles.put("gestor", "GESTOR_EVENTOS");
-        roles.put("propi", "PROPIETARIO_ESPACIOS");
-        roles.put("user", "USUARIO");
-        roles.put("admin", "GESTOR_EVENTOS, PROPIETARIO_ESPACIOS, USUARIO");
+        roles.put("propietario", "PROPIETARIO_ESPACIOS");
+        roles.put("usuario", "USUARIO");
+        roles.put("admin", "GESTOR_EVENTOS,PROPIETARIO_ESPACIOS,USUARIO");
     }
 
     @Override
