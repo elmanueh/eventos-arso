@@ -28,6 +28,7 @@ public class ServicioEventos implements IServicioEventos {
 		this.repositorioEvento = repositorio;
 	}
 	
+	// USUARIO
 	@Override
 	public Evento recuperarEvento(String idEvento) throws EntidadNoEncontrada {
 		if (idEvento == null || idEvento.isEmpty())
@@ -41,6 +42,7 @@ public class ServicioEventos implements IServicioEventos {
 			return resultado.get();
 	}
 
+	// GESTOR_EVENTOS
 	@Override
 	public String altaEvento(String nombre, String descripcion, String organizador, EventoCategoria categoria,
 			LocalDateTime fechaInicio, LocalDateTime fechaFin, int numPlazas, String idEspacioFisico) throws EntidadNoEncontrada {
@@ -100,6 +102,7 @@ public class ServicioEventos implements IServicioEventos {
 			
 	}
 
+	// GESTOR_EVENTOS
 	@Override
 	public void modificarEvento(String idEvento, String descripcion, LocalDateTime fechaInicio, LocalDateTime fechaFin,
 			int numPlazas, String idEspacioFisico) throws EntidadNoEncontrada {
@@ -137,6 +140,7 @@ public class ServicioEventos implements IServicioEventos {
 		repositorioEvento.save(evento);
 	}
 
+	// GESTOR_EVENTOS
 	@Override
 	public void cancelarEvento(String idEvento) {
 
@@ -152,6 +156,7 @@ public class ServicioEventos implements IServicioEventos {
 		repositorioEvento.save(evento);
 	}
 
+	// USUARIO
 	@Override
 	public String eventosDelMes(int mes, int año) {
 		if (mes < 1 || mes > 12)
