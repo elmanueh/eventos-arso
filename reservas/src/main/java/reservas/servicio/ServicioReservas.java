@@ -29,37 +29,37 @@ public class ServicioReservas implements IServicioReservas {
 	// USUARIO
 	@Override
 	public String reservar(String idEvento, String idUsuario, int numPlazas) throws EntidadNoEncontrada {
-        Optional<Evento> eventoOpt = repositorioEventos.findById(idEvento);
-        
-        if (!eventoOpt.isPresent()) {
-            throw new EntidadNoEncontrada("No existe evento con id: " + idEvento);
-        }
-        
-        Evento evento = eventoOpt.get();
+		Optional<Evento> eventoOpt = repositorioEventos.findById(idEvento);
 
-        if (evento.isCancelado())
-        	throw new IllegalArgumentException("El evento con id " + idEvento + " está cancelado.");
+		if (!eventoOpt.isPresent()) {
+			throw new EntidadNoEncontrada("No existe evento con id: " + idEvento);
+		}
 
-        if(evento.getPlazasDisponibles() < numPlazas)
-        	throw new IllegalArgumentException("El número de plazas supera la capacidad del evento con id " + idEvento + ".");
-        
-        // Crear reserva
-        Reserva nuevaReserva = new Reserva();
-        nuevaReserva.setEvento(evento);
-        nuevaReserva.setIdUsuario(idUsuario);
-        nuevaReserva.setPlazasReservadas(numPlazas);
+		Evento evento = eventoOpt.get();
 
-        repositorioReservas.save(nuevaReserva);
-        
-        
-        //TODO: esta bien lo siguiente??
-        // Actualizar plazas en el evento
-        evento.reservarPlazas(numPlazas);
-        evento.addReserva(nuevaReserva);
-        
-        repositorioEventos.save(evento);
+		if (evento.isCancelado())
+			throw new IllegalArgumentException("El evento con id " + idEvento + " está cancelado.");
 
-        return nuevaReserva.getId();
+		if (evento.getPlazasDisponibles() < numPlazas)
+			throw new IllegalArgumentException(
+					"El número de plazas supera la capacidad del evento con id " + idEvento + ".");
+
+		// Crear reserva
+		Reserva nuevaReserva = new Reserva();
+		nuevaReserva.setEvento(evento);
+		nuevaReserva.setIdUsuario(idUsuario);
+		nuevaReserva.setPlazasReservadas(numPlazas);
+
+		repositorioReservas.save(nuevaReserva);
+
+		// TODO: esta bien lo siguiente??
+		// Actualizar plazas en el evento
+		evento.reservarPlazas(numPlazas);
+		evento.addReserva(nuevaReserva);
+
+		repositorioEventos.save(evento);
+
+		return nuevaReserva.getId();
 	}
 
 	// USUARIO
@@ -69,24 +69,23 @@ public class ServicioReservas implements IServicioReservas {
 			throw new IllegalArgumentException("id: no debe ser nulo ni vacio");
 
 		Optional<Reserva> resultado = repositorioReservas.findById(idReserva);
-		
+
 		if (resultado.isPresent() == false)
 			throw new EntidadNoEncontrada("No existe encuesta con id: " + idReserva);
 		else
 			return resultado.get();
 	}
 
-	
 	// GESTOR_EVENTOS
 	@Override
 	public List<Reserva> recuperarTodasReservas(String idEvento) throws EntidadNoEncontrada {
 		if (idEvento == null || idEvento.isEmpty()) {
-	        throw new IllegalArgumentException("idEvento: no debe ser nulo ni vacío");
-	    }
+			throw new IllegalArgumentException("idEvento: no debe ser nulo ni vacío");
+		}
 
-	    List<Reserva> reservas = repositorioReservas.findByEventoId(idEvento);
+		List<Reserva> reservas = repositorioReservas.findByEventoId(idEvento);
 
-	    return reservas;
+		return reservas;
 	}
 
 }

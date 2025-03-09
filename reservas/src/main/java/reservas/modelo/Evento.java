@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "eventos")
 public class Evento {
-	@Id
+    @Id
     private String id;
     private int plazasDisponibles;
     private boolean cancelado;
@@ -45,19 +45,18 @@ public class Evento {
     }
 
     public LinkedList<Reserva> getReservas() {
-        return new LinkedList<> (reservas);
+        return new LinkedList<>(reservas);
     }
 
     public void setReservas(LinkedList<Reserva> reservas) {
         this.reservas = reservas;
     }
-    
+
     public void addReserva(Reserva reserva) {
         this.reservas.add(reserva);
     }
 
-    
     public void reservarPlazas(int numPlazas) {
-    	this.plazasDisponibles -= numPlazas;
+        this.plazasDisponibles -= numPlazas;
     }
 }

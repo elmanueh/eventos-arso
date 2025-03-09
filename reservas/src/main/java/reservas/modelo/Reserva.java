@@ -6,12 +6,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "reservas")
 public class Reserva {
-	@Id
+    @Id
     private String id;
     private String idUsuario;
     private int plazasReservadas;
     private boolean cancelada;
-    
+
     @DBRef
     private Evento evento;
 
