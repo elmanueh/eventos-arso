@@ -25,6 +25,7 @@ import reservas.rest.dto.ReservaResponseDTO;
 import reservas.rest.dto.CreateReservaDTO;
 import reservas.rest.mapper.ReservaMapper;
 import reservas.servicio.IServicioReservas;
+import reservas.servicio.ReservaResumen;
 
 @RestController
 @RequestMapping("/reservas")
@@ -37,10 +38,10 @@ public class ControladorReservas {
 	}
 
 	@Autowired
-	private PagedResourcesAssembler<Reserva> pagedResourcesAssembler;
+	private PagedResourcesAssembler<ReservaResumen> pagedResourcesAssembler;
 
 	@Autowired
-	private ReservaAssembler reservaAssembler;
+	private ReservaResumenAssembler reservaAssembler;
 
 	// reservar
 	@PostMapping()
@@ -61,10 +62,10 @@ public class ControladorReservas {
 
 	// recuperarTodasReservas
 	@GetMapping("/evento/{id}")
-	public PagedModel<EntityModel<Reserva>> getlistadoPaginado(@PathVariable String id,
+	public PagedModel<EntityModel<ReservaResumen>> getlistadoPaginado(@PathVariable String id,
 			Pageable pageable) throws EntidadNoEncontrada {
 
-		Page<Reserva> resultado = servicio.recuperarTodasReservas(id, pageable);
+		Page<ReservaResumen> resultado = servicio.recuperarTodasReservas(id, pageable);
 		return pagedResourcesAssembler.toModel(resultado, reservaAssembler);
 	}
 

@@ -12,6 +12,6 @@ public interface IServicioReservas {
 
 	Reserva recuperarReserva(String idReserva) throws EntidadNoEncontrada;
 
-	Page<Reserva> recuperarTodasReservas(String idEvento, Pageable pageable) throws EntidadNoEncontrada;
+	Page<ReservaResumen> recuperarTodasReservas(String idEvento, Pageable pageable) throws EntidadNoEncontrada;
 
 }

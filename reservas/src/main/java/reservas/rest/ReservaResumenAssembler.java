@@ -7,17 +7,16 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
-import reservas.modelo.Reserva;
+import reservas.servicio.ReservaResumen;
 
 @Component
-public class ReservaAssembler
-		implements RepresentationModelAssembler<Reserva, EntityModel<Reserva>> {
+public class ReservaResumenAssembler
+		implements RepresentationModelAssembler<ReservaResumen, EntityModel<ReservaResumen>> {
 
-	@SuppressWarnings("null")
 	@Override
-	public EntityModel<Reserva> toModel(Reserva reserva) {
+	public EntityModel<ReservaResumen> toModel(ReservaResumen reserva) {
 		try {
-			EntityModel<Reserva> resultado = EntityModel.of(reserva,
+			EntityModel<ReservaResumen> resultado = EntityModel.of(reserva,
 					linkTo(methodOn(ControladorReservas.class).getReserva(reserva.getId())).withSelfRel());
 			return resultado;
 		} catch (Exception e) {
