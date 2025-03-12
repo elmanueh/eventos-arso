@@ -1,6 +1,7 @@
 package reservas.servicio;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import reservas.repositorio.EntidadNoEncontrada;
 import reservas.modelo.Reserva;
@@ -11,6 +12,6 @@ public interface IServicioReservas {
 
 	Reserva recuperarReserva(String idReserva) throws EntidadNoEncontrada;
 
-	List<Reserva> recuperarTodasReservas(String idEvento) throws EntidadNoEncontrada;
+	Page<Reserva> recuperarTodasReservas(String idEvento, Pageable pageable) throws EntidadNoEncontrada;
 
 }

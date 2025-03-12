@@ -1,7 +1,9 @@
 package reservas.servicio;
 
-import java.util.List;
 import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,13 +80,12 @@ public class ServicioReservas implements IServicioReservas {
 
 	// GESTOR_EVENTOS
 	@Override
-	public List<Reserva> recuperarTodasReservas(String idEvento) throws EntidadNoEncontrada {
+	public Page<Reserva> recuperarTodasReservas(String idEvento, Pageable pageable) throws EntidadNoEncontrada {
 		if (idEvento == null || idEvento.isEmpty()) {
 			throw new IllegalArgumentException("idEvento: no debe ser nulo ni vacío");
 		}
 
-		List<Reserva> reservas = repositorioReservas.findByEventoId(idEvento);
-
+		Page<Reserva> reservas = repositorioReservas.findByEventoId(idEvento, pageable);
 		return reservas;
 	}
 

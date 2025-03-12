@@ -1,14 +1,14 @@
 package reservas.repositorio;
 
-import java.util.List;
-
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import reservas.modelo.Reserva;
 
 @NoRepositoryBean
-public interface RepositorioReservas extends CrudRepository<Reserva, String> {
-	List<Reserva> findByEventoId(String idEvento);
+public interface RepositorioReservas extends PagingAndSortingRepository<Reserva, String> {
+	Page<Reserva> findByEventoId(String idEvento, Pageable pageable);
 
 }

@@ -33,14 +33,15 @@ public class ProgramaServicio {
         } catch (Exception e) {
             System.out.println(e);
         }
-
-        // RECUPERAR RESERVAS DE UN EVENTO
-        System.out.println("Todas las reservas de evento id: " + idEvento1 + " son: "
-                + servicio.recuperarTodasReservas(idEvento1));
-
-        // Este es vacio
-        System.out.println("Todas las reservas de evento id: " + idEvento2 + " son: "
-                + servicio.recuperarTodasReservas(idEvento2));
+        /*
+         * // RECUPERAR RESERVAS DE UN EVENTO
+         * System.out.println("Todas las reservas de evento id: " + idEvento1 + " son: "
+         * + servicio.recuperarTodasReservas(idEvento1));
+         * 
+         * // Este es vacio
+         * System.out.println("Todas las reservas de evento id: " + idEvento2 + " son: "
+         * + servicio.recuperarTodasReservas(idEvento2));
+         */
 
     }
 
