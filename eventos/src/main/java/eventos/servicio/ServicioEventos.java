@@ -78,7 +78,7 @@ public class ServicioEventos implements IServicioEventos {
 				throw new EntidadNoEncontrada("Error al encontrar el evento con id " + espacio2 + ".");
 			EspacioFisico espacioFisico = espacio2.get();
 
-			if (!espacioFisico.isActivo())
+			if (espacioFisico.isCancelado())
 				throw new IllegalStateException("El espacio físico con id " + idEspacioFisico + " está cancelado.");
 
 			if (numPlazas > espacioFisico.getCapacidad())

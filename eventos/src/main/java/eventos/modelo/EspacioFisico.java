@@ -18,7 +18,7 @@ public class EspacioFisico {
 	private String nombre;
 	private String propietario;
 	private String direccion;
-	private boolean activo;
+	private boolean cancelado;
 	private int capacidad;
 
 	public EspacioFisico() {
@@ -48,12 +48,12 @@ public class EspacioFisico {
 		return propietario;
 	}
 
-	public void setActivo(boolean activo) {
-		this.activo = activo;
+	public void setCancelado(boolean cancelado) {
+		this.cancelado = cancelado;
 	}
 
-	public boolean isActivo() {
-		return activo;
+	public boolean isCancelado() {
+		return cancelado;
 	}
 
 	public void setCapacidad(int capacidad) {

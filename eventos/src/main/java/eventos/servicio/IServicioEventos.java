@@ -4,12 +4,10 @@ import java.time.LocalDateTime;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 import eventos.modelo.Evento;
 import eventos.modelo.EventoCategoria;
 import eventos.repositorio.EntidadNoEncontrada;
-
 
 public interface IServicioEventos {
 

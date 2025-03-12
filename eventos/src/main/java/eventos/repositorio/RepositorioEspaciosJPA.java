@@ -9,12 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 import eventos.modelo.EspacioFisico;
 
 public interface RepositorioEspaciosJPA extends RepositorioEspacios, JpaRepository<EspacioFisico, String> {
-	@Query("SELECT e FROM EspacioFisico e")
-	/*
-	 * @Query("SELECT e FROM EspacioFisico e WHERE e.capacidad >= :capacidad AND "
-			+ "e.activo AND "
+	@Query("SELECT e FROM EspacioFisico e WHERE e.capacidad >= :capacidad AND "
+			+ "e.cancelado = false AND "
 			+ "e.id NOT IN (SELECT o.espacioFisico.id FROM Ocupacion o WHERE "
 			+ "o.fechaFin <= :fechaFin AND o.fechaInicio >= :fechaInicio)")
-	 */
 	LinkedList<EspacioFisico> getEspaciosFisicoLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin, int capacidad);
 }
