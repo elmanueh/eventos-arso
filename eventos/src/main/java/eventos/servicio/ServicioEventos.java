@@ -9,6 +9,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import eventos.modelo.EspacioFisico;
@@ -27,7 +29,7 @@ public class ServicioEventos implements IServicioEventos {
 	public ServicioEventos(RepositorioEventos repositorio) {
 		this.repositorioEvento = repositorio;
 	}
-	
+
 	// USUARIO
 	@Override
 	public Evento recuperarEvento(String idEvento) throws EntidadNoEncontrada {
@@ -35,7 +37,7 @@ public class ServicioEventos implements IServicioEventos {
 			throw new IllegalArgumentException("id: no debe ser nulo ni vacio");
 
 		Optional<Evento> resultado = repositorioEvento.findById(idEvento);
-		
+
 		if (resultado.isPresent() == false)
 			throw new EntidadNoEncontrada("No existe encuesta con id: " + idEvento);
 		else
@@ -45,7 +47,8 @@ public class ServicioEventos implements IServicioEventos {
 	// GESTOR_EVENTOS
 	@Override
 	public String altaEvento(String nombre, String descripcion, String organizador, EventoCategoria categoria,
-			LocalDateTime fechaInicio, LocalDateTime fechaFin, int numPlazas, String idEspacioFisico) throws EntidadNoEncontrada {
+			LocalDateTime fechaInicio, LocalDateTime fechaFin, int numPlazas, String idEspacioFisico)
+			throws EntidadNoEncontrada {
 
 		if (nombre == null || nombre.isEmpty())
 			throw new IllegalArgumentException("El nombre del evento no puede ser nulo o vacío.");
@@ -65,41 +68,50 @@ public class ServicioEventos implements IServicioEventos {
 			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo o vacío.");
 
 		// try {
-			/*
-			SE OBTIENE EL ESPACIO FISICO A PARTIR DEL ID
-			
-			EspacioFisico espacioFisico = repositorioEspacio.findById(idEspacioFisico);
-			
-			if (espacioFisico.isCancelado())
-				
-				throw new IllegalArgumentException("El espacio físico con id " + idEspacioFisico + " está cancelado.");
-			
-			if (numPlazas > espacioFisico.getCapacidad())
-				
-				throw new IllegalArgumentException("El número de plazas supera la capacidad del espacio físico con id " + idEspacioFisico + ".");
-			
-			LinkedList<EspacioFisico> espaciosFisicos = new LinkedList<EspacioFisico>(repositorioEspacio.getEspaciosFisicoLibres(fechaInicio, fechaFin, numPlazas));
-			
-			boolean isEspacioFisicoLibre = espaciosFisicos.stream().anyMatch(espacio -> espacio.getId().equals(idEspacioFisico));
-			
-			if (!isEspacioFisicoLibre)
-				throw new IllegalArgumentException("El espacio fisico con id " + idEspacioFisico + " no está disponible en la fecha.");
-			*/
-			
-			EspacioFisico espacioFisico = new EspacioFisico();
-			
-			espacioFisico.setId(idEspacioFisico);
-			
-			Evento evento = new Evento(nombre, descripcion, organizador, numPlazas, categoria, fechaInicio, fechaFin, espacioFisico);
-			
-			String id = repositorioEvento.save(evento).getId();
-			
-			return id;
-			
+		/*
+		 * SE OBTIENE EL ESPACIO FISICO A PARTIR DEL ID
+		 * 
+		 * EspacioFisico espacioFisico = repositorioEspacio.findById(idEspacioFisico);
+		 * 
+		 * if (espacioFisico.isCancelado())
+		 * 
+		 * throw new IllegalArgumentException("El espacio físico con id " +
+		 * idEspacioFisico + " está cancelado.");
+		 * 
+		 * if (numPlazas > espacioFisico.getCapacidad())
+		 * 
+		 * throw new
+		 * IllegalArgumentException("El número de plazas supera la capacidad del espacio físico con id "
+		 * + idEspacioFisico + ".");
+		 * 
+		 * LinkedList<EspacioFisico> espaciosFisicos = new
+		 * LinkedList<EspacioFisico>(repositorioEspacio.getEspaciosFisicoLibres(
+		 * fechaInicio, fechaFin, numPlazas));
+		 * 
+		 * boolean isEspacioFisicoLibre = espaciosFisicos.stream().anyMatch(espacio ->
+		 * espacio.getId().equals(idEspacioFisico));
+		 * 
+		 * if (!isEspacioFisicoLibre)
+		 * throw new IllegalArgumentException("El espacio fisico con id " +
+		 * idEspacioFisico + " no está disponible en la fecha.");
+		 */
+
+		EspacioFisico espacioFisico = new EspacioFisico();
+
+		espacioFisico.setId(idEspacioFisico);
+
+		Evento evento = new Evento(nombre, descripcion, organizador, numPlazas, categoria, fechaInicio, fechaFin,
+				espacioFisico);
+
+		String id = repositorioEvento.save(evento).getId();
+
+		return id;
+
 		// } catch (EntidadNoEncontrada e) {
-		//	throw new EntidadNoEncontrada("Error al encontrar el espacio físico con id " + idEspacioFisico + ".");
+		// throw new EntidadNoEncontrada("Error al encontrar el espacio físico con id "
+		// + idEspacioFisico + ".");
 		// }
-			
+
 	}
 
 	// GESTOR_EVENTOS
@@ -111,8 +123,8 @@ public class ServicioEventos implements IServicioEventos {
 			throw new IllegalArgumentException("El id del evento no puede ser nulo o vacío.");
 		if (descripcion != null && descripcion.isEmpty())
 			throw new IllegalArgumentException("La descripción del evento no puede ser vacía.");
-		if (numPlazas == 0 && numPlazas < -1)
-			throw new IllegalArgumentException("El número de plazas del evento debe ser mayor que 0.");
+		if (numPlazas <= -1)
+			throw new IllegalArgumentException("La capacidad del espacio físico debe ser mayor que 0.");
 		if (idEspacioFisico != null && idEspacioFisico.isEmpty())
 			throw new IllegalArgumentException("El id del espacio físico no puede ser vacío.");
 
@@ -127,11 +139,11 @@ public class ServicioEventos implements IServicioEventos {
 			evento.setFechaInicio(fechaInicio);
 		if (fechaFin != null)
 			evento.setFechaFin(fechaFin);
-		if (numPlazas != -1)
+		if (numPlazas != 0)
 			evento.setPlazas(numPlazas);
 		if (idEspacioFisico != null) {
 			// evento.setEspacioFisico(repositorioEspacio.getById(idEspacioFisico));
-			
+
 			EspacioFisico espacio = new EspacioFisico();
 			espacio.setId(idEspacioFisico);
 			evento.setEspacioFisico(espacio);
@@ -167,6 +179,23 @@ public class ServicioEventos implements IServicioEventos {
 		List<Evento> eventos = repositorioEvento.getEventosDelMes(mes, año);
 		String resumenEventos = eventos.stream().map(Evento::toString).collect(Collectors.joining(""));
 		return resumenEventos;
+	}
+
+	@Override
+	public Page<EventoResumen> eventosDelMesPaginados(int mes, int año, Pageable pageable) {
+		if (mes < 1 || mes > 12)
+			throw new IllegalArgumentException("El mes debe estar comprendido entre 1 y 12.");
+		if (año < 0)
+			throw new IllegalArgumentException("El año no puede ser negativo.");
+
+		return repositorioEvento.getEventosDelMesPaginados(mes, año, pageable).map(evento -> {
+			EventoResumen resumen = new EventoResumen();
+			resumen.setId(evento.getId());
+			resumen.setNombre(evento.getNombre());
+			resumen.setDescripcion(evento.getDescripcion());
+
+			return resumen;
+		});
 	}
 
 }
