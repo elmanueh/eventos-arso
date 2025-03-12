@@ -1,6 +1,7 @@
 package eventos.servicio;
 
 import java.time.LocalDateTime;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,6 +18,7 @@ import eventos.modelo.EspacioFisico;
 import eventos.modelo.Evento;
 import eventos.modelo.EventoCategoria;
 import eventos.repositorio.EntidadNoEncontrada;
+import eventos.repositorio.RepositorioEspacios;
 import eventos.repositorio.RepositorioEventos;
 
 @Service
@@ -24,10 +26,12 @@ import eventos.repositorio.RepositorioEventos;
 public class ServicioEventos implements IServicioEventos {
 
 	private RepositorioEventos repositorioEvento;
+	private RepositorioEspacios repositorioEspacio;
 
 	@Autowired
-	public ServicioEventos(RepositorioEventos repositorio) {
-		this.repositorioEvento = repositorio;
+	public ServicioEventos(RepositorioEventos repositorioEvento, RepositorioEspacios repositorioEspacios) {
+		this.repositorioEvento = repositorioEvento;
+		this.repositorioEspacio = repositorioEspacios;
 	}
 
 	// USUARIO
@@ -67,50 +71,42 @@ public class ServicioEventos implements IServicioEventos {
 		if (idEspacioFisico == null || idEspacioFisico.isEmpty())
 			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo o vacío.");
 
-		// try {
-		/*
-		 * SE OBTIENE EL ESPACIO FISICO A PARTIR DEL ID
-		 * 
-		 * EspacioFisico espacioFisico = repositorioEspacio.findById(idEspacioFisico);
-		 * 
-		 * if (espacioFisico.isCancelado())
-		 * 
-		 * throw new IllegalArgumentException("El espacio físico con id " +
-		 * idEspacioFisico + " está cancelado.");
-		 * 
-		 * if (numPlazas > espacioFisico.getCapacidad())
-		 * 
-		 * throw new
-		 * IllegalArgumentException("El número de plazas supera la capacidad del espacio físico con id "
-		 * + idEspacioFisico + ".");
-		 * 
-		 * LinkedList<EspacioFisico> espaciosFisicos = new
-		 * LinkedList<EspacioFisico>(repositorioEspacio.getEspaciosFisicoLibres(
-		 * fechaInicio, fechaFin, numPlazas));
-		 * 
-		 * boolean isEspacioFisicoLibre = espaciosFisicos.stream().anyMatch(espacio ->
-		 * espacio.getId().equals(idEspacioFisico));
-		 * 
-		 * if (!isEspacioFisicoLibre)
-		 * throw new IllegalArgumentException("El espacio fisico con id " +
-		 * idEspacioFisico + " no está disponible en la fecha.");
-		 */
+		try {
+			Optional<EspacioFisico> espacio2 = repositorioEspacio.findById(idEspacioFisico);
 
-		EspacioFisico espacioFisico = new EspacioFisico();
+			if (!espacio2.isPresent())
+				throw new EntidadNoEncontrada("Error al encontrar el evento con id " + espacio2 + ".");
+			EspacioFisico espacioFisico = espacio2.get();
 
-		espacioFisico.setId(idEspacioFisico);
+			if (!espacioFisico.isActivo())
+				throw new IllegalStateException("El espacio físico con id " + idEspacioFisico + " está cancelado.");
 
-		Evento evento = new Evento(nombre, descripcion, organizador, numPlazas, categoria, fechaInicio, fechaFin,
-				espacioFisico);
+			if (numPlazas > espacioFisico.getCapacidad())
+				throw new IllegalStateException(
+						"El número de plazas supera la capacidad del espacio físico con id " + idEspacioFisico + ".");
 
-		String id = repositorioEvento.save(evento).getId();
+			// TODO: Una consulta booleana mejor
+			LinkedList<EspacioFisico> espaciosFisicos = new LinkedList<EspacioFisico>(
+					repositorioEspacio.getEspaciosFisicoLibres(fechaInicio, fechaFin, numPlazas));
 
-		return id;
+			boolean isEspacioFisicoLibre = espaciosFisicos.stream()
+					.anyMatch(espacio -> espacio.getId().equals(idEspacioFisico));
 
-		// } catch (EntidadNoEncontrada e) {
-		// throw new EntidadNoEncontrada("Error al encontrar el espacio físico con id "
-		// + idEspacioFisico + ".");
-		// }
+			if (!isEspacioFisicoLibre)
+				throw new IllegalStateException(
+						"El espacio fisico con id " + idEspacioFisico + " no está disponible en la fecha.");
+
+			Evento evento = new Evento(nombre, descripcion, organizador, numPlazas, categoria, fechaInicio, fechaFin,
+					espacioFisico);
+
+			String id = repositorioEvento.save(evento).getId();
+
+			return id;
+
+		} catch (EntidadNoEncontrada e) {
+			throw new EntidadNoEncontrada("Error al encontrar el espacio físico con id "
+					+ idEspacioFisico + ".");
+		}
 
 	}
 
@@ -142,9 +138,12 @@ public class ServicioEventos implements IServicioEventos {
 		if (numPlazas != 0)
 			evento.setPlazas(numPlazas);
 		if (idEspacioFisico != null) {
-			// evento.setEspacioFisico(repositorioEspacio.getById(idEspacioFisico));
+			Optional<EspacioFisico> espacio2 = repositorioEspacio.findById(idEspacioFisico);
 
-			EspacioFisico espacio = new EspacioFisico();
+			if (!espacio2.isPresent())
+				throw new EntidadNoEncontrada("Error al encontrar el evento con id " + espacio2 + ".");
+
+			EspacioFisico espacio = espacio2.get();
 			espacio.setId(idEspacioFisico);
 			evento.setEspacioFisico(espacio);
 		}

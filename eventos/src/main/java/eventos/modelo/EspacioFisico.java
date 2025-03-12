@@ -10,24 +10,18 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "EspacioFisico")
 public class EspacioFisico {
-	
+
 	@Id
-	@GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid")
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	private String id;
 	private String nombre;
 	private String propietario;
 	private String direccion;
+	private boolean activo;
+	private int capacidad;
 
 	public EspacioFisico() {
-
-	}
-
-	public EspacioFisico(String nombre, String propietario, int capacidad, String direccion, double latitud,
-			double longitud, String descripcion) {
-		this.nombre = nombre;
-		this.propietario = propietario;
-		this.direccion = direccion;
 	}
 
 	public String getId() {
@@ -52,6 +46,22 @@ public class EspacioFisico {
 
 	public String getPropietario() {
 		return propietario;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setCapacidad(int capacidad) {
+		this.capacidad = capacidad;
+	}
+
+	public int getCapacidad() {
+		return capacidad;
 	}
 
 	@Override
