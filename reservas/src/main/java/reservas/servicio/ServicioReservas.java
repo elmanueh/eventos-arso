@@ -41,10 +41,10 @@ public class ServicioReservas implements IServicioReservas {
 		Evento evento = eventoOpt.get();
 
 		if (evento.isCancelado())
-			throw new IllegalArgumentException("El evento con id " + idEvento + " está cancelado.");
+			throw new IllegalStateException("El evento con id " + idEvento + " está cancelado.");
 
 		if (evento.getPlazasDisponibles() < numPlazas)
-			throw new IllegalArgumentException(
+			throw new IllegalStateException(
 					"El número de plazas supera la capacidad del evento con id " + idEvento + ".");
 
 		// Crear reserva
