@@ -4,7 +4,7 @@ public class EventoResponseDTO {
 	private String nombre;
 	private String descripcion;
 	private String organizador;
-	private int plazas;
+	private int numPlazas;
 	private boolean cancelado;
 	private String categoria;
 
@@ -37,12 +37,12 @@ public class EventoResponseDTO {
 		this.organizador = organizador;
 	}
 
-	public int getPlazas() {
-		return plazas;
+	public int getNumPlazas() {
+		return numPlazas;
 	}
 
-	public void setPlazas(int plazas) {
-		this.plazas = plazas;
+	public void setNumPlazas(int numPlazas) {
+		this.numPlazas = numPlazas;
 	}
 
 	public boolean isCancelado() {

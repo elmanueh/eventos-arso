@@ -1,5 +1,6 @@
 package eventos.modelo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,17 +9,28 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "EspacioFisico")
+@Table(name = "espacioFisico")
 public class EspacioFisico {
 
 	@Id
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	@Column(name = "id")
 	private String id;
+	
+	@Column(name = "nombre")
 	private String nombre;
+	
+	@Column(name = "propietario")
 	private String propietario;
+	
+	@Column(name = "direccion")
 	private String direccion;
+	
+	@Column(name = "cancelado")
 	private boolean cancelado;
+	
+	@Column(name = "capacidad")
 	private int capacidad;
 
 	public EspacioFisico() {

@@ -3,11 +3,13 @@ package eventos.modelo;
 import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -15,38 +17,51 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "Evento")
+@Table(name = "evento")
 public class Evento {
 	
 	@Id
 	@GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid")
+	@Column(name = "id")
 	private String id;
+	
+	@Column(name = "nombre")
 	private String nombre;
 	
 	@Lob
+	@Column(name = "descripcion")
 	private String descripcion;
+	
+	@Column(name = "organizador")
 	private String organizador;
-	private int plazas;
+	
+	@Column(name = "plazas")
+	private int numPlazas;
+	
+	@Column(name = "cancelado")
 	private boolean cancelado;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(name = "categoria")
 	private EventoCategoria categoria;
 	
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "idOcupacion")
 	private Ocupacion ocupacion;
+
 
 	public Evento() {
 
 	}
 
-	public Evento(String nombre, String descripcion, String organizador, int plazas, EventoCategoria categoria,
+	public Evento(String nombre, String descripcion, String organizador, int numPlazas, EventoCategoria categoria,
 			LocalDateTime fechaInicio,
 			LocalDateTime fechaFin, EspacioFisico espacioFisico) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.organizador = organizador;
-		this.plazas = plazas;
+		this.numPlazas = numPlazas;
 		this.cancelado = false;
 		this.categoria = categoria;
 		this.ocupacion = new Ocupacion(fechaInicio, fechaFin, espacioFisico);
@@ -76,12 +91,12 @@ public class Evento {
 		return organizador;
 	}
 
-	public int getPlazas() {
-		return plazas;
+	public int getNumPlazas() {
+		return numPlazas;
 	}
 
-	public void setPlazas(int plazas) {
-		this.plazas = plazas;
+	public void setNumPlazas(int numPlazas) {
+		this.numPlazas = numPlazas;
 	}
 
 	public boolean isCancelado() {

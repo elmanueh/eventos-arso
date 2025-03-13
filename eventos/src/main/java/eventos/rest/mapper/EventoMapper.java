@@ -13,7 +13,7 @@ public class EventoMapper {
 		dto.setNombre(evento.getNombre());
 		dto.setDescripcion(evento.getDescripcion());
 		dto.setOrganizador(evento.getOrganizador());
-		dto.setPlazas(evento.getPlazas());
+		dto.setNumPlazas(evento.getNumPlazas());
 		dto.setCancelado(evento.isCancelado());
 		dto.setCategoria(evento.getCategoria().name());
 		dto.setOcupado(evento.getOcupacion() != null && evento.getOcupacion().isActiva());
