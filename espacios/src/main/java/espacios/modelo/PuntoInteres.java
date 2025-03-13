@@ -1,5 +1,6 @@
 package espacios.modelo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,19 +9,26 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PuntoInteres")
+@Table(name = "puntoInteres")
 public class PuntoInteres {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private String id;
+	
+	@Column(name = "nombre")
 	private String nombre;
 
 	@Lob
+	@Column(name = "descripcion")
 	private String descripcion;
+	
+	@Column(name = "distancia")
 	private float distancia;
 
 	@Lob
+	@Column(name = "url")
 	private String url;
 
 	public PuntoInteres() {

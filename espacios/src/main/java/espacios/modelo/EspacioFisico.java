@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -12,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
@@ -20,28 +22,47 @@ import javax.persistence.Table;
 import espacios.repositorio.Identificable;
 
 @Entity
-@Table(name = "EspacioFisico")
+@Table(name = "espacioFisico")
 public class EspacioFisico implements Identificable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String id;
-	private String nombre;
-	private String propietario;
-	private int capacidad;
-	private String direccion;
-	private double longitud;
-	private double latitud;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private String id;
 
-	@Lob
-	private String descripcion;
+    @Column(name = "nombre")
+    private String nombre;
 
-	@Enumerated(EnumType.STRING)
-	private EspacioFisicoEstado estado;
+    @Column(name = "propietario")
+    private String propietario;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "EspacioFisico_PuntoInteres")
-	private List<PuntoInteres> puntosInteres;
+    @Column(name = "capacidad")
+    private int capacidad;
+
+    @Column(name = "direccion")
+    private String direccion;
+
+    @Column(name = "longitud")
+    private double longitud;
+
+    @Column(name = "latitud")
+    private double latitud;
+
+    @Lob
+    @Column(name = "descripcion")
+    private String descripcion;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado")
+    private EspacioFisicoEstado estado;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+		name = "espacioFisico_puntoInteres",
+	    joinColumns = @JoinColumn(name = "idEspacioFisico"),
+	    inverseJoinColumns = @JoinColumn(name = "idPuntosInteres")
+    )
+    private List<PuntoInteres> puntosInteres;
 
 	public EspacioFisico() {
 

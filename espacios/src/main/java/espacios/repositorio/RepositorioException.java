@@ -5,6 +5,7 @@ package espacios.repositorio;
  * Al instanciarla, se establece la excepción interna que produce el error (causa).
  */
 
+@SuppressWarnings("serial")
 public class RepositorioException extends Exception {
 
 	public RepositorioException(String msg, Throwable causa) {
