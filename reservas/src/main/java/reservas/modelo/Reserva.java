@@ -3,16 +3,25 @@ package reservas.modelo;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "reservas")
 public class Reserva {
+	
     @Id
     private String id;
+    
+    @Field("idUsuario")
     private String idUsuario;
+    
+    @Field("plazasReservadas")
     private int plazasReservadas;
+    
+    @Field("cancelada")
     private boolean cancelada;
 
     @DBRef
+    @Field("evento")
     private Evento evento;
 
     public Reserva() {

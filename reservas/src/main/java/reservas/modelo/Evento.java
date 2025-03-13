@@ -5,15 +5,22 @@ import java.util.LinkedList;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "eventos")
 public class Evento {
+
     @Id
     private String id;
+
+    @Field("plazasDisponibles")
     private int plazasDisponibles;
+
+    @Field("cancelado")
     private boolean cancelado;
 
     @DBRef
+    @Field("reservas")
     private LinkedList<Reserva> reservas;
 
     public Evento() {
