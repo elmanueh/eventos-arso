@@ -136,7 +136,7 @@ public class ServicioEventos implements IServicioEventos {
 		if (fechaFin != null)
 			evento.setFechaFin(fechaFin);
 		if (numPlazas != 0)
-			evento.setPlazas(numPlazas);
+			evento.setNumPlazas(numPlazas);
 		if (idEspacioFisico != null) {
 			Optional<EspacioFisico> espacio2 = repositorioEspacio.findById(idEspacioFisico);
 
