@@ -20,6 +20,7 @@ import eventos.modelo.EventoCategoria;
 import eventos.repositorio.EntidadNoEncontrada;
 import eventos.repositorio.RepositorioEspacios;
 import eventos.repositorio.RepositorioEventos;
+import eventos.rest.mapper.EventoMapper;
 
 @Service
 @Transactional
@@ -179,7 +180,8 @@ public class ServicioEventos implements IServicioEventos {
 		String resumenEventos = eventos.stream().map(Evento::toString).collect(Collectors.joining(""));
 		return resumenEventos;
 	}
-
+	
+	// USUARIO
 	@Override
 	public Page<EventoResumen> eventosDelMesPaginados(int mes, int año, Pageable pageable) {
 		if (mes < 1 || mes > 12)
@@ -187,14 +189,7 @@ public class ServicioEventos implements IServicioEventos {
 		if (año < 0)
 			throw new IllegalArgumentException("El año no puede ser negativo.");
 
-		return repositorioEvento.getEventosDelMesPaginados(mes, año, pageable).map(evento -> {
-			EventoResumen resumen = new EventoResumen();
-			resumen.setId(evento.getId());
-			resumen.setNombre(evento.getNombre());
-			resumen.setDescripcion(evento.getDescripcion());
-
-			return resumen;
-		});
+		return repositorioEvento.getEventosDelMesPaginados(mes, año, pageable).map(EventoMapper::toResumen);
 	}
 
 }
