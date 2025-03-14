@@ -15,6 +15,7 @@ import reservas.modelo.Reserva;
 import reservas.repositorio.EntidadNoEncontrada;
 import reservas.repositorio.RepositorioEventos;
 import reservas.repositorio.RepositorioReservas;
+import reservas.rest.mapper.ReservaMapper;
 
 @Service
 @Transactional
@@ -86,15 +87,7 @@ public class ServicioReservas implements IServicioReservas {
 			throw new IllegalArgumentException("idEvento: no debe ser nulo ni vacío");
 		}
 
-		Page<ReservaResumen> reservas = repositorioReservas.findByEventoId(idEvento, pageable).map(reserva -> {
-			ReservaResumen resumen = new ReservaResumen();
-			resumen.setIdUsuario(reserva.getIdUsuario());
-			resumen.setPlazasReservadas(reserva.getPlazasReservadas());
-			resumen.setCancelada(reserva.isCancelada());
-			resumen.setEvento(reserva.getEvento() != null);
-
-			return resumen;
-		});
+		Page<ReservaResumen> reservas = repositorioReservas.findByEventoId(idEvento, pageable).map(ReservaMapper::toResumen);
 		return reservas;
 	}
 

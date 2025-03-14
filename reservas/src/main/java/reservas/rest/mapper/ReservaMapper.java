@@ -2,6 +2,7 @@ package reservas.rest.mapper;
 
 import reservas.modelo.Reserva;
 import reservas.rest.dto.ReservaResponseDTO;
+import reservas.servicio.ReservaResumen;
 
 public class ReservaMapper {
 
@@ -15,5 +16,15 @@ public class ReservaMapper {
 		dto.setCancelada(reserva.isCancelada());
 
 		return dto;
+	}
+
+	public static ReservaResumen toResumen(Reserva reserva) {
+		ReservaResumen resumen = new ReservaResumen();
+		resumen.setIdUsuario(reserva.getIdUsuario());
+		resumen.setPlazasReservadas(reserva.getPlazasReservadas());
+		resumen.setCancelada(reserva.isCancelada());
+		resumen.setEvento(reserva.getEvento() != null);
+
+		return resumen;
 	}
 }
