@@ -2,7 +2,7 @@ package eventos.rest.mapper;
 
 import eventos.modelo.Evento;
 import eventos.rest.dto.EventoResponseDTO;
-import eventos.servicio.EventoResumen;
+import eventos.rest.dto.EventoResumen;
 
 public class EventoMapper {
 
@@ -21,13 +21,13 @@ public class EventoMapper {
 
 		return dto;
 	}
-	
+
 	public static EventoResumen toResumen(Evento evento) {
-	    EventoResumen resumen = new EventoResumen();
-	    resumen.setId(evento.getId());
-	    resumen.setNombre(evento.getNombre());
-	    resumen.setDescripcion(evento.getDescripcion());
-	    
-	    return resumen;
+		EventoResumen resumen = new EventoResumen();
+		resumen.setId(evento.getId());
+		resumen.setNombre(evento.getNombre());
+		resumen.setDescripcion(evento.getDescripcion());
+
+		return resumen;
 	}
 }

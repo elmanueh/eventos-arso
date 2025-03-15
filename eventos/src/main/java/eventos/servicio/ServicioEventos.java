@@ -20,6 +20,7 @@ import eventos.modelo.EventoCategoria;
 import eventos.repositorio.EntidadNoEncontrada;
 import eventos.repositorio.RepositorioEspacios;
 import eventos.repositorio.RepositorioEventos;
+import eventos.rest.dto.EventoResumen;
 import eventos.rest.mapper.EventoMapper;
 
 @Service
@@ -180,7 +181,7 @@ public class ServicioEventos implements IServicioEventos {
 		String resumenEventos = eventos.stream().map(Evento::toString).collect(Collectors.joining(""));
 		return resumenEventos;
 	}
-	
+
 	// USUARIO
 	@Override
 	public Page<EventoResumen> eventosDelMesPaginados(int mes, int año, Pageable pageable) {

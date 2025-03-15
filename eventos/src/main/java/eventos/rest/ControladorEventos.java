@@ -26,11 +26,11 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 
 import eventos.modelo.Evento;
-import eventos.servicio.EventoResumen;
 import eventos.modelo.EventoCategoria;
 import eventos.repositorio.EntidadNoEncontrada;
 import eventos.rest.dto.CreateEventoDTO;
 import eventos.rest.dto.EventoResponseDTO;
+import eventos.rest.dto.EventoResumen;
 import eventos.rest.dto.UpdateEventoDTO;
 import eventos.rest.mapper.EventoMapper;
 import eventos.servicio.IServicioEventos;

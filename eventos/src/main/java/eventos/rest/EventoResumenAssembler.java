@@ -7,7 +7,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
-import eventos.servicio.EventoResumen;
+import eventos.rest.dto.EventoResumen;
 
 @Component
 public class EventoResumenAssembler implements RepresentationModelAssembler<EventoResumen, EntityModel<EventoResumen>> {

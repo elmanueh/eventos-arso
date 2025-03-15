@@ -1,4 +1,4 @@
-package eventos.servicio;
+package eventos.rest.dto;
 
 public class EventoResumen {
 
