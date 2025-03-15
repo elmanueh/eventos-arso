@@ -27,8 +27,8 @@ import eventos.rest.mapper.EventoMapper;
 @Transactional
 public class ServicioEventos implements IServicioEventos {
 
-	private RepositorioEventos repositorioEvento;
-	private RepositorioEspacios repositorioEspacio;
+	private final RepositorioEventos repositorioEvento;
+	private final RepositorioEspacios repositorioEspacio;
 
 	@Autowired
 	public ServicioEventos(RepositorioEventos repositorioEvento, RepositorioEspacios repositorioEspacios) {

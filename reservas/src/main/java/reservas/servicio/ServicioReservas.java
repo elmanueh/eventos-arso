@@ -21,8 +21,8 @@ import reservas.rest.mapper.ReservaMapper;
 @Transactional
 public class ServicioReservas implements IServicioReservas {
 
-	private RepositorioReservas repositorioReservas;
-	private RepositorioEventos repositorioEventos;
+	private final RepositorioReservas repositorioReservas;
+	private final RepositorioEventos repositorioEventos;
 
 	@Autowired
 	public ServicioReservas(RepositorioReservas repositorioReservas, RepositorioEventos repositorioEventos) {
