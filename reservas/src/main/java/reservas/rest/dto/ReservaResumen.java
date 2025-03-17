@@ -1,4 +1,4 @@
-package reservas.servicio;
+package reservas.rest.dto;
 
 public class ReservaResumen {
 	private String id;

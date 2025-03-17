@@ -2,7 +2,7 @@ package reservas.rest.mapper;
 
 import reservas.modelo.Reserva;
 import reservas.rest.dto.ReservaResponseDTO;
-import reservas.servicio.ReservaResumen;
+import reservas.rest.dto.ReservaResumen;
 
 public class ReservaMapper {
 

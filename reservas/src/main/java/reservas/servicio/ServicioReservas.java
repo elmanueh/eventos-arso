@@ -15,6 +15,7 @@ import reservas.modelo.Reserva;
 import reservas.repositorio.EntidadNoEncontrada;
 import reservas.repositorio.RepositorioEventos;
 import reservas.repositorio.RepositorioReservas;
+import reservas.rest.dto.ReservaResumen;
 import reservas.rest.mapper.ReservaMapper;
 
 @Service

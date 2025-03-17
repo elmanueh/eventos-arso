@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import reservas.repositorio.EntidadNoEncontrada;
+import reservas.rest.dto.ReservaResumen;
 import reservas.modelo.Reserva;
 
 public interface IServicioReservas {

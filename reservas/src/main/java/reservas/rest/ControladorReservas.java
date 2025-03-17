@@ -22,10 +22,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import reservas.modelo.Reserva;
 import reservas.repositorio.EntidadNoEncontrada;
 import reservas.rest.dto.ReservaResponseDTO;
+import reservas.rest.dto.ReservaResumen;
 import reservas.rest.dto.CreateReservaDTO;
 import reservas.rest.mapper.ReservaMapper;
 import reservas.servicio.IServicioReservas;
-import reservas.servicio.ReservaResumen;
 
 @RestController
 @RequestMapping("/reservas")
