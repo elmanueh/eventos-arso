@@ -34,6 +34,13 @@ public class ServicioReservas implements IServicioReservas {
 	// USUARIO
 	@Override
 	public String reservar(String idEvento, String idUsuario, int numPlazas) throws EntidadNoEncontrada {
+		if (idEvento == null || idEvento.isEmpty())
+			throw new IllegalArgumentException("idEvento: no debe ser nulo ni vacío");
+		if (idUsuario == null || idUsuario.isEmpty())
+			throw new IllegalArgumentException("idUsuario: no debe ser nulo ni vacío");
+		if (numPlazas <= 0)
+			throw new IllegalArgumentException("numPlazas: debe ser mayor que 0");
+
 		Optional<Evento> eventoOpt = repositorioEventos.findById(idEvento);
 
 		if (!eventoOpt.isPresent()) {
@@ -49,7 +56,6 @@ public class ServicioReservas implements IServicioReservas {
 			throw new IllegalStateException(
 					"El número de plazas supera la capacidad del evento con id " + idEvento + ".");
 
-		// Crear reserva
 		Reserva nuevaReserva = new Reserva();
 		nuevaReserva.setEvento(evento);
 		nuevaReserva.setIdUsuario(idUsuario);
@@ -57,8 +63,6 @@ public class ServicioReservas implements IServicioReservas {
 
 		repositorioReservas.save(nuevaReserva);
 
-		// TODO: esta bien lo siguiente??
-		// Actualizar plazas en el evento
 		evento.reservarPlazas(numPlazas);
 		evento.addReserva(nuevaReserva);
 
@@ -71,7 +75,7 @@ public class ServicioReservas implements IServicioReservas {
 	@Override
 	public Reserva recuperarReserva(String idReserva) throws EntidadNoEncontrada {
 		if (idReserva == null || idReserva.isEmpty())
-			throw new IllegalArgumentException("id: no debe ser nulo ni vacio");
+			throw new IllegalArgumentException("idReserva: no debe ser nulo ni vacio");
 
 		Optional<Reserva> resultado = repositorioReservas.findById(idReserva);
 
@@ -84,11 +88,12 @@ public class ServicioReservas implements IServicioReservas {
 	// GESTOR_EVENTOS
 	@Override
 	public Page<ReservaResumen> recuperarTodasReservas(String idEvento, Pageable pageable) throws EntidadNoEncontrada {
-		if (idEvento == null || idEvento.isEmpty()) {
+		if (idEvento == null || idEvento.isEmpty())
 			throw new IllegalArgumentException("idEvento: no debe ser nulo ni vacío");
-		}
 
-		Page<ReservaResumen> reservas = repositorioReservas.findByEventoId(idEvento, pageable).map(ReservaMapper::toResumen);
+		Page<ReservaResumen> reservas = repositorioReservas.findByEventoId(idEvento, pageable)
+				.map(ReservaMapper::toResumen);
+
 		return reservas;
 	}
 

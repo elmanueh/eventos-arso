@@ -27,6 +27,12 @@ public class GlobalExceptionHandler {
 				.body(new MessageError(HttpStatus.CONFLICT, ex.getMessage()));
 	}
 
+	@ExceptionHandler(IllegalArgumentException.class)
+	public ResponseEntity<MessageError> handleIllegalArgumentException(IllegalArgumentException ex) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+				.body(new MessageError(HttpStatus.BAD_REQUEST, ex.getMessage()));
+	}
+
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<MessageError> handleValidationException(MethodArgumentNotValidException ex) {
 		Map<String, String> errors = new HashMap<>();
