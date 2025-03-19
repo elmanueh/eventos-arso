@@ -10,16 +10,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import eventos.repositorio.EntidadNoEncontrada;
-
 @ControllerAdvice
-public class GlobalExceptionHandler {
-
-	@ExceptionHandler(EntidadNoEncontrada.class)
-	public ResponseEntity<MessageError> handleNotFoundException(EntidadNoEncontrada ex) {
-		return ResponseEntity.status(HttpStatus.NOT_FOUND)
-				.body(new MessageError(HttpStatus.NOT_FOUND, ex.getMessage()));
-	}
+public class MethodArgumentNotValidExceptionHandler {
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<MessageError> handleValidationException(MethodArgumentNotValidException ex) {
