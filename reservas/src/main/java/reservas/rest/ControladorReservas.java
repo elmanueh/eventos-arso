@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import reservas.modelo.Reserva;
-import reservas.repositorio.EntidadNoEncontrada;
+import reservas.repositorio.exception.EntidadNoEncontrada;
 import reservas.rest.dto.ReservaResponseDTO;
 import reservas.rest.dto.ReservaResumen;
 import reservas.rest.dto.CreateReservaDTO;

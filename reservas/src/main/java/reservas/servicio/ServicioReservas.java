@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 
 import reservas.modelo.Evento;
 import reservas.modelo.Reserva;
-import reservas.repositorio.EntidadNoEncontrada;
 import reservas.repositorio.RepositorioEventos;
 import reservas.repositorio.RepositorioReservas;
+import reservas.repositorio.exception.EntidadNoEncontrada;
 import reservas.rest.dto.ReservaResumen;
 import reservas.rest.mapper.ReservaMapper;
 

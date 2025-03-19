@@ -19,37 +19,36 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "evento")
 public class Evento {
-	
+
 	@Id
-	@GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid")
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	@Column(name = "id")
 	private String id;
-	
+
 	@Column(name = "nombre")
 	private String nombre;
-	
+
 	@Lob
 	@Column(name = "descripcion")
 	private String descripcion;
-	
+
 	@Column(name = "organizador")
 	private String organizador;
-	
+
 	@Column(name = "plazas")
 	private int numPlazas;
-	
+
 	@Column(name = "cancelado")
 	private boolean cancelado;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "categoria")
 	private EventoCategoria categoria;
-	
+
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "idOcupacion")
 	private Ocupacion ocupacion;
-
 
 	public Evento() {
 

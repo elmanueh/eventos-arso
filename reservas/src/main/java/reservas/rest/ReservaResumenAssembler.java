@@ -13,6 +13,7 @@ import reservas.rest.dto.ReservaResumen;
 public class ReservaResumenAssembler
 		implements RepresentationModelAssembler<ReservaResumen, EntityModel<ReservaResumen>> {
 
+	@SuppressWarnings("null")
 	@Override
 	public EntityModel<ReservaResumen> toModel(ReservaResumen reserva) {
 		try {
