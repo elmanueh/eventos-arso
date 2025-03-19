@@ -17,14 +17,14 @@ import org.hibernate.annotations.GenericGenerator;
 public class Ocupacion {
 
 	@Id
-	@GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid")
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	@Column(name = "id")
 	private String id;
-	
+
 	@Column(name = "fechaInicio")
 	private LocalDateTime fechaInicio;
-	
+
 	@Column(name = "fechaFin")
 	private LocalDateTime fechaFin;
 
