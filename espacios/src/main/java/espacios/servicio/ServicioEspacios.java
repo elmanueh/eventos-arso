@@ -10,13 +10,16 @@ import espacios.repositorio.EntidadNoEncontrada;
 import espacios.repositorio.FactoriaRepositorios;
 import espacios.repositorio.IRepositorioAdHocEspacioFisico;
 import espacios.repositorio.RepositorioException;
+import espacios.servicio.eventos.IServicioEventos;
 
 public class ServicioEspacios implements IServicioEspacios {
 
-	private IRepositorioAdHocEspacioFisico repositorioEspacioFisico;
+	private final IRepositorioAdHocEspacioFisico repositorioEspacioFisico;
+	private final IServicioEventos servicioEventos;
 
 	public ServicioEspacios() {
 		repositorioEspacioFisico = FactoriaRepositorios.getRepositorio(EspacioFisico.class);
+		servicioEventos = FactoriaServicios.getServicio(IServicioEventos.class);
 	}
 
 	@Override
@@ -113,7 +116,7 @@ public class ServicioEspacios implements IServicioEspacios {
 		if (idEspacioFisico == null || idEspacioFisico.isEmpty())
 			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo o vacío.");
 
-		if (repositorioEspacioFisico.isAlgunaOcupacion(idEspacioFisico)) {
+		if (!servicioEventos.isAlgunaOcupacion(idEspacioFisico)) {
 			try {
 				EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
 				espacioFisico.cerrar();
@@ -155,10 +158,7 @@ public class ServicioEspacios implements IServicioEspacios {
 		if (capacidad <= 0)
 			throw new IllegalArgumentException("La capacidad debe ser mayor que 0.");
 
-		// return repositorioEspacioFisico.getEspaciosFisicoLibres(fechaInicio,
-		// fechaFin, capacidad);
-		// Por ahora devolver todos, proximamente nos comunicaremos con Eventos.
-		return repositorioEspacioFisico.getAll();
+		return servicioEventos.buscarEspaciosFisicosLibres(fechaInicio, fechaFin, capacidad);
 	}
 
 }

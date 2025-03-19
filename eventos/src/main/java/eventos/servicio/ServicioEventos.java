@@ -193,4 +193,26 @@ public class ServicioEventos implements IServicioEventos {
 		return repositorioEvento.getEventosDelMesPaginados(mes, año, pageable).map(EventoMapper::toResumen);
 	}
 
+	@Override
+	public boolean isAlgunaOcupacion(String idEspacio) {
+		if (idEspacio == null || idEspacio.isEmpty())
+			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo o vacío.");
+
+		return repositorioEspacio.getNumeroOcupaciones(idEspacio) > 0;
+	}
+
+	@Override
+	public List<EspacioFisico> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin,
+			int capacidad) {
+		if (fechaInicio == null)
+			throw new IllegalArgumentException("La fecha de inicio no puede ser nula.");
+		if (fechaFin == null)
+			throw new IllegalArgumentException("La fecha de fin no puede ser nula.");
+		if (capacidad <= 0)
+			throw new IllegalArgumentException("La capacidad debe ser mayor que 0.");
+
+		// TODO: Tal vez haya que paginarlo
+		return repositorioEspacio.getEspaciosFisicoLibres(fechaInicio, fechaFin, capacidad);
+	}
+
 }

@@ -12,4 +12,6 @@ import eventos.modelo.EspacioFisico;
 @NoRepositoryBean
 public interface RepositorioEspacios extends PagingAndSortingRepository<EspacioFisico, String> {
 	LinkedList<EspacioFisico> getEspaciosFisicoLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin, int numPlazas);
+
+	int getNumeroOcupaciones(String idEspacioFisico);
 }

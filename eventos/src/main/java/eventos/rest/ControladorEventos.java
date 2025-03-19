@@ -101,4 +101,18 @@ public class ControladorEventos {
 		Page<EventoResumen> resultado = servicio.eventosDelMesPaginados(mes, año, pageable);
 		return pagedResourcesAssembler.toModel(resultado, eventoResumenAssembler);
 	}
+
+	@GetMapping("/ocupacion/{id}")
+	public ResponseEntity<Boolean> isAlgunaOcupacion(@PathVariable String id) {
+		return ResponseEntity.ok(servicio.isAlgunaOcupacion(id));
+	}
+
+	@GetMapping("/espacioslibres")
+	public ResponseEntity<?> buscarEspaciosFisicosLibres(
+			@RequestParam String fechaInicio,
+			@RequestParam String fechaFin,
+			@RequestParam int capacidad) {
+		return ResponseEntity.ok(servicio.buscarEspaciosFisicosLibres(LocalDateTime.parse(fechaInicio),
+				LocalDateTime.parse(fechaFin), capacidad));
+	}
 }

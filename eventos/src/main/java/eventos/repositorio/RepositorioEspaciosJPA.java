@@ -14,4 +14,8 @@ public interface RepositorioEspaciosJPA extends RepositorioEspacios, JpaReposito
 			+ "e.id NOT IN (SELECT o.espacioFisico.id FROM Ocupacion o WHERE "
 			+ "o.fechaFin <= :fechaFin AND o.fechaInicio >= :fechaInicio)")
 	LinkedList<EspacioFisico> getEspaciosFisicoLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin, int capacidad);
+
+	@Query("SELECT COUNT(o.espacioFisico) FROM Ocupacion o WHERE o.espacioFisico.id = :idEspacioFisico"
+			+ " AND o.fechaInicio <= CURRENT_TIMESTAMP AND o.fechaFin >= CURRENT_TIMESTAMP")
+	int getNumeroOcupaciones(String idEspacioFisico);
 }

@@ -1,0 +1,21 @@
+package espacios.servicio.eventos;
+
+import java.util.List;
+
+import espacios.modelo.EspacioFisico;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
+
+public interface EventosRetrofit {
+
+	@GET("eventos/ocupacion/{id}")
+	Call<Boolean> isAlgunaOcupacion(@Path("id") String idEspacio);
+
+	@GET("eventos/espacioslibres")
+	Call<List<EspacioFisico>> buscarEspaciosFisicosLibres(
+			@Query("fechaInicio") String fechaInicio,
+			@Query("fechaFin") String fechaFin,
+			@Query("capacidad") int capacidad);
+}
