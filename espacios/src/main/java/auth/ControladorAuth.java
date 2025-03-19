@@ -9,7 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
 import espacios.servicio.FactoriaServicios;
-import espacios.servicio.IServicioAuth;
+import espacios.servicio.auth.IServicioAuth;
 
 @Path("auth")
 public class ControladorAuth {

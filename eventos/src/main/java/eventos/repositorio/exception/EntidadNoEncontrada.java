@@ -1,4 +1,4 @@
-package eventos.repositorio;
+package eventos.repositorio.exception;
 
 /*
  * Excepción notificada si no existe una entidad con el identificador

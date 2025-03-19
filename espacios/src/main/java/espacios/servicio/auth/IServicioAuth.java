@@ -1,4 +1,4 @@
-package espacios.servicio;
+package espacios.servicio.auth;
 
 public interface IServicioAuth {
     Boolean verificarCredenciales(String usuario, String contrasena);

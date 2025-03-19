@@ -1,4 +1,4 @@
-package espacios.servicio;
+package espacios.servicio.auth;
 
 import java.util.HashMap;
 import java.util.Map;

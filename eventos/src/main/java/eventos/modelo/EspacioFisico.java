@@ -17,19 +17,19 @@ public class EspacioFisico {
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	@Column(name = "id")
 	private String id;
-	
+
 	@Column(name = "nombre")
 	private String nombre;
-	
+
 	@Column(name = "propietario")
 	private String propietario;
-	
+
 	@Column(name = "direccion")
 	private String direccion;
-	
+
 	@Column(name = "cancelado")
 	private boolean cancelado;
-	
+
 	@Column(name = "capacidad")
 	private int capacidad;
 

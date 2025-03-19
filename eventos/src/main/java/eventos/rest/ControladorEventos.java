@@ -27,7 +27,7 @@ import org.springframework.hateoas.PagedModel;
 
 import eventos.modelo.Evento;
 import eventos.modelo.EventoCategoria;
-import eventos.repositorio.EntidadNoEncontrada;
+import eventos.repositorio.exception.EntidadNoEncontrada;
 import eventos.rest.dto.CreateEventoDTO;
 import eventos.rest.dto.EventoResponseDTO;
 import eventos.rest.dto.EventoResumen;

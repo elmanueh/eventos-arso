@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import eventos.modelo.EspacioFisico;
 import eventos.modelo.Evento;
 import eventos.modelo.EventoCategoria;
-import eventos.repositorio.EntidadNoEncontrada;
+import eventos.repositorio.exception.EntidadNoEncontrada;
 import eventos.rest.dto.EventoResumen;
 
 public interface IServicioEventos {

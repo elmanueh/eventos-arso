@@ -25,44 +25,40 @@ import espacios.repositorio.Identificable;
 @Table(name = "espacioFisico")
 public class EspacioFisico implements Identificable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private String id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private String id;
 
-    @Column(name = "nombre")
-    private String nombre;
+	@Column(name = "nombre")
+	private String nombre;
 
-    @Column(name = "propietario")
-    private String propietario;
+	@Column(name = "propietario")
+	private String propietario;
 
-    @Column(name = "capacidad")
-    private int capacidad;
+	@Column(name = "capacidad")
+	private int capacidad;
 
-    @Column(name = "direccion")
-    private String direccion;
+	@Column(name = "direccion")
+	private String direccion;
 
-    @Column(name = "longitud")
-    private double longitud;
+	@Column(name = "longitud")
+	private double longitud;
 
-    @Column(name = "latitud")
-    private double latitud;
+	@Column(name = "latitud")
+	private double latitud;
 
-    @Lob
-    @Column(name = "descripcion")
-    private String descripcion;
+	@Lob
+	@Column(name = "descripcion")
+	private String descripcion;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "estado")
-    private EspacioFisicoEstado estado;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "estado")
+	private EspacioFisicoEstado estado;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-		name = "espacioFisico_puntoInteres",
-	    joinColumns = @JoinColumn(name = "idEspacioFisico"),
-	    inverseJoinColumns = @JoinColumn(name = "idPuntosInteres")
-    )
-    private List<PuntoInteres> puntosInteres;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "espacioFisico_puntoInteres", joinColumns = @JoinColumn(name = "idEspacioFisico"), inverseJoinColumns = @JoinColumn(name = "idPuntosInteres"))
+	private List<PuntoInteres> puntosInteres;
 
 	public EspacioFisico() {
 

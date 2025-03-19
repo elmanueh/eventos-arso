@@ -17,9 +17,9 @@ import org.springframework.stereotype.Service;
 import eventos.modelo.EspacioFisico;
 import eventos.modelo.Evento;
 import eventos.modelo.EventoCategoria;
-import eventos.repositorio.EntidadNoEncontrada;
 import eventos.repositorio.RepositorioEspacios;
 import eventos.repositorio.RepositorioEventos;
+import eventos.repositorio.exception.EntidadNoEncontrada;
 import eventos.rest.dto.EventoResumen;
 import eventos.rest.mapper.EventoMapper;
 

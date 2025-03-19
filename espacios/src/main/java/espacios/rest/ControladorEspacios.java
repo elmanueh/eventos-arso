@@ -111,7 +111,6 @@ public class ControladorEspacios {
     public Response buscarEspaciosFisicosLibres(@QueryParam("fechainicio") String fechaInicio,
             @QueryParam("fechafin") String fechaFin, @QueryParam("capacidad") int capacidad) throws Exception {
 
-        System.out.println(fechaInicio + " " + fechaFin + " " + capacidad);
         List<EspacioFisico> espaciosFisicosLibres = servicio.buscarEspaciosFisicosLibres(
                 LocalDateTime.parse(fechaInicio),
                 LocalDateTime.parse(fechaFin), capacidad);
