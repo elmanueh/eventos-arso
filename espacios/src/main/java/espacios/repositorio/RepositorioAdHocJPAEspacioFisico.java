@@ -8,6 +8,7 @@ import javax.persistence.TypedQuery;
 
 import espacios.modelo.EspacioFisico;
 import espacios.modelo.EspacioFisicoEstado;
+import espacios.repositorio.core.RepositorioJPA;
 import espacios.utils.EntityManagerHelper;
 
 public class RepositorioAdHocJPAEspacioFisico extends RepositorioJPA<EspacioFisico>

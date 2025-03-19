@@ -1,4 +1,4 @@
-package espacios.servicio;
+package espacios.servicio.puntosInteres;
 
 import java.util.LinkedList;
 import javax.xml.parsers.DocumentBuilder;

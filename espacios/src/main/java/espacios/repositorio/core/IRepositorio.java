@@ -1,6 +1,9 @@
-package espacios.repositorio;
+package espacios.repositorio.core;
 
 import java.util.List;
+
+import espacios.repositorio.exception.EntidadNoEncontrada;
+import espacios.repositorio.exception.RepositorioException;
 
 public interface IRepositorio<T, K> {
 

@@ -8,7 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface EventosRetrofit {
+public interface EventosRest {
 
 	@GET("eventos/ocupacion/{id}")
 	Call<Boolean> isAlgunaOcupacion(@Path("id") String idEspacio);

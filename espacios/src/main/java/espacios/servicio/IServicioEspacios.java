@@ -6,8 +6,8 @@ import java.util.List;
 
 import espacios.modelo.EspacioFisico;
 import espacios.modelo.PuntoInteres;
-import espacios.repositorio.EntidadNoEncontrada;
-import espacios.repositorio.RepositorioException;
+import espacios.repositorio.exception.EntidadNoEncontrada;
+import espacios.repositorio.exception.RepositorioException;
 
 public interface IServicioEspacios {
 

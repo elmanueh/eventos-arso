@@ -1,4 +1,4 @@
-package espacios.repositorio;
+package espacios.repositorio.core;
 
 public interface Identificable {
 

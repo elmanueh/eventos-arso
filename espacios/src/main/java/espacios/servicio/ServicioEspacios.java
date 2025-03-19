@@ -6,10 +6,11 @@ import java.util.List;
 
 import espacios.modelo.EspacioFisico;
 import espacios.modelo.PuntoInteres;
-import espacios.repositorio.EntidadNoEncontrada;
-import espacios.repositorio.FactoriaRepositorios;
 import espacios.repositorio.IRepositorioAdHocEspacioFisico;
-import espacios.repositorio.RepositorioException;
+import espacios.repositorio.core.FactoriaRepositorios;
+import espacios.repositorio.exception.EntidadNoEncontrada;
+import espacios.repositorio.exception.RepositorioException;
+import espacios.servicio.core.FactoriaServicios;
 import espacios.servicio.eventos.IServicioEventos;
 
 public class ServicioEspacios implements IServicioEspacios {

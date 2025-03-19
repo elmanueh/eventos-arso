@@ -4,10 +4,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
-import espacios.repositorio.EntidadNoEncontrada;
+import espacios.repositorio.exception.EntidadNoEncontrada;
 
 @Provider
-public class TratamientoEntidadNoEncontradaException implements ExceptionMapper<EntidadNoEncontrada> {
+public class EntidadNoEncontradaExceptionHandler implements ExceptionMapper<EntidadNoEncontrada> {
 
 	@Override
 	public Response toResponse(EntidadNoEncontrada arg0) {

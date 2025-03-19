@@ -12,19 +12,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServicioEventos implements IServicioEventos {
 
 	private final Retrofit retrofit;
-	private final EventosRetrofit service;
+	private final EventosRest eventosRest;
 
 	public ServicioEventos() {
 		retrofit = new Retrofit.Builder().baseUrl("http://localhost:8081/api/")
 				.addConverterFactory(GsonConverterFactory.create()).build();
-		service = retrofit.create(EventosRetrofit.class);
+		eventosRest = retrofit.create(EventosRest.class);
 	}
 
 	@Override
 	public boolean isAlgunaOcupacion(String idEspacio) {
 		try {
-			Boolean response = service.isAlgunaOcupacion(idEspacio).execute().body();
-
+			Boolean response = eventosRest.isAlgunaOcupacion(idEspacio).execute().body();
 			return response.booleanValue();
 		} catch (IOException e) {
 			return false;
@@ -35,7 +34,7 @@ public class ServicioEventos implements IServicioEventos {
 	public List<EspacioFisico> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin,
 			int capacidad) {
 		try {
-			List<EspacioFisico> response = service
+			List<EspacioFisico> response = eventosRest
 					.buscarEspaciosFisicosLibres(fechaInicio.toString(), fechaFin.toString(), capacidad).execute()
 					.body();
 

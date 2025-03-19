@@ -8,8 +8,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-import espacios.servicio.FactoriaServicios;
 import espacios.servicio.auth.IServicioAuth;
+import espacios.servicio.core.FactoriaServicios;
 
 @Path("auth")
 public class ControladorAuth {

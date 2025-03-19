@@ -19,7 +19,7 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import espacios.repositorio.Identificable;
+import espacios.repositorio.core.Identificable;
 
 @Entity
 @Table(name = "espacioFisico")

@@ -1,4 +1,4 @@
-package espacios.repositorio;
+package espacios.repositorio.core;
 
 import java.util.List;
 
@@ -8,6 +8,8 @@ import javax.persistence.Query;
 import org.eclipse.persistence.config.HintValues;
 import org.eclipse.persistence.config.QueryHints;
 
+import espacios.repositorio.exception.EntidadNoEncontrada;
+import espacios.repositorio.exception.RepositorioException;
 import espacios.utils.EntityManagerHelper;
 
 public abstract class RepositorioJPA<T extends Identificable> implements IRepositorioString<T> {

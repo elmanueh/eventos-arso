@@ -4,10 +4,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
-import espacios.repositorio.RepositorioException;
+import espacios.repositorio.exception.RepositorioException;
 
 @Provider
-public class TratamientoRepositorioException implements ExceptionMapper<RepositorioException> {
+public class RepositorioExceptionHandler implements ExceptionMapper<RepositorioException> {
 
 	@Override
 	public Response toResponse(RepositorioException arg0) {

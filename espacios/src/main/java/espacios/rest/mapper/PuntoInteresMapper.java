@@ -5,8 +5,7 @@ import espacios.rest.dto.PuntoInteresDTO;
 
 public class PuntoInteresMapper {
 
-    public PuntoInteresMapper() {
-        throw new UnsupportedOperationException("No se permite instanciar esta clase");
+    private PuntoInteresMapper() {
     }
 
     public static PuntoInteres fromDTO(PuntoInteresDTO puntoDTO) {

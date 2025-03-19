@@ -1,4 +1,4 @@
-package espacios.repositorio;
+package espacios.repositorio.exception;
 
 /*
  * Excepción que representa un fallo en el sistema de persistencia.

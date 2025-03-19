@@ -10,8 +10,7 @@ import espacios.rest.dto.ResumenEspacioFisicoResponseDTO;
 
 public class EspacioFisicoMapper {
 
-    public EspacioFisicoMapper() {
-        throw new UnsupportedOperationException("No se permite instanciar esta clase");
+    private EspacioFisicoMapper() {
     }
 
     public static EspacioFisico toEntity(CreateEspacioFisicoDTO dto) {
