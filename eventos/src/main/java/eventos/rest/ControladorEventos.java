@@ -2,6 +2,7 @@ package eventos.rest;
 
 import java.net.URI;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -32,13 +33,14 @@ import eventos.rest.dto.CreateEventoDTO;
 import eventos.rest.dto.EventoResponseDTO;
 import eventos.rest.dto.EventoResumen;
 import eventos.rest.dto.UpdateEventoDTO;
+import eventos.rest.hateoas.EventoResumenAssembler;
 import eventos.rest.mapper.EventoMapper;
 import eventos.servicio.IServicioEventos;
 
 @RestController
 @RequestMapping("/eventos")
 public class ControladorEventos {
-	private IServicioEventos servicio;
+	private final IServicioEventos servicio;
 
 	@Autowired
 	public ControladorEventos(IServicioEventos servicio) {
@@ -108,11 +110,12 @@ public class ControladorEventos {
 	}
 
 	@GetMapping("/espacioslibres")
-	public ResponseEntity<?> buscarEspaciosFisicosLibres(
+	public List<String> buscarEspaciosFisicosLibres(
 			@RequestParam String fechaInicio,
 			@RequestParam String fechaFin,
 			@RequestParam int capacidad) {
-		return ResponseEntity.ok(servicio.buscarEspaciosFisicosLibres(LocalDateTime.parse(fechaInicio),
-				LocalDateTime.parse(fechaFin), capacidad));
+
+		return servicio.buscarEspaciosFisicosLibres(
+				LocalDateTime.parse(fechaInicio), LocalDateTime.parse(fechaFin), capacidad);
 	}
 }

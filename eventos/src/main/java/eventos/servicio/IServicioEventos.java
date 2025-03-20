@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import eventos.modelo.EspacioFisico;
 import eventos.modelo.Evento;
 import eventos.modelo.EventoCategoria;
 import eventos.repositorio.exception.EntidadNoEncontrada;
@@ -25,12 +24,10 @@ public interface IServicioEventos {
 
 	void cancelarEvento(String idEvento);
 
-	String eventosDelMes(int mes, int año);
-
 	Page<EventoResumen> eventosDelMesPaginados(int mes, int año, Pageable pageable);
 
 	boolean isAlgunaOcupacion(String idEspacio);
 
-	List<EspacioFisico> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin, int capacidad);
+	List<String> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin, int capacidad);
 
 }

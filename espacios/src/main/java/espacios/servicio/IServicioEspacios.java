@@ -8,6 +8,7 @@ import espacios.modelo.EspacioFisico;
 import espacios.modelo.PuntoInteres;
 import espacios.repositorio.exception.EntidadNoEncontrada;
 import espacios.repositorio.exception.RepositorioException;
+import espacios.servicio.eventos.exception.RetrofitException;
 
 public interface IServicioEspacios {
 
@@ -22,10 +23,10 @@ public interface IServicioEspacios {
 	void modificarEspacioFisico(String idEspacioFisico, String nombre, int capacidad, String descripcion)
 			throws RepositorioException, EntidadNoEncontrada;
 
-	void bajaEspacioFisico(String idEspacioFisico) throws RepositorioException, EntidadNoEncontrada;
+	void bajaEspacioFisico(String idEspacioFisico) throws RepositorioException, EntidadNoEncontrada, RetrofitException;
 
 	void activarEspacioFisico(String idEspacioFisico) throws RepositorioException, EntidadNoEncontrada;
 
 	List<EspacioFisico> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin, int capacidad)
-			throws RepositorioException;
+			throws RepositorioException, RetrofitException;
 }

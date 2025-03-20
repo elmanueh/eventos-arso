@@ -2,45 +2,44 @@ package espacios.servicio.eventos;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.LinkedList;
 import java.util.List;
 
-import espacios.modelo.EspacioFisico;
+import espacios.servicio.eventos.exception.RetrofitException;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ServicioEventos implements IServicioEventos {
+public class ServicioEventosAPI implements IServicioEventosAPI {
 
 	private final Retrofit retrofit;
 	private final EventosRest eventosRest;
 
-	public ServicioEventos() {
+	public ServicioEventosAPI() {
 		retrofit = new Retrofit.Builder().baseUrl("http://localhost:8081/api/")
 				.addConverterFactory(GsonConverterFactory.create()).build();
 		eventosRest = retrofit.create(EventosRest.class);
 	}
 
 	@Override
-	public boolean isAlgunaOcupacion(String idEspacio) {
+	public boolean isAlgunaOcupacion(String idEspacio) throws RetrofitException {
 		try {
 			Boolean response = eventosRest.isAlgunaOcupacion(idEspacio).execute().body();
 			return response.booleanValue();
 		} catch (IOException e) {
-			return false;
+			throw new RetrofitException("Error al consultar la ocupación del espacio físico con id " + idEspacio);
 		}
 	}
 
 	@Override
-	public List<EspacioFisico> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin,
-			int capacidad) {
+	public List<String> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin,
+			int capacidad) throws RetrofitException {
 		try {
-			List<EspacioFisico> response = eventosRest
-					.buscarEspaciosFisicosLibres(fechaInicio.toString(), fechaFin.toString(), capacidad).execute()
-					.body();
+			List<String> response = eventosRest
+					.buscarEspaciosFisicosLibres(fechaInicio.toString(), fechaFin.toString(), capacidad)
+					.execute().body();
 
 			return response;
 		} catch (Exception e) {
-			return new LinkedList<EspacioFisico>();
+			throw new RetrofitException("Error al buscar espacios físicos libres");
 		}
 	}
 

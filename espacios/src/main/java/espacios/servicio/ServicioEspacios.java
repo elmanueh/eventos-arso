@@ -11,16 +11,17 @@ import espacios.repositorio.core.FactoriaRepositorios;
 import espacios.repositorio.exception.EntidadNoEncontrada;
 import espacios.repositorio.exception.RepositorioException;
 import espacios.servicio.core.FactoriaServicios;
-import espacios.servicio.eventos.IServicioEventos;
+import espacios.servicio.eventos.IServicioEventosAPI;
+import espacios.servicio.eventos.exception.RetrofitException;
 
 public class ServicioEspacios implements IServicioEspacios {
 
 	private final IRepositorioAdHocEspacioFisico repositorioEspacioFisico;
-	private final IServicioEventos servicioEventos;
+	private final IServicioEventosAPI servicioEventosAPI;
 
 	public ServicioEspacios() {
 		repositorioEspacioFisico = FactoriaRepositorios.getRepositorio(EspacioFisico.class);
-		servicioEventos = FactoriaServicios.getServicio(IServicioEventos.class);
+		servicioEventosAPI = FactoriaServicios.getServicio(IServicioEventosAPI.class);
 	}
 
 	@Override
@@ -112,12 +113,13 @@ public class ServicioEspacios implements IServicioEspacios {
 	}
 
 	@Override
-	public void bajaEspacioFisico(String idEspacioFisico) throws RepositorioException, EntidadNoEncontrada {
+	public void bajaEspacioFisico(String idEspacioFisico)
+			throws RepositorioException, EntidadNoEncontrada, RetrofitException {
 
 		if (idEspacioFisico == null || idEspacioFisico.isEmpty())
 			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo o vacío.");
 
-		if (!servicioEventos.isAlgunaOcupacion(idEspacioFisico)) {
+		if (!servicioEventosAPI.isAlgunaOcupacion(idEspacioFisico)) {
 			try {
 				EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
 				espacioFisico.cerrar();
@@ -150,7 +152,7 @@ public class ServicioEspacios implements IServicioEspacios {
 
 	@Override
 	public List<EspacioFisico> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin,
-			int capacidad) throws RepositorioException {
+			int capacidad) throws RepositorioException, RetrofitException {
 
 		if (fechaInicio == null)
 			throw new IllegalArgumentException("La fecha de inicio no puede ser nula.");
@@ -159,7 +161,10 @@ public class ServicioEspacios implements IServicioEspacios {
 		if (capacidad <= 0)
 			throw new IllegalArgumentException("La capacidad debe ser mayor que 0.");
 
-		return servicioEventos.buscarEspaciosFisicosLibres(fechaInicio, fechaFin, capacidad);
+		List<String> espaciosFisicosIds = servicioEventosAPI.buscarEspaciosFisicosLibres(fechaInicio, fechaFin,
+				capacidad);
+
+		return repositorioEspacioFisico.getEspaciosFisicosByIds(espaciosFisicosIds);
 	}
 
 }
