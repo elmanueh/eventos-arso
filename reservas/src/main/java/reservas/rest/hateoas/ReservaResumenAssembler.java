@@ -1,4 +1,4 @@
-package reservas.rest;
+package reservas.rest.hateoas;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -7,6 +7,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
+import reservas.rest.ControladorReservas;
 import reservas.rest.dto.ReservaResumen;
 
 @Component

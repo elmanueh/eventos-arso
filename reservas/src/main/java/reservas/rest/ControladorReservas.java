@@ -23,6 +23,7 @@ import reservas.modelo.Reserva;
 import reservas.repositorio.exception.EntidadNoEncontrada;
 import reservas.rest.dto.ReservaResponseDTO;
 import reservas.rest.dto.ReservaResumen;
+import reservas.rest.hateoas.ReservaResumenAssembler;
 import reservas.rest.dto.CreateReservaDTO;
 import reservas.rest.mapper.ReservaMapper;
 import reservas.servicio.IServicioReservas;
@@ -30,7 +31,7 @@ import reservas.servicio.IServicioReservas;
 @RestController
 @RequestMapping("/reservas")
 public class ControladorReservas {
-	private IServicioReservas servicio;
+	private final IServicioReservas servicio;
 
 	@Autowired
 	public ControladorReservas(IServicioReservas servicio) {
@@ -47,6 +48,7 @@ public class ControladorReservas {
 	@PostMapping()
 	public ResponseEntity<Void> createReserva(@Valid @RequestBody CreateReservaDTO reservaDTO)
 			throws EntidadNoEncontrada {
+
 		String id = servicio.reservar(reservaDTO.getIdEvento(), reservaDTO.getIdUsuario(), reservaDTO.getNumPlazas());
 
 		URI nuevaURL = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();

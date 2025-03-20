@@ -43,9 +43,8 @@ public class ServicioReservas implements IServicioReservas {
 
 		Optional<Evento> eventoOpt = repositorioEventos.findById(idEvento);
 
-		if (!eventoOpt.isPresent()) {
+		if (!eventoOpt.isPresent())
 			throw new EntidadNoEncontrada("No existe evento con id: " + idEvento);
-		}
 
 		Evento evento = eventoOpt.get();
 
@@ -77,12 +76,11 @@ public class ServicioReservas implements IServicioReservas {
 		if (idReserva == null || idReserva.isEmpty())
 			throw new IllegalArgumentException("idReserva: no debe ser nulo ni vacio");
 
-		Optional<Reserva> resultado = repositorioReservas.findById(idReserva);
+		Optional<Reserva> reservaOpt = repositorioReservas.findById(idReserva);
 
-		if (resultado.isPresent() == false)
+		if (!reservaOpt.isPresent())
 			throw new EntidadNoEncontrada("No existe encuesta con id: " + idReserva);
-		else
-			return resultado.get();
+		return reservaOpt.get();
 	}
 
 	// GESTOR_EVENTOS
@@ -93,7 +91,6 @@ public class ServicioReservas implements IServicioReservas {
 
 		Page<ReservaResumen> reservas = repositorioReservas.findByEventoId(idEvento, pageable)
 				.map(ReservaMapper::toResumen);
-
 		return reservas;
 	}
 
