@@ -1,16 +1,28 @@
 package reservas.rest.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(description = "Resumen de la reserva")
 public class ReservaResumen {
+
+	@Schema(description = "Identificador de la reserva", example = "abc123")
 	private String id;
+
+	@Schema(description = "Identificador del usuario", example = "67890")
 	private String idUsuario;
-    private int plazasReservadas;
-    private boolean cancelada;
-    private boolean evento;
+
+	@Schema(description = "Número de plazas reservadas", example = "2")
+	private int plazasReservadas;
+
+	@Schema(description = "Indica si la reserva ha sido cancelada", example = "false")
+	private boolean cancelada;
+
+	@Schema(description = "Indica si el evento está activo", example = "true")
+	private boolean evento;
 
 	public ReservaResumen() {
 	}
 
-	
 	public String getId() {
 		return id;
 	}
@@ -50,7 +62,5 @@ public class ReservaResumen {
 	public void setEvento(boolean evento) {
 		this.evento = evento;
 	}
-
-	
 
 }

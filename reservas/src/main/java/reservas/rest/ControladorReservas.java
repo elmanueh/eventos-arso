@@ -30,7 +30,7 @@ import reservas.servicio.IServicioReservas;
 
 @RestController
 @RequestMapping("/reservas")
-public class ControladorReservas {
+public class ControladorReservas implements ReservasApi {
 	private final IServicioReservas servicio;
 
 	@Autowired
@@ -64,9 +64,8 @@ public class ControladorReservas {
 
 	// recuperarTodasReservas
 	@GetMapping("/evento/{id}")
-	public PagedModel<EntityModel<ReservaResumen>> getlistadoPaginado(@PathVariable String id,
-			Pageable pageable) throws EntidadNoEncontrada {
-
+	public PagedModel<EntityModel<ReservaResumen>> getListadoPaginado(String id, Pageable pageable)
+			throws EntidadNoEncontrada {
 		Page<ReservaResumen> resultado = servicio.recuperarTodasReservas(id, pageable);
 		return pagedResourcesAssembler.toModel(resultado, reservaAssembler);
 	}
