@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import eventos.communication.IEventProducer;
 import eventos.modelo.EspacioFisico;
 import eventos.modelo.Evento;
 import eventos.modelo.EventoCategoria;
@@ -27,11 +28,14 @@ public class ServicioEventos implements IServicioEventos {
 
 	private final RepositorioEventos repositorioEvento;
 	private final RepositorioEspacios repositorioEspacio;
+	private final IEventProducer eventosPublisher;
 
 	@Autowired
-	public ServicioEventos(RepositorioEventos repositorioEvento, RepositorioEspacios repositorioEspacios) {
+	public ServicioEventos(RepositorioEventos repositorioEvento, RepositorioEspacios repositorioEspacios,
+			IEventProducer eventosPublisher) {
 		this.repositorioEvento = repositorioEvento;
 		this.repositorioEspacio = repositorioEspacios;
+		this.eventosPublisher = eventosPublisher;
 	}
 
 	// USUARIO
@@ -92,6 +96,10 @@ public class ServicioEventos implements IServicioEventos {
 					espacioFisico);
 
 			String id = repositorioEvento.save(evento).getId();
+
+			// TODO: publicar evento
+			eventosPublisher.publicarEventoCreado(id, evento);
+
 			return id;
 		} catch (EntidadNoEncontrada e) {
 			throw new EntidadNoEncontrada("Error al encontrar el espacio físico con id "
@@ -132,11 +140,13 @@ public class ServicioEventos implements IServicioEventos {
 				throw new EntidadNoEncontrada("Error al encontrar el evento con id " + espacioFisicoOptional + ".");
 
 			EspacioFisico espacio = espacioFisicoOptional.get();
-			espacio.setId(idEspacioFisico);
 			evento.setEspacioFisico(espacio);
 		}
 
 		repositorioEvento.save(evento);
+
+		// TODO: publicar evento
+		eventosPublisher.publicarEventoModificado(idEvento, evento);
 	}
 
 	// GESTOR_EVENTOS
@@ -153,6 +163,9 @@ public class ServicioEventos implements IServicioEventos {
 		Evento evento = eventoOptional.get();
 		evento.setCancelado();
 		repositorioEvento.save(evento);
+
+		// TODO: publicar evento
+		eventosPublisher.publicarEventoCancelado(idEvento);
 	}
 
 	// USUARIO
