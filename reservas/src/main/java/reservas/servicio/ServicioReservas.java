@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import reservas.communication.producer.IEventProducer;
 import reservas.modelo.Evento;
 import reservas.modelo.Reserva;
 import reservas.repositorio.RepositorioEventos;
@@ -24,11 +25,14 @@ public class ServicioReservas implements IServicioReservas {
 
 	private final RepositorioReservas repositorioReservas;
 	private final RepositorioEventos repositorioEventos;
+	private final IEventProducer reservasPublisher;
 
 	@Autowired
-	public ServicioReservas(RepositorioReservas repositorioReservas, RepositorioEventos repositorioEventos) {
+	public ServicioReservas(RepositorioReservas repositorioReservas, RepositorioEventos repositorioEventos,
+			IEventProducer reservasPublisher) {
 		this.repositorioReservas = repositorioReservas;
 		this.repositorioEventos = repositorioEventos;
+		this.reservasPublisher = reservasPublisher;
 	}
 
 	// USUARIO
@@ -55,19 +59,22 @@ public class ServicioReservas implements IServicioReservas {
 			throw new IllegalStateException(
 					"El número de plazas supera la capacidad del evento con id " + idEvento + ".");
 
-		Reserva nuevaReserva = new Reserva();
-		nuevaReserva.setEvento(evento);
-		nuevaReserva.setIdUsuario(idUsuario);
-		nuevaReserva.setPlazasReservadas(numPlazas);
+		Reserva reserva = new Reserva();
+		reserva.setEvento(evento);
+		reserva.setIdUsuario(idUsuario);
+		reserva.setPlazasReservadas(numPlazas);
 
-		repositorioReservas.save(nuevaReserva);
+		repositorioReservas.save(reserva);
 
 		evento.reservarPlazas(numPlazas);
-		evento.addReserva(nuevaReserva);
+		evento.addReserva(reserva);
 
 		repositorioEventos.save(evento);
 
-		return nuevaReserva.getId();
+		String idReserva = reserva.getId();
+		reservasPublisher.publicarReservaCreado(idReserva, reserva);
+
+		return idReserva;
 	}
 
 	// USUARIO

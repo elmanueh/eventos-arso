@@ -17,11 +17,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 @Configuration
 public class RabbitMQConfig {
+	public static final String QUEUE_NAME = "reservas";
 	public static final String EXCHANGE_NAME = "bus";
-	public static final String EVENTOS_QUEUE_NAME = "eventos";
 	public static final String EVENTOS_BINDING_KEY = "bus.eventos.#";
-	public static final String RESERVAS_QUEUE_NAME = "reservas";
-	public static final String RESERVAS_BINDING_KEY = "bus.reservas.#";
 
 	@Bean
 	public TopicExchange exchange() {
@@ -29,29 +27,16 @@ public class RabbitMQConfig {
 	}
 
 	@Bean
-	public Queue queueEventos() {
+	public Queue queue() {
 		boolean durable = true;
 		boolean exclusive = false;
 		boolean autodelete = false;
-		return new Queue(EVENTOS_QUEUE_NAME, durable, exclusive, autodelete);
+		return new Queue(QUEUE_NAME, durable, exclusive, autodelete);
 	}
 
 	@Bean
-	public Binding bindingEventos() {
-		return BindingBuilder.bind(queueEventos()).to(exchange()).with(EVENTOS_BINDING_KEY);
-	}
-
-	@Bean
-	public Queue queueReservas() {
-		boolean durable = true;
-		boolean exclusive = false;
-		boolean autodelete = false;
-		return new Queue(RESERVAS_QUEUE_NAME, durable, exclusive, autodelete);
-	}
-
-	@Bean
-	public Binding bindingReservas() {
-		return BindingBuilder.bind(queueReservas()).to(exchange()).with(RESERVAS_BINDING_KEY);
+	public Binding binding() {
+		return BindingBuilder.bind(queue()).to(exchange()).with(EVENTOS_BINDING_KEY);
 	}
 
 	@Bean
@@ -59,6 +44,7 @@ public class RabbitMQConfig {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.registerModule(new JavaTimeModule());
 		objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+
 		return new Jackson2JsonMessageConverter(objectMapper);
 	}
 
@@ -70,6 +56,6 @@ public class RabbitMQConfig {
 	}
 
 	public static String generarRoutingKey(String tipoEvento) {
-		return EXCHANGE_NAME + "." + EVENTOS_QUEUE_NAME + "." + tipoEvento;
+		return EXCHANGE_NAME + "." + QUEUE_NAME + "." + tipoEvento;
 	}
 }

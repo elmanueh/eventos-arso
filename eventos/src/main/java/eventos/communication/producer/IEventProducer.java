@@ -1,4 +1,4 @@
-package eventos.communication;
+package eventos.communication.producer;
 
 import eventos.modelo.Evento;
 

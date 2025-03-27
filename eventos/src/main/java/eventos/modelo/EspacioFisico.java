@@ -56,8 +56,8 @@ public class EspacioFisico {
 		return direccion;
 	}
 
-	public String getPropietario() {
-		return propietario;
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 
 	public void setCancelado(boolean cancelado) {
@@ -74,6 +74,14 @@ public class EspacioFisico {
 
 	public int getCapacidad() {
 		return capacidad;
+	}
+
+	public void setPropietario(String propietario) {
+		this.propietario = propietario;
+	}
+
+	public String getPropietario() {
+		return propietario;
 	}
 
 	@Override

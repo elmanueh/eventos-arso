@@ -19,7 +19,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 public class RabbitMQConfig {
 	public static final String QUEUE_NAME = "eventos";
 	public static final String EXCHANGE_NAME = "bus";
-	public static final String EVENTOS_BINDING_KEY = "bus.eventos.#";
+	public static final String ESPACIOS_BINDING_KEY = "bus.espacios.#";
 
 	@Bean
 	public TopicExchange exchange() {
@@ -36,7 +36,7 @@ public class RabbitMQConfig {
 
 	@Bean
 	public Binding binding() {
-		return BindingBuilder.bind(queue()).to(exchange()).with(EVENTOS_BINDING_KEY);
+		return BindingBuilder.bind(queue()).to(exchange()).with(ESPACIOS_BINDING_KEY);
 	}
 
 	@Bean

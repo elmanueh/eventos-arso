@@ -12,7 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import eventos.communication.IEventProducer;
+import eventos.communication.producer.IEventProducer;
 import eventos.modelo.EspacioFisico;
 import eventos.modelo.Evento;
 import eventos.modelo.EventoCategoria;
