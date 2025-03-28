@@ -20,6 +20,7 @@ public class ReservaMapper {
 
 	public static ReservaResumen toResumen(Reserva reserva) {
 		ReservaResumen resumen = new ReservaResumen();
+		resumen.setId(reserva.getId());
 		resumen.setIdUsuario(reserva.getIdUsuario());
 		resumen.setPlazasReservadas(reserva.getPlazasReservadas());
 		resumen.setCancelada(reserva.isCancelada());

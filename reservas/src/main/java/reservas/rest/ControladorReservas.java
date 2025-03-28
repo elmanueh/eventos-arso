@@ -11,6 +11,7 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,8 +45,8 @@ public class ControladorReservas implements ReservasApi {
 	@Autowired
 	private ReservaResumenAssembler reservaAssembler;
 
-	// reservar
 	@PostMapping()
+	@PreAuthorize("hasAuthority('USUARIO')")
 	public ResponseEntity<Void> createReserva(@Valid @RequestBody CreateReservaDTO reservaDTO)
 			throws EntidadNoEncontrada {
 
@@ -55,16 +56,16 @@ public class ControladorReservas implements ReservasApi {
 		return ResponseEntity.created(nuevaURL).build();
 	}
 
-	// recuperarReserva
 	@GetMapping("/{id}")
+	@PreAuthorize("hasAuthority('USUARIO')")
 	public ReservaResponseDTO getReserva(@PathVariable String id) throws EntidadNoEncontrada {
 		Reserva reserva = servicio.recuperarReserva(id);
 		return ReservaMapper.toDTO(reserva);
 	}
 
-	// recuperarTodasReservas
 	@GetMapping("/evento/{id}")
-	public PagedModel<EntityModel<ReservaResumen>> getListadoPaginado(String id, Pageable pageable)
+	@PreAuthorize("hasAuthority('GESTOR_EVENTOS')")
+	public PagedModel<EntityModel<ReservaResumen>> getListadoPaginado(@PathVariable String id, Pageable pageable)
 			throws EntidadNoEncontrada {
 		Page<ReservaResumen> resultado = servicio.recuperarTodasReservas(id, pageable);
 		return pagedResourcesAssembler.toModel(resultado, reservaAssembler);
