@@ -16,4 +16,9 @@
         <servlet-name>jersey-servlet</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
+
+    <!-- Declarar el RabbitMQConfig -->
+    <listener>
+        <listener-class>espacios.communication.consumer.RabbitMQStartupListener</listener-class>
+    </listener>
 </web-app>

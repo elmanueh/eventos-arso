@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
+import espacios.communication.producer.IEventProducer;
 import espacios.modelo.EspacioFisico;
 import espacios.modelo.PuntoInteres;
 import espacios.repositorio.IRepositorioAdHocEspacioFisico;
@@ -18,10 +19,12 @@ public class ServicioEspacios implements IServicioEspacios {
 
 	private final IRepositorioAdHocEspacioFisico repositorioEspacioFisico;
 	private final IServicioEventosAPI servicioEventosAPI;
+	private final IEventProducer eventProducer;
 
 	public ServicioEspacios() {
 		repositorioEspacioFisico = FactoriaRepositorios.getRepositorio(EspacioFisico.class);
 		servicioEventosAPI = FactoriaServicios.getServicio(IServicioEventosAPI.class);
+		eventProducer = FactoriaServicios.getServicio(IEventProducer.class);
 	}
 
 	@Override
@@ -54,6 +57,8 @@ public class ServicioEspacios implements IServicioEspacios {
 
 		try {
 			String id = repositorioEspacioFisico.add(espacio);
+			eventProducer.publicarEspacioCreado(id, espacio);
+
 			return id;
 		} catch (RepositorioException e) {
 			throw new RepositorioException("Error al dar de alta el espacio físico con nombre " + nombre + ".");
@@ -105,6 +110,7 @@ public class ServicioEspacios implements IServicioEspacios {
 				espacioFisico.setDescripcion(descripcion);
 
 			repositorioEspacioFisico.update(espacioFisico);
+			eventProducer.publicarEspacioModificado(espacioFisico.getId(), espacioFisico);
 		} catch (RepositorioException e) {
 			throw new RepositorioException("Error al modificar el espacio físico con id " + idEspacioFisico + ".");
 		} catch (EntidadNoEncontrada e) {
@@ -124,6 +130,7 @@ public class ServicioEspacios implements IServicioEspacios {
 				EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
 				espacioFisico.cerrar();
 				repositorioEspacioFisico.update(espacioFisico);
+				eventProducer.publicarEspacioEstadoModificado(idEspacioFisico, false);
 			} catch (RepositorioException e) {
 				throw new RepositorioException(
 						"Error al dar de baja el espacio físico con id " + idEspacioFisico + ".");
@@ -143,6 +150,7 @@ public class ServicioEspacios implements IServicioEspacios {
 			EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
 			espacioFisico.activar();
 			repositorioEspacioFisico.update(espacioFisico);
+			eventProducer.publicarEspacioEstadoModificado(idEspacioFisico, true);
 		} catch (RepositorioException e) {
 			throw new RepositorioException("Error al activar el espacio físico con id " + idEspacioFisico + ".");
 		} catch (EntidadNoEncontrada e) {
