@@ -1,7 +1,5 @@
 package espacios.communication.producer.events;
 
-import java.time.LocalDateTime;
-
 import espacios.communication.RabbitEvent;
 
 public class EventModificarEspacio extends RabbitEvent {
