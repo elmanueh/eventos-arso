@@ -14,7 +14,7 @@ public class ServicioEventosAPI implements IServicioEventosAPI {
 	private final EventosRest eventosRest;
 
 	public ServicioEventosAPI() {
-		retrofit = new Retrofit.Builder().baseUrl("http://localhost:8081/api/")
+		retrofit = new Retrofit.Builder().baseUrl("http://localhost:8082/api/")
 				.addConverterFactory(GsonConverterFactory.create()).build();
 		eventosRest = retrofit.create(EventosRest.class);
 	}

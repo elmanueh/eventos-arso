@@ -48,8 +48,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 }
 
                 // Crear el objeto de autenticación
-                UsernamePasswordAuthenticationToken auth = 
-                    new UsernamePasswordAuthenticationToken(username, null, authorities);
+                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(username, null, authorities);
 
                 // Guardar en el contexto de seguridad
                 SecurityContextHolder.getContext().setAuthentication(auth);

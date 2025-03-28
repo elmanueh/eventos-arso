@@ -1,36 +1,29 @@
 package auth;
 
-import java.time.Instant;
-import java.util.Date;
+import java.util.Base64;
 import java.util.Map;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JwtUtils {
 
-	private static final String SECRETO = "secreto";
-	private static final long TIEMPO = 3600; // 1 hora
+	public static Map<String, Object> decodeToken(String token) {
+        try {
+            String[] chunks = token.split("\\.");
+            if (chunks.length < 2) {
+                throw new IllegalArgumentException("Token inválido");
+            }
 
-	public static String generateToken(Map<String, Object> claims) {
+            String payloadJson = new String(Base64.getUrlDecoder().decode(chunks[1]));
 
-		Date caducidad = Date.from(Instant.now().plusSeconds(TIEMPO));
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(payloadJson, new TypeReference<Map<String, Object>>() {});
 
-		String token = Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS256, SECRETO)
-				.setExpiration(caducidad).compact();
-
-		return token;
-	}
-
-	public static Claims validateToken(String token) {
-
-		Claims claims = Jwts.parser()
-				.setSigningKey(SECRETO)
-				.parseClaimsJws(token)
-				.getBody();
-
-		return claims;
-	}
+        } catch (Exception e) {
+            System.out.println("Error al decodificar el token: " + e.getMessage());
+            return null;
+        }
+    }
 
 }
