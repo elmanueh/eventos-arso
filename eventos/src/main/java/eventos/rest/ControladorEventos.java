@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,12 +55,14 @@ public class ControladorEventos {
 	private EventoResumenAssembler eventoResumenAssembler;
 
 	@GetMapping("/{id}")
+	@PreAuthorize("hasAnyAuthority('GESTOR_EVENTOS', 'USUARIO')")
 	public EventoResponseDTO getEvento(@PathVariable String id) throws EntidadNoEncontrada {
 		Evento evento = servicio.recuperarEvento(id);
 		return EventoMapper.toDTO(evento);
 	}
 
 	@PostMapping()
+	@PreAuthorize("hasAuthority('GESTOR_EVENTOS')")
 	public ResponseEntity<Void> createEvento(@Valid @RequestBody CreateEventoDTO eventoDTO)
 			throws EntidadNoEncontrada {
 		String id = servicio.altaEvento(eventoDTO.getNombre(), eventoDTO.getDescripcion(),
@@ -72,6 +75,7 @@ public class ControladorEventos {
 	}
 
 	@PatchMapping("/{id}")
+	@PreAuthorize("hasAuthority('GESTOR_EVENTOS')")
 	public ResponseEntity<Void> updateEvento(@PathVariable String id, @Valid @RequestBody UpdateEventoDTO eventoDTO)
 			throws EntidadNoEncontrada {
 
@@ -91,12 +95,14 @@ public class ControladorEventos {
 	}
 
 	@PutMapping("/{id}/ocupacion")
+	@PreAuthorize("hasAuthority('GESTOR_EVENTOS')")
 	public ResponseEntity<Void> cancelEvento(@PathVariable String id) throws EntidadNoEncontrada {
 		servicio.cancelarEvento(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 
 	@GetMapping()
+	@PreAuthorize("hasAnyAuthority('GESTOR_EVENTOS', 'USUARIO')")
 	public PagedModel<EntityModel<EventoResumen>> getlistadoPaginado(@RequestParam int mes, @RequestParam int año,
 			Pageable pageable) throws EntidadNoEncontrada {
 
