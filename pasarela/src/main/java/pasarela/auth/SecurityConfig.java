@@ -1,4 +1,4 @@
-package gateway.auth;
+package pasarela.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -14,10 +14,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private JwtRequestFilter authenticationRequestFilter;
-    
+
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
-        // configuración de seguridad
+        // Deshabilita la protección CSRF y la autenticación básica
         httpSecurity.csrf().disable().httpBasic().disable()
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        // Establece el filtro de autenticación en la cadena de filtros de seguridad
+        // Agrega el filtro de autenticación JWT
         httpSecurity.addFilterBefore(this.authenticationRequestFilter,
                 UsernamePasswordAuthenticationFilter.class);
     }

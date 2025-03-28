@@ -1,4 +1,4 @@
-package gateway.auth;
+package pasarela.auth;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,6 +17,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import io.jsonwebtoken.Claims;
 
+// TODO: REVISAR ESTE ARCHIVO
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
@@ -48,14 +49,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 // Establecemos la autenticación en el contexto de seguridad
                 // Se interpreta como que el usuario ha superado la autenticación
                 SecurityContextHolder.getContext().setAuthentication(auth);
-                
+
             } catch (Exception e) {
-            	response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "El token JWT no es correcto");  
-            	return;
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "El token JWT no es correcto");
+                return;
             }
         }
-        
+
         chain.doFilter(request, response);
-        
+
     }
 }
