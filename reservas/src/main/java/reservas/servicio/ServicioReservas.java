@@ -35,7 +35,6 @@ public class ServicioReservas implements IServicioReservas {
 		this.reservasPublisher = reservasPublisher;
 	}
 
-	// USUARIO
 	@Override
 	public String reservar(String idEvento, String idUsuario, int numPlazas) throws EntidadNoEncontrada {
 		if (idEvento == null || idEvento.isEmpty())
@@ -77,7 +76,6 @@ public class ServicioReservas implements IServicioReservas {
 		return idReserva;
 	}
 
-	// USUARIO
 	@Override
 	public Reserva recuperarReserva(String idReserva) throws EntidadNoEncontrada {
 		if (idReserva == null || idReserva.isEmpty())
@@ -90,7 +88,6 @@ public class ServicioReservas implements IServicioReservas {
 		return reservaOpt.get();
 	}
 
-	// GESTOR_EVENTOS
 	@Override
 	public Page<ReservaResumen> recuperarTodasReservas(String idEvento, Pageable pageable) throws EntidadNoEncontrada {
 		if (idEvento == null || idEvento.isEmpty())
@@ -99,6 +96,15 @@ public class ServicioReservas implements IServicioReservas {
 		Page<ReservaResumen> reservas = repositorioReservas.findByEventoId(idEvento, pageable)
 				.map(ReservaMapper::toResumen);
 		return reservas;
+	}
+
+	@Override
+	public int recuperarNumPlazasReservadas(String idEvento) throws EntidadNoEncontrada {
+		if (idEvento == null || idEvento.isEmpty())
+			throw new IllegalArgumentException("idEvento: no debe ser nulo ni vacío");
+		
+		Integer totalPlazas = repositorioReservas.sumPlazasReservadasByEventoId(idEvento);
+        return (totalPlazas != null) ? totalPlazas : 0;
 	}
 
 }

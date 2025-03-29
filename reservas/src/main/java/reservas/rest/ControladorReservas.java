@@ -70,5 +70,10 @@ public class ControladorReservas implements ReservasApi {
 		Page<ReservaResumen> resultado = servicio.recuperarTodasReservas(id, pageable);
 		return pagedResourcesAssembler.toModel(resultado, reservaAssembler);
 	}
+	
+	@GetMapping("/evento/{idEvento}/plazasReservadas")
+	public ResponseEntity<Integer> obtenerPlazasReservadas(@PathVariable String idEvento) throws EntidadNoEncontrada {
+		return ResponseEntity.ok(servicio.recuperarNumPlazasReservadas(idEvento));
+	}
 
 }

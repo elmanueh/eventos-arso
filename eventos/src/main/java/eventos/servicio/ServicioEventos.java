@@ -21,6 +21,8 @@ import eventos.repositorio.RepositorioEventos;
 import eventos.repositorio.exception.EntidadNoEncontrada;
 import eventos.rest.dto.EventoResumen;
 import eventos.rest.mapper.EventoMapper;
+import eventos.servicio.reservas.IServicioReservasAPI;
+import eventos.servicio.reservas.exception.RetrofitException;
 
 @Service
 @Transactional
@@ -29,13 +31,15 @@ public class ServicioEventos implements IServicioEventos {
 	private final RepositorioEventos repositorioEvento;
 	private final RepositorioEspacios repositorioEspacio;
 	private final IEventProducer eventosPublisher;
+	private final IServicioReservasAPI servicioReservasAPI;
 
 	@Autowired
 	public ServicioEventos(RepositorioEventos repositorioEvento, RepositorioEspacios repositorioEspacios,
-			IEventProducer eventosPublisher) {
+			IEventProducer eventosPublisher, IServicioReservasAPI servicioReservasAPI) {
 		this.repositorioEvento = repositorioEvento;
 		this.repositorioEspacio = repositorioEspacios;
 		this.eventosPublisher = eventosPublisher;
+		this.servicioReservasAPI = servicioReservasAPI;
 	}
 
 	// USUARIO
@@ -110,14 +114,14 @@ public class ServicioEventos implements IServicioEventos {
 	// GESTOR_EVENTOS
 	@Override
 	public void modificarEvento(String idEvento, String descripcion, LocalDateTime fechaInicio, LocalDateTime fechaFin,
-			int numPlazas, String idEspacioFisico) throws EntidadNoEncontrada {
+			int numPlazas, String idEspacioFisico) throws EntidadNoEncontrada, RetrofitException {
 
 		if (idEvento == null || idEvento.isEmpty())
 			throw new IllegalArgumentException("El id del evento no puede ser nulo o vacío.");
 		if (descripcion != null && descripcion.isEmpty())
 			throw new IllegalArgumentException("La descripción del evento no puede ser vacía.");
 		if (numPlazas <= -1)
-			throw new IllegalArgumentException("La capacidad del espacio físico debe ser mayor que 0.");
+			throw new IllegalArgumentException("La número de plazas del evento debe ser mayor que 0.");
 		if (idEspacioFisico != null && idEspacioFisico.isEmpty())
 			throw new IllegalArgumentException("El id del espacio físico no puede ser vacío o nulo.");
 
@@ -132,12 +136,20 @@ public class ServicioEventos implements IServicioEventos {
 			evento.setFechaInicio(fechaInicio);
 		if (fechaFin != null)
 			evento.setFechaFin(fechaFin);
-		if (numPlazas != 0)
+		if (numPlazas != 0) {
+			//TODO: retrofit para cambiar numPlazas
+			if (evento.getOcupacion() != null && evento.getNumPlazas() > numPlazas) {
+					int numPlazasReservadas = servicioReservasAPI.validadReservas(idEvento);
+					if (numPlazas < numPlazasReservadas) {
+						throw new IllegalStateException("El número de plazas del evento no puede ser menor al número de plazas reservadas en el evento con id " + idEvento + ".");
+					}
+			}
 			evento.setNumPlazas(numPlazas);
+		}
 		if (idEspacioFisico != null) {
 			Optional<EspacioFisico> espacioFisicoOptional = repositorioEspacio.findById(idEspacioFisico);
 			if (!espacioFisicoOptional.isPresent())
-				throw new EntidadNoEncontrada("Error al encontrar el evento con id " + espacioFisicoOptional + ".");
+				throw new EntidadNoEncontrada("Error al encontrar el espacio físico con id " + idEspacioFisico + ".");
 
 			EspacioFisico espacio = espacioFisicoOptional.get();
 			evento.setEspacioFisico(espacio);

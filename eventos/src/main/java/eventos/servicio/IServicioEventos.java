@@ -10,6 +10,7 @@ import eventos.modelo.Evento;
 import eventos.modelo.EventoCategoria;
 import eventos.repositorio.exception.EntidadNoEncontrada;
 import eventos.rest.dto.EventoResumen;
+import eventos.servicio.reservas.exception.RetrofitException;
 
 public interface IServicioEventos {
 
@@ -20,7 +21,7 @@ public interface IServicioEventos {
 			throws EntidadNoEncontrada;
 
 	void modificarEvento(String idEvento, String descripcion, LocalDateTime fechaInicio, LocalDateTime fechaFin,
-			int numPlazas, String idEspacioFisico) throws EntidadNoEncontrada;
+			int numPlazas, String idEspacioFisico) throws EntidadNoEncontrada, RetrofitException;
 
 	void cancelarEvento(String idEvento);
 

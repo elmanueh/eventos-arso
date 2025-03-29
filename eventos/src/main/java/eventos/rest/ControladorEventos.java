@@ -37,6 +37,7 @@ import eventos.rest.dto.UpdateEventoDTO;
 import eventos.rest.hateoas.EventoResumenAssembler;
 import eventos.rest.mapper.EventoMapper;
 import eventos.servicio.IServicioEventos;
+import eventos.servicio.reservas.exception.RetrofitException;
 
 @RestController
 @RequestMapping("/eventos")
@@ -77,7 +78,7 @@ public class ControladorEventos {
 	@PatchMapping("/{id}")
 	@PreAuthorize("hasAuthority('GESTOR_EVENTOS')")
 	public ResponseEntity<Void> updateEvento(@PathVariable String id, @Valid @RequestBody UpdateEventoDTO eventoDTO)
-			throws EntidadNoEncontrada {
+			throws EntidadNoEncontrada, RetrofitException {
 
 		LocalDateTime fechaInicio = eventoDTO.getFechaInicio() != null
 				? LocalDateTime.parse(eventoDTO.getFechaInicio())

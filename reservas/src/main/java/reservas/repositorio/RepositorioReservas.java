@@ -10,5 +10,7 @@ import reservas.modelo.Reserva;
 @NoRepositoryBean
 public interface RepositorioReservas extends PagingAndSortingRepository<Reserva, String> {
 	Page<Reserva> findByEventoId(String idEvento, Pageable pageable);
+	
+	Integer sumPlazasReservadasByEventoId(String idEvento);
 
 }
