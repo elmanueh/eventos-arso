@@ -1,6 +1,7 @@
 package espacios.repositorio;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -18,7 +19,7 @@ public class RepositorioAdHocJPAEspacioFisico extends RepositorioJPA<EspacioFisi
 	}
 
 	@Override
-	public List<EspacioFisico> getEspaciosFisicosByIds(List<String> ids) {
+	public List<EspacioFisico> getEspaciosFisicosByIds(List<UUID> ids) {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 
 		String queryString = "SELECT e FROM EspacioFisico e WHERE e.id IN :ids";

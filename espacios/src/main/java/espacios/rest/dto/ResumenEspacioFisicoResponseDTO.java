@@ -1,7 +1,9 @@
 package espacios.rest.dto;
 
+import java.util.UUID;
+
 public class ResumenEspacioFisicoResponseDTO {
-    private String id;
+    private UUID id;
     private String nombre;
     private String propietario;
     private String estado;
@@ -9,11 +11,11 @@ public class ResumenEspacioFisicoResponseDTO {
     public ResumenEspacioFisicoResponseDTO() {
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

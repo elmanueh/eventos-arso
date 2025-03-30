@@ -2,10 +2,12 @@ package espacios.modelo;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,18 +19,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import espacios.repositorio.core.Identificable;
+import espacios.utils.UUIDConverter;
 
 @Entity
 @Table(name = "espacioFisico")
 public class EspacioFisico implements Identificable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private String id;
+	@Column(name = "id", updatable = false, nullable = false)
+	private UUID id;
 
 	@Column(name = "nombre")
 	private String nombre;
@@ -78,11 +81,18 @@ public class EspacioFisico implements Identificable {
 		this.puntosInteres = new LinkedList<PuntoInteres>();
 	}
 
-	public String getId() {
+	@PrePersist
+	public void generateUUID() {
+		if (id == null) {
+			id = UUID.randomUUID();
+		}
+	}
+
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

@@ -1,6 +1,7 @@
 package espacios.repositorio.core;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -12,12 +13,12 @@ import espacios.repositorio.exception.EntidadNoEncontrada;
 import espacios.repositorio.exception.RepositorioException;
 import espacios.utils.EntityManagerHelper;
 
-public abstract class RepositorioJPA<T extends Identificable> implements IRepositorioString<T> {
+public abstract class RepositorioJPA<T extends Identificable> implements IRepositorioUUID<T> {
 
 	public abstract Class<T> getClase();
 
 	@Override
-	public String add(T entity) throws RepositorioException {
+	public UUID add(T entity) throws RepositorioException {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		try {
 			em.getTransaction().begin();
@@ -80,7 +81,7 @@ public abstract class RepositorioJPA<T extends Identificable> implements IReposi
 	}
 
 	@Override
-	public T getById(String id) throws RepositorioException, EntidadNoEncontrada {
+	public T getById(UUID id) throws RepositorioException, EntidadNoEncontrada {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		try {
 			T instance = em.find(getClase(), id);
@@ -120,7 +121,7 @@ public abstract class RepositorioJPA<T extends Identificable> implements IReposi
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<String> getIds() throws RepositorioException {
+	public List<UUID> getIds() throws RepositorioException {
 		EntityManager em = EntityManagerHelper.getEntityManager();
 		try {
 			final String queryString = " SELECT t.id FROM " + getClase().getSimpleName() + " t ";

@@ -1,29 +1,34 @@
 package espacios.modelo;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+
+import espacios.utils.UUIDConverter;
 
 @Entity
 @Table(name = "puntoInteres")
 public class PuntoInteres {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private String id;
-	
+	@Column(name = "id", updatable = false, nullable = false)
+	private UUID id;
+
 	@Column(name = "nombre")
 	private String nombre;
 
 	@Lob
 	@Column(name = "descripcion")
 	private String descripcion;
-	
+
 	@Column(name = "distancia")
 	private float distancia;
 
@@ -40,6 +45,13 @@ public class PuntoInteres {
 		this.descripcion = descripcion;
 		this.distancia = distancia;
 		this.url = url;
+	}
+
+	@PrePersist
+	public void generateUUID() {
+		if (id == null) {
+			id = UUID.randomUUID();
+		}
 	}
 
 	public String getNombre() {

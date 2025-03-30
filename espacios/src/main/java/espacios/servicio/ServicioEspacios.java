@@ -3,6 +3,7 @@ package espacios.servicio;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 import espacios.communication.producer.IEventProducer;
 import espacios.modelo.EspacioFisico;
@@ -28,13 +29,13 @@ public class ServicioEspacios implements IServicioEspacios {
 	}
 
 	@Override
-	public EspacioFisico recuperarEspacioFisico(String idEspacioFisico)
+	public EspacioFisico recuperarEspacioFisico(UUID idEspacioFisico)
 			throws RepositorioException, EntidadNoEncontrada {
 		return repositorioEspacioFisico.getById(idEspacioFisico);
 	}
 
 	@Override
-	public String altaEspacioFisico(String nombre, String propietario, int capacidad, String direccionPostal,
+	public UUID altaEspacioFisico(String nombre, String propietario, int capacidad, String direccionPostal,
 			double latitud, double longidud, String descripcion) throws RepositorioException {
 
 		if (nombre == null || nombre.isEmpty())
@@ -56,7 +57,7 @@ public class ServicioEspacios implements IServicioEspacios {
 				descripcion);
 
 		try {
-			String id = repositorioEspacioFisico.add(espacio);
+			UUID id = repositorioEspacioFisico.add(espacio);
 			eventProducer.publicarEspacioCreado(id, espacio);
 
 			return id;
@@ -66,11 +67,11 @@ public class ServicioEspacios implements IServicioEspacios {
 	}
 
 	@Override
-	public void asignarPuntosDeInteres(String idEspacioFisico, LinkedList<PuntoInteres> puntosInteres)
+	public void asignarPuntosDeInteres(UUID idEspacioFisico, LinkedList<PuntoInteres> puntosInteres)
 			throws RepositorioException, EntidadNoEncontrada {
 
-		if (idEspacioFisico == null || idEspacioFisico.isEmpty())
-			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo o vacío.");
+		if (idEspacioFisico == null)
+			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo.");
 		if (puntosInteres == null || puntosInteres.isEmpty())
 			throw new IllegalArgumentException("La lista de puntos de interés no puede ser nula o vacía.");
 
@@ -87,11 +88,11 @@ public class ServicioEspacios implements IServicioEspacios {
 	}
 
 	@Override
-	public void modificarEspacioFisico(String idEspacioFisico, String nombre, int capacidad, String descripcion)
+	public void modificarEspacioFisico(UUID idEspacioFisico, String nombre, int capacidad, String descripcion)
 			throws RepositorioException, EntidadNoEncontrada {
 
-		if (idEspacioFisico == null || idEspacioFisico.isEmpty())
-			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo o vacío.");
+		if (idEspacioFisico == null)
+			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo.");
 		if (nombre != null && nombre.isEmpty())
 			throw new IllegalArgumentException("El nombre del espacio físico no puede ser vacío.");
 		if (capacidad <= -1)
@@ -119,11 +120,11 @@ public class ServicioEspacios implements IServicioEspacios {
 	}
 
 	@Override
-	public void bajaEspacioFisico(String idEspacioFisico)
+	public void bajaEspacioFisico(UUID idEspacioFisico)
 			throws RepositorioException, EntidadNoEncontrada, RetrofitException {
 
-		if (idEspacioFisico == null || idEspacioFisico.isEmpty())
-			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo o vacío.");
+		if (idEspacioFisico == null)
+			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo.");
 
 		if (!servicioEventosAPI.isAlgunaOcupacion(idEspacioFisico)) {
 			try {
@@ -141,10 +142,10 @@ public class ServicioEspacios implements IServicioEspacios {
 	}
 
 	@Override
-	public void activarEspacioFisico(String idEspacioFisico) throws RepositorioException, EntidadNoEncontrada {
+	public void activarEspacioFisico(UUID idEspacioFisico) throws RepositorioException, EntidadNoEncontrada {
 
-		if (idEspacioFisico == null || idEspacioFisico.isEmpty())
-			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo o vacío.");
+		if (idEspacioFisico == null)
+			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo.");
 
 		try {
 			EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
@@ -169,7 +170,7 @@ public class ServicioEspacios implements IServicioEspacios {
 		if (capacidad <= 0)
 			throw new IllegalArgumentException("La capacidad debe ser mayor que 0.");
 
-		List<String> espaciosFisicosIds = servicioEventosAPI.buscarEspaciosFisicosLibres(fechaInicio, fechaFin,
+		List<UUID> espaciosFisicosIds = servicioEventosAPI.buscarEspaciosFisicosLibres(fechaInicio, fechaFin,
 				capacidad);
 
 		return repositorioEspacioFisico.getEspaciosFisicosByIds(espaciosFisicosIds);

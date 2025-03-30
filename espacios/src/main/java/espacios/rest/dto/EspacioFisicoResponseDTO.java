@@ -2,9 +2,10 @@ package espacios.rest.dto;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 public class EspacioFisicoResponseDTO {
-    private String id;
+    private UUID id;
     private String nombre;
     private String propietario;
     private int capacidad;
@@ -19,11 +20,11 @@ public class EspacioFisicoResponseDTO {
         puntosInteres = new LinkedList<>();
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

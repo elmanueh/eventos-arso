@@ -17,19 +17,18 @@ public class JwtUtils {
 
 	public static String generateToken(Map<String, Object> claims) {
 		Date caducidad = Date.from(Instant.now().plusSeconds(TIEMPO));
-		String token = Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS256, SECRETO)
-				.setExpiration(caducidad).compact();
-
-		return token;
+		return Jwts.builder()
+				.setClaims(claims)
+				.signWith(SignatureAlgorithm.HS256, SECRETO)
+				.setExpiration(caducidad)
+				.compact();
 	}
 
 	public static Claims validateToken(String token) {
-		Claims claims = Jwts.parser()
+		return Jwts.parser()
 				.setSigningKey(SECRETO)
 				.parseClaimsJws(token)
 				.getBody();
-
-		return claims;
 	}
 
 	public static Cookie crearCookie(String token) {

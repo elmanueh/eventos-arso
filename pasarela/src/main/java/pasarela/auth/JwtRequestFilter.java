@@ -1,28 +1,24 @@
 package pasarela.auth;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import io.jsonwebtoken.Claims;
 
-// TODO: REVISAR ESTE ARCHIVO
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-    protected void doFilterInternal(HttpServletRequest request,
-            HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
 
         // Evitar filtrado en la ruta de login
         if (request.getServletPath().equals("/auth/login")) {
@@ -30,30 +26,32 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             return;
         }
 
-        // Comprueba que la petición lleve el token JWT y lo valida
-        String authorization = request.getHeader("Authorization");
-        if (authorization != null && authorization.startsWith("Bearer ")) {
+        String token = null;
+        if (request.getCookies() != null) {
+            token = Arrays.stream(request.getCookies())
+                    .filter(cookie -> cookie.getName().equals("jwt"))
+                    .map(Cookie::getValue)
+                    .findFirst()
+                    .orElse(null);
+        }
 
-            try {
-                String token = authorization.substring("Bearer ".length()).trim();
-                Claims claims = JwtUtils.validateToken(token);
-                String[] roles = claims.get("roles", String.class).split(",");
+        if (token == null) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Se requiere autenticación");
+            return;
+        }
 
-                // Establece el contexto de seguridad
-                ArrayList<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-                for (String rol : roles)
-                    authorities.add(new SimpleGrantedAuthority(rol));
+        try {
+            Claims claims = JwtUtils.validateToken(token);
 
-                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(claims.getSubject(),
-                        null, authorities);
-                // Establecemos la autenticación en el contexto de seguridad
-                // Se interpreta como que el usuario ha superado la autenticación
-                SecurityContextHolder.getContext().setAuthentication(auth);
-
-            } catch (Exception e) {
+            String username = claims.getSubject();
+            if (username == null) {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "El token JWT no es correcto");
                 return;
             }
+
+        } catch (Exception e) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "El token JWT no es correcto");
+            return;
         }
 
         chain.doFilter(request, response);

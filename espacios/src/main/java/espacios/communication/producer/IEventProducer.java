@@ -1,13 +1,15 @@
 package espacios.communication.producer;
 
+import java.util.UUID;
+
 import espacios.modelo.EspacioFisico;
 
 public interface IEventProducer {
 
-	void publicarEspacioCreado(String idEntidad, EspacioFisico entidad);
+	void publicarEspacioCreado(UUID idEntidad, EspacioFisico entidad);
 
-	void publicarEspacioModificado(String idEntidad, EspacioFisico entidad);
+	void publicarEspacioModificado(UUID idEntidad, EspacioFisico entidad);
 
-	void publicarEspacioEstadoModificado(String idEntidad, boolean estado);
+	void publicarEspacioEstadoModificado(UUID idEntidad, boolean estado);
 
 }

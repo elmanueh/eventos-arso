@@ -3,6 +3,7 @@ package espacios.servicio.eventos;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import espacios.servicio.eventos.exception.RetrofitException;
 import retrofit2.Retrofit;
@@ -20,7 +21,7 @@ public class ServicioEventosAPI implements IServicioEventosAPI {
 	}
 
 	@Override
-	public boolean isAlgunaOcupacion(String idEspacio) throws RetrofitException {
+	public boolean isAlgunaOcupacion(UUID idEspacio) throws RetrofitException {
 		try {
 			Boolean response = eventosRest.isAlgunaOcupacion(idEspacio).execute().body();
 			return response.booleanValue();
@@ -30,15 +31,16 @@ public class ServicioEventosAPI implements IServicioEventosAPI {
 	}
 
 	@Override
-	public List<String> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin,
+	public List<UUID> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin,
 			int capacidad) throws RetrofitException {
 		try {
-			List<String> response = eventosRest
+			List<UUID> response = eventosRest
 					.buscarEspaciosFisicosLibres(fechaInicio.toString(), fechaFin.toString(), capacidad)
 					.execute().body();
 
 			return response;
 		} catch (Exception e) {
+			System.out.println(e);
 			throw new RetrofitException("Error al buscar espacios físicos libres");
 		}
 	}

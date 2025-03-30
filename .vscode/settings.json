@@ -4,5 +4,6 @@
   "editor.insertSpaces": false,
   "editor.tabSize": 4,
   "java.compile.nullAnalysis.mode": "automatic",
-  "java.saveActions.organizeImports": true
+  "java.saveActions.organizeImports": true,
+  "postman.settings.dotenv-detection-notification-visibility": false
 }

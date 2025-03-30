@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.LinkedList;
 
 import javax.annotation.security.RolesAllowed;
@@ -51,12 +52,12 @@ public class ControladorEspacios {
     public Response createEspacio(CreateEspacioFisicoDTO espacioFisicoDTO) throws Exception {
 
         EspacioFisico espacioFisico = EspacioFisicoMapper.toEntity(espacioFisicoDTO);
-        String id = servicio.altaEspacioFisico(espacioFisico.getNombre(), espacioFisico.getPropietario(),
+        UUID id = servicio.altaEspacioFisico(espacioFisico.getNombre(), espacioFisico.getPropietario(),
                 espacioFisico.getCapacidad(), espacioFisico.getDireccion(), espacioFisico.getLatitud(),
                 espacioFisico.getLongitud(),
                 espacioFisico.getDescripcion());
 
-        URI nuevaURL = this.uriInfo.getAbsolutePathBuilder().path(id).build();
+        URI nuevaURL = this.uriInfo.getAbsolutePathBuilder().path(id.toString()).build();
         return Response.created(nuevaURL).build();
     }
 
@@ -64,7 +65,7 @@ public class ControladorEspacios {
     @Path("/{id}")
     @RolesAllowed({ "PROPIETARIO_ESPACIOS", "USUARIO" })
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getEspacio(@PathParam("id") String idEspacioFisico) throws Exception {
+    public Response getEspacio(@PathParam("id") UUID idEspacioFisico) throws Exception {
         EspacioFisico espacioFisico = servicio.recuperarEspacioFisico(idEspacioFisico);
         return Response.status(Response.Status.OK).entity(EspacioFisicoMapper.toDTO(espacioFisico)).build();
     }
@@ -73,7 +74,7 @@ public class ControladorEspacios {
     @Path("/{id}")
     @RolesAllowed("PROPIETARIO_ESPACIOS")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateEspacio(@PathParam("id") String id, UpdateEspacioFisicoDTO espacioFisicoDTO)
+    public Response updateEspacio(@PathParam("id") UUID id, UpdateEspacioFisicoDTO espacioFisicoDTO)
             throws Exception {
         EspacioFisico espacioFisico = EspacioFisicoMapper.toEntity(espacioFisicoDTO);
 
@@ -86,7 +87,7 @@ public class ControladorEspacios {
     @PUT
     @Path("/{id}/estado")
     @RolesAllowed("PROPIETARIO_ESPACIOS")
-    public Response cambiarEstadoEspacio(@PathParam("id") String id, @FormParam("estado") String estado)
+    public Response cambiarEstadoEspacio(@PathParam("id") UUID id, @FormParam("estado") String estado)
             throws Exception {
 
         EspacioFisicoEstado estadoEnum;
@@ -121,8 +122,8 @@ public class ControladorEspacios {
             ResumenExtendido resumenExtendido = new ResumenExtendido();
             resumenExtendido.setEspacioDTO(EspacioFisicoMapper.toResumenDTO(espacioFisico));
 
-            String id = espacioFisico.getId();
-            URI nuevaURL = this.uriInfo.getBaseUriBuilder().path(getClass()).path(id).build();
+            UUID id = espacioFisico.getId();
+            URI nuevaURL = this.uriInfo.getBaseUriBuilder().path(getClass()).path(id.toString()).build();
             resumenExtendido.setUrl(nuevaURL.toString());
 
             extendido.add(resumenExtendido);
@@ -137,7 +138,7 @@ public class ControladorEspacios {
     @Path("/{id}/puntosinteres")
     @RolesAllowed("PROPIETARIO_ESPACIOS")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response asignarPuntosDeInteres(@PathParam("id") String id, List<PuntoInteresDTO> puntosInteresDTO)
+    public Response asignarPuntosDeInteres(@PathParam("id") UUID id, List<PuntoInteresDTO> puntosInteresDTO)
             throws Exception {
 
         LinkedList<PuntoInteres> puntosInteres = new LinkedList<>(

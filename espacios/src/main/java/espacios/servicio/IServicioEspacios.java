@@ -3,6 +3,7 @@ package espacios.servicio;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 import espacios.modelo.EspacioFisico;
 import espacios.modelo.PuntoInteres;
@@ -12,20 +13,20 @@ import espacios.servicio.eventos.exception.RetrofitException;
 
 public interface IServicioEspacios {
 
-	EspacioFisico recuperarEspacioFisico(String idEspacioFisico) throws RepositorioException, EntidadNoEncontrada;
+	EspacioFisico recuperarEspacioFisico(UUID idEspacioFisico) throws RepositorioException, EntidadNoEncontrada;
 
-	String altaEspacioFisico(String nombre, String propietario, int capacidad, String direccionPostal, double latitud,
+	UUID altaEspacioFisico(String nombre, String propietario, int capacidad, String direccionPostal, double latitud,
 			double longidud, String descripcion) throws RepositorioException;
 
-	void asignarPuntosDeInteres(String idEspacioFisico, LinkedList<PuntoInteres> puntosInteres)
+	void asignarPuntosDeInteres(UUID idEspacioFisico, LinkedList<PuntoInteres> puntosInteres)
 			throws RepositorioException, EntidadNoEncontrada;
 
-	void modificarEspacioFisico(String idEspacioFisico, String nombre, int capacidad, String descripcion)
+	void modificarEspacioFisico(UUID idEspacioFisico, String nombre, int capacidad, String descripcion)
 			throws RepositorioException, EntidadNoEncontrada;
 
-	void bajaEspacioFisico(String idEspacioFisico) throws RepositorioException, EntidadNoEncontrada, RetrofitException;
+	void bajaEspacioFisico(UUID idEspacioFisico) throws RepositorioException, EntidadNoEncontrada, RetrofitException;
 
-	void activarEspacioFisico(String idEspacioFisico) throws RepositorioException, EntidadNoEncontrada;
+	void activarEspacioFisico(UUID idEspacioFisico) throws RepositorioException, EntidadNoEncontrada;
 
 	List<EspacioFisico> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin, int capacidad)
 			throws RepositorioException, RetrofitException;

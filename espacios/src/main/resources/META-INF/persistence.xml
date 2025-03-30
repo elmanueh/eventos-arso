@@ -6,6 +6,7 @@
     <persistence-unit name="espacios">
         <class>espacios.modelo.EspacioFisico</class>
         <class>espacios.modelo.PuntoInteres</class>
+        <class>espacios.utils.UUIDConverter</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
             <property name="javax.persistence.jdbc.user" value="manujuli" />
