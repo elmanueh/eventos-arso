@@ -1,7 +1,8 @@
 package reservas.rest.dto;
 
+import java.util.UUID;
+
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,13 +11,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 		"idEvento", "idUsuario", "numPlazas" })
 public class CreateReservaDTO {
 
-	@Schema(description = "Identificador único del evento al que se desea asistir.", example = "12345", required = true)
-	@NotBlank(message = "El id del evento no puede ser nulo o vacío")
-	private String idEvento;
+	@Schema(description = "Identificador único del evento al que se desea asistir.", example = "889101c0-65c4-4434-b6dc-92f2cd4cf151", required = true)
+	@NotNull(message = "El id del evento no puede ser nulo o vacío")
+	private UUID idEvento;
 
-	@Schema(description = "Identificador único del usuario que realiza la reserva.", example = "67890", required = true)
-	@NotBlank(message = "El id del usuario no puede ser nulo o vacío")
-	private String idUsuario;
+	@Schema(description = "Identificador único del usuario que realiza la reserva.", example = "83da0af1-e2f9-4067-89e9-3fe3b68ed5fe", required = true)
+	@NotNull(message = "El id del usuario no puede ser nulo o vacío")
+	private UUID idUsuario;
 
 	@Schema(description = "Cantidad de plazas que se desean reservar. Debe ser un número mayor a 0.", example = "2", required = true)
 	@NotNull(message = "El número de plazas no puede ser nulo o vacío")
@@ -26,19 +27,19 @@ public class CreateReservaDTO {
 	public CreateReservaDTO() {
 	}
 
-	public String getIdEvento() {
+	public UUID getIdEvento() {
 		return idEvento;
 	}
 
-	public void setIdEvento(String idEvento) {
+	public void setIdEvento(UUID idEvento) {
 		this.idEvento = idEvento;
 	}
 
-	public String getIdUsuario() {
+	public UUID getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(String idUsuario) {
+	public void setIdUsuario(UUID idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 

@@ -1,10 +1,12 @@
 package reservas.servicio;
 
+import java.util.UUID;
+
 public interface IServicioEventos {
 
-	void crearEvento(String idEvento, int capacidad, boolean cancelado);
+	void crearEvento(UUID idEvento, int capacidad, boolean cancelado);
 
-	void modificarEvento(String idEvento, int capacidad);
+	void modificarEvento(UUID idEvento, int capacidad);
 
-	void cancelarEvento(String idEvento);
+	void cancelarEvento(UUID idEvento);
 }

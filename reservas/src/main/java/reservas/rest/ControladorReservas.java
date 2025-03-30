@@ -1,6 +1,7 @@
 package reservas.rest;
 
 import java.net.URI;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -50,7 +51,7 @@ public class ControladorReservas implements ReservasApi {
 	public ResponseEntity<Void> createReserva(@Valid @RequestBody CreateReservaDTO reservaDTO)
 			throws EntidadNoEncontrada {
 
-		String id = servicio.reservar(reservaDTO.getIdEvento(), reservaDTO.getIdUsuario(), reservaDTO.getNumPlazas());
+		UUID id = servicio.reservar(reservaDTO.getIdEvento(), reservaDTO.getIdUsuario(), reservaDTO.getNumPlazas());
 
 		URI nuevaURL = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
 		return ResponseEntity.created(nuevaURL).build();
@@ -58,21 +59,21 @@ public class ControladorReservas implements ReservasApi {
 
 	@GetMapping("/{id}")
 	@PreAuthorize("hasAuthority('USUARIO')")
-	public ReservaResponseDTO getReserva(@PathVariable String id) throws EntidadNoEncontrada {
+	public ReservaResponseDTO getReserva(@PathVariable UUID id) throws EntidadNoEncontrada {
 		Reserva reserva = servicio.recuperarReserva(id);
 		return ReservaMapper.toDTO(reserva);
 	}
 
 	@GetMapping("/evento/{id}")
 	@PreAuthorize("hasAuthority('GESTOR_EVENTOS')")
-	public PagedModel<EntityModel<ReservaResumen>> getListadoPaginado(@PathVariable String id, Pageable pageable)
+	public PagedModel<EntityModel<ReservaResumen>> getListadoPaginado(@PathVariable UUID id, Pageable pageable)
 			throws EntidadNoEncontrada {
 		Page<ReservaResumen> resultado = servicio.recuperarTodasReservas(id, pageable);
 		return pagedResourcesAssembler.toModel(resultado, reservaAssembler);
 	}
-	
+
 	@GetMapping("/evento/{idEvento}/plazasReservadas")
-	public ResponseEntity<Integer> obtenerPlazasReservadas(@PathVariable String idEvento) throws EntidadNoEncontrada {
+	public ResponseEntity<Integer> obtenerPlazasReservadas(@PathVariable UUID idEvento) throws EntidadNoEncontrada {
 		return ResponseEntity.ok(servicio.recuperarNumPlazasReservadas(idEvento));
 	}
 

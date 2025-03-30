@@ -1,5 +1,7 @@
 package reservas.servicio;
 
+import java.util.UUID;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -9,12 +11,11 @@ import reservas.repositorio.exception.EntidadNoEncontrada;
 
 public interface IServicioReservas {
 
-	String reservar(String idEvento, String idUsuario, int numPlazas) throws EntidadNoEncontrada;
+	UUID reservar(UUID idEvento, UUID idUsuario, int numPlazas) throws EntidadNoEncontrada;
 
-	Reserva recuperarReserva(String idReserva) throws EntidadNoEncontrada;
+	Reserva recuperarReserva(UUID idReserva) throws EntidadNoEncontrada;
 
-	Page<ReservaResumen> recuperarTodasReservas(String idEvento, Pageable pageable) throws EntidadNoEncontrada;
-	
-	int recuperarNumPlazasReservadas(String idEvento) throws EntidadNoEncontrada;
+	Page<ReservaResumen> recuperarTodasReservas(UUID idEvento, Pageable pageable) throws EntidadNoEncontrada;
+
+	int recuperarNumPlazasReservadas(UUID idEvento) throws EntidadNoEncontrada;
 }
-

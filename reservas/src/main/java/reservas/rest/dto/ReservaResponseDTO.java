@@ -1,12 +1,14 @@
 package reservas.rest.dto;
 
+import java.util.UUID;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "Objeto de transferencia de datos (DTO) que representa la respuesta de una entidad de reserva")
 public class ReservaResponseDTO {
 
-	@Schema(description = "Identificador único del usuario asociado a la reserva", example = "67890")
-	private String idUsuario;
+	@Schema(description = "Identificador único del usuario asociado a la reserva", example = "85d7414c-d677-4890-89b2-482c91aa2597")
+	private UUID idUsuario;
 
 	@Schema(description = "Cantidad de plazas reservadas", example = "2")
 	private int plazasReservadas;
@@ -17,11 +19,11 @@ public class ReservaResponseDTO {
 	public ReservaResponseDTO() {
 	}
 
-	public String getIdUsuario() {
+	public UUID getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(String idUsuario) {
+	public void setIdUsuario(UUID idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 

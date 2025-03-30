@@ -1,6 +1,7 @@
 package reservas.communication.consumer.events;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import reservas.communication.RabbitEvent;
 
@@ -10,7 +11,7 @@ public class EventModificarEvento extends RabbitEvent {
 	private int numPlazas;
 	private LocalDateTime fechaInicio;
 	private LocalDateTime fechaFin;
-	private String espacioFisico;
+	private UUID espacioFisico;
 
 	public EventModificarEvento() {
 	}
@@ -47,11 +48,11 @@ public class EventModificarEvento extends RabbitEvent {
 		this.fechaFin = fechaFin;
 	}
 
-	public String getEspacioFisico() {
+	public UUID getEspacioFisico() {
 		return espacioFisico;
 	}
 
-	public void setEspacioFisico(String espacioFisico) {
+	public void setEspacioFisico(UUID espacioFisico) {
 		this.espacioFisico = espacioFisico;
 	}
 }

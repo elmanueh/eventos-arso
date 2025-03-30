@@ -1,22 +1,24 @@
 package reservas.communication.producer.events;
 
+import java.util.UUID;
+
 import reservas.communication.RabbitEvent;
 
 public class EventCrearReserva extends RabbitEvent {
 
-	private String idUsuario;
+	private UUID idUsuario;
 	private int plazasReservadas;
 	private boolean cancelada;
-	private String idEvento;
+	private UUID idEvento;
 
 	public EventCrearReserva() {
 	}
 
-	public String getIdUsuario() {
+	public UUID getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(String idUsuario) {
+	public void setIdUsuario(UUID idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 
@@ -36,11 +38,11 @@ public class EventCrearReserva extends RabbitEvent {
 		this.cancelada = cancelada;
 	}
 
-	public String getIdEvento() {
+	public UUID getIdEvento() {
 		return idEvento;
 	}
 
-	public void setIdEvento(String idEvento) {
+	public void setIdEvento(UUID idEvento) {
 		this.idEvento = idEvento;
 	}
 

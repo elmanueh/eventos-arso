@@ -1,12 +1,13 @@
 package reservas.communication;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public abstract class RabbitEvent {
 
 	private LocalDateTime fechaHora;
 	private String tipoEvento;
-	private String idEntidad;
+	private UUID idEntidad;
 
 	public RabbitEvent() {
 	}
@@ -19,11 +20,11 @@ public abstract class RabbitEvent {
 		this.fechaHora = fechaHora;
 	}
 
-	public String getIdEntidad() {
+	public UUID getIdEntidad() {
 		return idEntidad;
 	}
 
-	public void setIdEntidad(String idEntidad) {
+	public void setIdEntidad(UUID idEntidad) {
 		this.idEntidad = idEntidad;
 	}
 

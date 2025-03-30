@@ -1,6 +1,7 @@
 package reservas.servicio;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +22,7 @@ public class ServicioEventos implements IServicioEventos {
 		this.repositorioEventos = repositorioEventos;
 	}
 
-	public void crearEvento(String idEvento, int capacidad, boolean cancelado) {
+	public void crearEvento(UUID idEvento, int capacidad, boolean cancelado) {
 		Evento evento = new Evento();
 		evento.setId(idEvento);
 		evento.setPlazasDisponibles(capacidad);
@@ -30,20 +31,19 @@ public class ServicioEventos implements IServicioEventos {
 	}
 
 	@Override
-	public void modificarEvento(String idEvento, int capacidad) {
+	public void modificarEvento(UUID idEvento, int capacidad) {
 		Optional<Evento> eventoOpt = repositorioEventos.findById(idEvento);
 
 		if (!eventoOpt.isPresent())
 			return;
 
 		Evento evento = eventoOpt.get();
-		System.out.println(capacidad);
 		evento.setPlazasDisponibles(capacidad);
 		repositorioEventos.save(evento);
 	}
 
 	@Override
-	public void cancelarEvento(String idEvento) {
+	public void cancelarEvento(UUID idEvento) {
 		Optional<Evento> eventoOpt = repositorioEventos.findById(idEvento);
 
 		if (!eventoOpt.isPresent())
@@ -51,7 +51,6 @@ public class ServicioEventos implements IServicioEventos {
 
 		Evento evento = eventoOpt.get();
 		evento.setCancelado(true);
-
 		repositorioEventos.save(evento);
 	}
 

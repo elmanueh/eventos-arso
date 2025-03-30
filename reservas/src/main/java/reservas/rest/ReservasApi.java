@@ -1,5 +1,7 @@
 package reservas.rest;
 
+import java.util.UUID;
+
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Pageable;
@@ -34,7 +36,7 @@ public interface ReservasApi {
 			@ApiResponse(responseCode = "404", description = "Reserva no encontrada. Esto ocurre si no existe una reserva con el identificador proporcionado.", content = @Content(schema = @Schema(implementation = MessageError.class)))
 	})
 	ReservaResponseDTO getReserva(
-			@PathVariable(name = "Identificador único de la reserva", required = true) String id)
+			@PathVariable(name = "Identificador único de la reserva", required = true) UUID id)
 			throws EntidadNoEncontrada;
 
 	@Operation(summary = "Listar reservas paginadas", description = "Obtiene un listado paginado de reservas asociadas a un recurso específico.", responses = {
@@ -42,7 +44,7 @@ public interface ReservasApi {
 			@ApiResponse(responseCode = "404", description = "Entidad no encontrada. Esto ocurre si no se encuentra el recurso relacionado para listar las reservas.", content = @Content(schema = @Schema(implementation = MessageError.class)))
 	})
 	PagedModel<EntityModel<ReservaResumen>> getListadoPaginado(
-			@PathVariable(name = "Identificador único del recurso relacionado", required = true) String id,
+			@PathVariable(name = "Identificador único del recurso relacionado", required = true) UUID id,
 			Pageable pageable) throws EntidadNoEncontrada;
 
 }

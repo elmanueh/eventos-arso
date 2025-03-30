@@ -1,6 +1,7 @@
 package reservas.servicio;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,11 +37,11 @@ public class ServicioReservas implements IServicioReservas {
 	}
 
 	@Override
-	public String reservar(String idEvento, String idUsuario, int numPlazas) throws EntidadNoEncontrada {
-		if (idEvento == null || idEvento.isEmpty())
-			throw new IllegalArgumentException("idEvento: no debe ser nulo ni vacío");
-		if (idUsuario == null || idUsuario.isEmpty())
-			throw new IllegalArgumentException("idUsuario: no debe ser nulo ni vacío");
+	public UUID reservar(UUID idEvento, UUID idUsuario, int numPlazas) throws EntidadNoEncontrada {
+		if (idEvento == null)
+			throw new IllegalArgumentException("idEvento: no debe ser nulo");
+		if (idUsuario == null)
+			throw new IllegalArgumentException("idUsuario: no debe ser nulo");
 		if (numPlazas <= 0)
 			throw new IllegalArgumentException("numPlazas: debe ser mayor que 0");
 
@@ -70,16 +71,16 @@ public class ServicioReservas implements IServicioReservas {
 
 		repositorioEventos.save(evento);
 
-		String idReserva = reserva.getId();
+		UUID idReserva = reserva.getId();
 		reservasPublisher.publicarReservaCreado(idReserva, reserva);
 
 		return idReserva;
 	}
 
 	@Override
-	public Reserva recuperarReserva(String idReserva) throws EntidadNoEncontrada {
-		if (idReserva == null || idReserva.isEmpty())
-			throw new IllegalArgumentException("idReserva: no debe ser nulo ni vacio");
+	public Reserva recuperarReserva(UUID idReserva) throws EntidadNoEncontrada {
+		if (idReserva == null)
+			throw new IllegalArgumentException("idReserva: no debe ser nulo");
 
 		Optional<Reserva> reservaOpt = repositorioReservas.findById(idReserva);
 
@@ -89,9 +90,9 @@ public class ServicioReservas implements IServicioReservas {
 	}
 
 	@Override
-	public Page<ReservaResumen> recuperarTodasReservas(String idEvento, Pageable pageable) throws EntidadNoEncontrada {
-		if (idEvento == null || idEvento.isEmpty())
-			throw new IllegalArgumentException("idEvento: no debe ser nulo ni vacío");
+	public Page<ReservaResumen> recuperarTodasReservas(UUID idEvento, Pageable pageable) throws EntidadNoEncontrada {
+		if (idEvento == null)
+			throw new IllegalArgumentException("idEvento: no debe ser nulo");
 
 		Page<ReservaResumen> reservas = repositorioReservas.findByEventoId(idEvento, pageable)
 				.map(ReservaMapper::toResumen);
@@ -99,12 +100,12 @@ public class ServicioReservas implements IServicioReservas {
 	}
 
 	@Override
-	public int recuperarNumPlazasReservadas(String idEvento) throws EntidadNoEncontrada {
-		if (idEvento == null || idEvento.isEmpty())
-			throw new IllegalArgumentException("idEvento: no debe ser nulo ni vacío");
-		
+	public int recuperarNumPlazasReservadas(UUID idEvento) throws EntidadNoEncontrada {
+		if (idEvento == null)
+			throw new IllegalArgumentException("idEvento: no debe ser nulo");
+
 		Integer totalPlazas = repositorioReservas.sumPlazasReservadasByEventoId(idEvento);
-        return (totalPlazas != null) ? totalPlazas : 0;
+		return (totalPlazas != null) ? totalPlazas : 0;
 	}
 
 }

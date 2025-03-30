@@ -1,6 +1,7 @@
 package reservas.communication.producer;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class RabbitMQProducer implements IEventProducer {
 	private RabbitTemplate rabbitTemplate;
 
 	@Override
-	public void publicarReservaCreado(String idEntidad, Reserva entidad) {
+	public void publicarReservaCreado(UUID idEntidad, Reserva entidad) {
 		RabbitEvent event = EventMapper.Domain2EventCrearReserva(entidad);
 		event.setIdEntidad(idEntidad);
 		event.setFechaHora(LocalDateTime.now());
