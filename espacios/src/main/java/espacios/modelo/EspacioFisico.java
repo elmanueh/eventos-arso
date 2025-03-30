@@ -7,13 +7,10 @@ import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -23,14 +20,13 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import espacios.repositorio.core.Identificable;
-import espacios.utils.UUIDConverter;
 
 @Entity
 @Table(name = "espacioFisico")
 public class EspacioFisico implements Identificable {
 
 	@Id
-	@Column(name = "id", updatable = false, nullable = false)
+	@Column(name = "id", columnDefinition = "VARCHAR(36)")
 	private UUID id;
 
 	@Column(name = "nombre")
