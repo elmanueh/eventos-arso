@@ -1,22 +1,23 @@
 package eventos.modelo;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "espacioFisico")
 public class EspacioFisico {
 
+	@SuppressWarnings("deprecation")
 	@Id
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
-	@Column(name = "id")
-	private String id;
+	@Type(type = "uuid-char")
+	@Column(name = "id", columnDefinition = "VARCHAR(36)")
+	private UUID id;
 
 	@Column(name = "nombre")
 	private String nombre;
@@ -36,11 +37,11 @@ public class EspacioFisico {
 	public EspacioFisico() {
 	}
 
-	public String getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

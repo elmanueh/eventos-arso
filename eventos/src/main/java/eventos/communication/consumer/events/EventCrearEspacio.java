@@ -1,10 +1,5 @@
 package eventos.communication.consumer.events;
 
-import java.time.LocalDateTime;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-
 import eventos.communication.RabbitEvent;
 
 public class EventCrearEspacio extends RabbitEvent {

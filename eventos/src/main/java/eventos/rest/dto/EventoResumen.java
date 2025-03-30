@@ -1,19 +1,21 @@
 package eventos.rest.dto;
 
+import java.util.UUID;
+
 public class EventoResumen {
 
-	private String id;
+	private UUID id;
 	private String nombre;
 	private String descripcion;
 
 	public EventoResumen() {
 	}
 
-	public String getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

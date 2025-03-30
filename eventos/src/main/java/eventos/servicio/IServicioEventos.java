@@ -2,6 +2,7 @@ package eventos.servicio;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,21 +15,21 @@ import eventos.servicio.reservas.exception.RetrofitException;
 
 public interface IServicioEventos {
 
-	Evento recuperarEvento(String idEvento) throws EntidadNoEncontrada;
+	Evento recuperarEvento(UUID idEvento) throws EntidadNoEncontrada;
 
-	String altaEvento(String nombre, String descripcion, String organizador, EventoCategoria categoria,
-			LocalDateTime fechaInicio, LocalDateTime fechaFin, int numPlazas, String idEspacioFisico)
+	UUID altaEvento(String nombre, String descripcion, String organizador, EventoCategoria categoria,
+			LocalDateTime fechaInicio, LocalDateTime fechaFin, int numPlazas, UUID idEspacioFisico)
 			throws EntidadNoEncontrada;
 
-	void modificarEvento(String idEvento, String descripcion, LocalDateTime fechaInicio, LocalDateTime fechaFin,
-			int numPlazas, String idEspacioFisico) throws EntidadNoEncontrada, RetrofitException;
+	void modificarEvento(UUID idEvento, String descripcion, LocalDateTime fechaInicio, LocalDateTime fechaFin,
+			int numPlazas, UUID idEspacioFisico) throws EntidadNoEncontrada, RetrofitException;
 
-	void cancelarEvento(String idEvento);
+	void cancelarEvento(UUID idEvento);
 
 	Page<EventoResumen> eventosDelMesPaginados(int mes, int año, Pageable pageable);
 
-	boolean isAlgunaOcupacion(String idEspacio);
+	boolean isAlgunaOcupacion(UUID idEspacio);
 
-	List<String> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin, int capacidad);
+	List<UUID> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin, int capacidad);
 
 }

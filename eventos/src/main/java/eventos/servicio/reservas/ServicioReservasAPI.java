@@ -1,7 +1,7 @@
 package eventos.servicio.reservas;
 
-
 import java.io.IOException;
+import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ public class ServicioReservasAPI implements IServicioReservasAPI {
 
 	private final Retrofit retrofit;
 	private final ReservasRest reservasRest;
-	
+
 	public ServicioReservasAPI() {
 		retrofit = new Retrofit.Builder().baseUrl("http://localhost:8083/api/")
 				.addConverterFactory(JacksonConverterFactory.create()).build();
@@ -22,14 +22,12 @@ public class ServicioReservasAPI implements IServicioReservasAPI {
 	}
 
 	@Override
-	public int validadReservas(String idEvento) throws RetrofitException {
+	public int validadReservas(UUID idEvento) throws RetrofitException {
 		try {
 			return reservasRest.obtenerPlazasReservadas(idEvento).execute().body();
 		} catch (IOException e) {
 			throw new RetrofitException("Error al consultar las plazas reservadas del evento con id " + idEvento);
 		}
 	}
-
-	
 
 }

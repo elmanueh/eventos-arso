@@ -1,12 +1,14 @@
 package eventos.servicio;
 
+import java.util.UUID;
+
 public interface IServicioEspacios {
 
-	void crearEspacio(String idEspacio, String nombre, String propietario, String direccion, boolean cancelado,
+	void crearEspacio(UUID idEspacio, String nombre, String propietario, String direccion, boolean cancelado,
 			int capacidad);
 
-	void modificarEspacio(String idEspacio, String nombre, int capacidad);
+	void modificarEspacio(UUID idEspacio, String nombre, int capacidad);
 
-	void cambiarEstadoEspacio(String idEspacio, boolean isCancelado);
+	void cambiarEstadoEspacio(UUID idEspacio, boolean isCancelado);
 
 }

@@ -1,6 +1,7 @@
 package eventos.servicio;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +22,7 @@ public class ServicioEspacios implements IServicioEspacios {
 		this.repositorioEspacios = repositorioEspacios;
 	}
 
-	public void crearEspacio(String idEspacio, String nombre, String propietario, String direccion, boolean cancelado,
+	public void crearEspacio(UUID idEspacio, String nombre, String propietario, String direccion, boolean cancelado,
 			int capacidad) {
 		EspacioFisico espacio = new EspacioFisico();
 		espacio.setId(idEspacio);
@@ -34,7 +35,7 @@ public class ServicioEspacios implements IServicioEspacios {
 		repositorioEspacios.save(espacio);
 	}
 
-	public void modificarEspacio(String idEspacio, String nombre, int capacidad) {
+	public void modificarEspacio(UUID idEspacio, String nombre, int capacidad) {
 		Optional<EspacioFisico> espacioOpt = repositorioEspacios.findById(idEspacio);
 
 		if (!espacioOpt.isPresent())
@@ -47,7 +48,7 @@ public class ServicioEspacios implements IServicioEspacios {
 		repositorioEspacios.save(espacio);
 	}
 
-	public void cambiarEstadoEspacio(String idEspacio, boolean isCancelado) {
+	public void cambiarEstadoEspacio(UUID idEspacio, boolean isCancelado) {
 		Optional<EspacioFisico> espacioOpt = repositorioEspacios.findById(idEspacio);
 
 		if (!espacioOpt.isPresent())

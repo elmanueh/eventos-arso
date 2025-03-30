@@ -1,9 +1,7 @@
 package eventos.communication.producer.events;
 
 import java.time.LocalDateTime;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.util.UUID;
 
 import eventos.communication.RabbitEvent;
 
@@ -17,7 +15,7 @@ public class EventCrearEvento extends RabbitEvent {
 	private boolean cancelado;
 	private LocalDateTime fechaInicio;
 	private LocalDateTime fechaFin;
-	private String espacioFisico;
+	private UUID espacioFisico;
 
 	public EventCrearEvento() {
 	}
@@ -86,11 +84,11 @@ public class EventCrearEvento extends RabbitEvent {
 		this.fechaFin = fechaFin;
 	}
 
-	public String getEspacioFisico() {
+	public UUID getEspacioFisico() {
 		return espacioFisico;
 	}
 
-	public void setEspacioFisico(String espacioFisico) {
+	public void setEspacioFisico(UUID espacioFisico) {
 		this.espacioFisico = espacioFisico;
 	}
 }

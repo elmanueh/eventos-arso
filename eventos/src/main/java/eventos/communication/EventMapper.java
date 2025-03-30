@@ -1,5 +1,7 @@
 package eventos.communication;
 
+import java.util.UUID;
+
 import eventos.communication.producer.events.EventCancelarEvento;
 import eventos.communication.producer.events.EventCrearEvento;
 import eventos.communication.producer.events.EventModificarEvento;
@@ -36,7 +38,7 @@ public class EventMapper {
 		return event;
 	}
 
-	public static EventCancelarEvento Domain2EventCancelarEvento(String idEntidad) {
+	public static EventCancelarEvento Domain2EventCancelarEvento(UUID idEntidad) {
 		EventCancelarEvento event = new EventCancelarEvento();
 
 		return event;

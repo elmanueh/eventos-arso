@@ -1,8 +1,10 @@
 package eventos.servicio.reservas;
 
+import java.util.UUID;
+
 import eventos.servicio.reservas.exception.RetrofitException;
 
 public interface IServicioReservasAPI {
-	int validadReservas(String idEvento)  throws RetrofitException ;
-	
+	int validadReservas(UUID idEvento) throws RetrofitException;
+
 }

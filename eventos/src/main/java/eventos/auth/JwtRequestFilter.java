@@ -11,6 +11,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,39 +22,41 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-	protected void doFilterInternal(HttpServletRequest request,
-            HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-		
-		String token = null;
-		
-		if (request.getCookies() != null) {
+    @Override
+    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
+            @NonNull FilterChain chain) throws IOException, ServletException {
+
+        String token = null;
+
+        if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
                 if (cookie.getName().equals("jwt")) {
                     token = cookie.getValue();
                 }
             }
         }
-		
-		if (token != null) {
-			Map<String, Object> claims = JwtUtils.decodeToken(token);
-		    
-		    if (claims != null) {
-		    	String username = (String) claims.get("sub");
-		    	String roles = (String) claims.get("roles");
-		        
-		        // Convertir los roles a una lista de GrantedAuthority
+
+        if (token != null) {
+            Map<String, Object> claims = JwtUtils.decodeToken(token);
+
+            if (claims != null) {
+                String username = (String) claims.get("sub");
+                String roles = (String) claims.get("roles");
+
+                // Convertir los roles a una lista de GrantedAuthority
                 List<GrantedAuthority> authorities = new ArrayList<>();
                 for (String rol : roles.split(",")) {
                     authorities.add(new SimpleGrantedAuthority(rol.trim()));
                 }
 
                 // Crear el objeto de autenticación
-                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(username, null, authorities);
+                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(username, null,
+                        authorities);
 
                 // Guardar en el contexto de seguridad
                 SecurityContextHolder.getContext().setAuthentication(auth);
-		    }
-		}
+            }
+        }
 
         chain.doFilter(request, response);
     }

@@ -1,5 +1,7 @@
 package eventos.repositorio;
 
+import java.util.UUID;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import eventos.modelo.Evento;
 
-public interface RepositorioEventosJPA extends RepositorioEventos, JpaRepository<Evento, String> {
+public interface RepositorioEventosJPA extends RepositorioEventos, JpaRepository<Evento, UUID> {
 
 	@Query("SELECT e FROM Evento e "
 			+ "WHERE :mes BETWEEN EXTRACT(MONTH FROM e.ocupacion.fechaInicio) AND EXTRACT(MONTH FROM e.ocupacion.fechaFin) "

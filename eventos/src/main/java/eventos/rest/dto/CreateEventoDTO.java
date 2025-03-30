@@ -1,5 +1,7 @@
 package eventos.rest.dto;
 
+import java.util.UUID;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -33,8 +35,8 @@ public class CreateEventoDTO {
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	private String fechaFin;
 
-	@NotBlank(message = "El id del espacio físico del evento no puede ser nulo o vacío")
-	private String espacioFisico;
+	@NotNull(message = "El id del espacio físico del evento no puede ser nulo o vacío")
+	private UUID espacioFisico;
 
 	public CreateEventoDTO() {
 	}
@@ -95,11 +97,11 @@ public class CreateEventoDTO {
 		this.fechaFin = fechaFin;
 	}
 
-	public String getEspacioFisico() {
+	public UUID getEspacioFisico() {
 		return espacioFisico;
 	}
 
-	public void setEspacioFisico(String espacioFisico) {
+	public void setEspacioFisico(UUID espacioFisico) {
 		this.espacioFisico = espacioFisico;
 	}
 

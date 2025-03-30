@@ -3,6 +3,7 @@ package eventos.rest;
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -57,7 +58,7 @@ public class ControladorEventos {
 
 	@GetMapping("/{id}")
 	@PreAuthorize("hasAnyAuthority('GESTOR_EVENTOS', 'USUARIO')")
-	public EventoResponseDTO getEvento(@PathVariable String id) throws EntidadNoEncontrada {
+	public EventoResponseDTO getEvento(@PathVariable UUID id) throws EntidadNoEncontrada {
 		Evento evento = servicio.recuperarEvento(id);
 		return EventoMapper.toDTO(evento);
 	}
@@ -66,7 +67,7 @@ public class ControladorEventos {
 	@PreAuthorize("hasAuthority('GESTOR_EVENTOS')")
 	public ResponseEntity<Void> createEvento(@Valid @RequestBody CreateEventoDTO eventoDTO)
 			throws EntidadNoEncontrada {
-		String id = servicio.altaEvento(eventoDTO.getNombre(), eventoDTO.getDescripcion(),
+		UUID id = servicio.altaEvento(eventoDTO.getNombre(), eventoDTO.getDescripcion(),
 				eventoDTO.getOrganizador(), EventoCategoria.valueOf(eventoDTO.getCategoria()),
 				LocalDateTime.parse(eventoDTO.getFechaInicio()), LocalDateTime.parse(eventoDTO.getFechaFin()),
 				eventoDTO.getNumPlazas(), eventoDTO.getEspacioFisico());
@@ -77,7 +78,7 @@ public class ControladorEventos {
 
 	@PatchMapping("/{id}")
 	@PreAuthorize("hasAuthority('GESTOR_EVENTOS')")
-	public ResponseEntity<Void> updateEvento(@PathVariable String id, @Valid @RequestBody UpdateEventoDTO eventoDTO)
+	public ResponseEntity<Void> updateEvento(@PathVariable UUID id, @Valid @RequestBody UpdateEventoDTO eventoDTO)
 			throws EntidadNoEncontrada, RetrofitException {
 
 		LocalDateTime fechaInicio = eventoDTO.getFechaInicio() != null
@@ -97,7 +98,7 @@ public class ControladorEventos {
 
 	@PutMapping("/{id}/ocupacion")
 	@PreAuthorize("hasAuthority('GESTOR_EVENTOS')")
-	public ResponseEntity<Void> cancelEvento(@PathVariable String id) throws EntidadNoEncontrada {
+	public ResponseEntity<Void> cancelEvento(@PathVariable UUID id) throws EntidadNoEncontrada {
 		servicio.cancelarEvento(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
@@ -112,12 +113,12 @@ public class ControladorEventos {
 	}
 
 	@GetMapping("/ocupacion/{id}")
-	public ResponseEntity<Boolean> isAlgunaOcupacion(@PathVariable String id) {
+	public ResponseEntity<Boolean> isAlgunaOcupacion(@PathVariable UUID id) {
 		return ResponseEntity.ok(servicio.isAlgunaOcupacion(id));
 	}
 
 	@GetMapping("/espacioslibres")
-	public List<String> buscarEspaciosFisicosLibres(
+	public List<UUID> buscarEspaciosFisicosLibres(
 			@RequestParam String fechaInicio,
 			@RequestParam String fechaFin,
 			@RequestParam int capacidad) {

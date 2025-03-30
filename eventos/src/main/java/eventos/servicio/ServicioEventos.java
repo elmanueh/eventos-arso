@@ -3,6 +3,7 @@ package eventos.servicio;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -44,9 +45,9 @@ public class ServicioEventos implements IServicioEventos {
 
 	// USUARIO
 	@Override
-	public Evento recuperarEvento(String idEvento) throws EntidadNoEncontrada {
-		if (idEvento == null || idEvento.isEmpty())
-			throw new IllegalArgumentException("id: no debe ser nulo ni vacio");
+	public Evento recuperarEvento(UUID idEvento) throws EntidadNoEncontrada {
+		if (idEvento == null)
+			throw new IllegalArgumentException("id: no debe ser nulo");
 
 		Optional<Evento> resultado = repositorioEvento.findById(idEvento);
 
@@ -57,8 +58,8 @@ public class ServicioEventos implements IServicioEventos {
 
 	// GESTOR_EVENTOS
 	@Override
-	public String altaEvento(String nombre, String descripcion, String organizador, EventoCategoria categoria,
-			LocalDateTime fechaInicio, LocalDateTime fechaFin, int numPlazas, String idEspacioFisico)
+	public UUID altaEvento(String nombre, String descripcion, String organizador, EventoCategoria categoria,
+			LocalDateTime fechaInicio, LocalDateTime fechaFin, int numPlazas, UUID idEspacioFisico)
 			throws EntidadNoEncontrada {
 
 		if (nombre == null || nombre.isEmpty())
@@ -75,8 +76,8 @@ public class ServicioEventos implements IServicioEventos {
 			throw new IllegalArgumentException("La fecha de fin del evento no puede ser nula.");
 		if (numPlazas <= 0)
 			throw new IllegalArgumentException("El número de plazas del evento debe ser mayor que 0.");
-		if (idEspacioFisico == null || idEspacioFisico.isEmpty())
-			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo o vacío.");
+		if (idEspacioFisico == null)
+			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo.");
 
 		try {
 			Optional<EspacioFisico> espacioFisicoOptional = repositorioEspacio.findById(idEspacioFisico);
@@ -99,7 +100,7 @@ public class ServicioEventos implements IServicioEventos {
 			Evento evento = new Evento(nombre, descripcion, organizador, numPlazas, categoria, fechaInicio, fechaFin,
 					espacioFisico);
 
-			String id = repositorioEvento.save(evento).getId();
+			UUID id = repositorioEvento.save(evento).getId();
 
 			// TODO: publicar evento
 			eventosPublisher.publicarEventoCreado(id, evento);
@@ -113,17 +114,15 @@ public class ServicioEventos implements IServicioEventos {
 
 	// GESTOR_EVENTOS
 	@Override
-	public void modificarEvento(String idEvento, String descripcion, LocalDateTime fechaInicio, LocalDateTime fechaFin,
-			int numPlazas, String idEspacioFisico) throws EntidadNoEncontrada, RetrofitException {
+	public void modificarEvento(UUID idEvento, String descripcion, LocalDateTime fechaInicio, LocalDateTime fechaFin,
+			int numPlazas, UUID idEspacioFisico) throws EntidadNoEncontrada, RetrofitException {
 
-		if (idEvento == null || idEvento.isEmpty())
-			throw new IllegalArgumentException("El id del evento no puede ser nulo o vacío.");
+		if (idEvento == null)
+			throw new IllegalArgumentException("El id del evento no puede ser nulo.");
 		if (descripcion != null && descripcion.isEmpty())
 			throw new IllegalArgumentException("La descripción del evento no puede ser vacía.");
 		if (numPlazas <= -1)
 			throw new IllegalArgumentException("La número de plazas del evento debe ser mayor que 0.");
-		if (idEspacioFisico != null && idEspacioFisico.isEmpty())
-			throw new IllegalArgumentException("El id del espacio físico no puede ser vacío o nulo.");
 
 		Optional<Evento> eventoOptional = repositorioEvento.findById(idEvento);
 		if (!eventoOptional.isPresent())
@@ -137,15 +136,18 @@ public class ServicioEventos implements IServicioEventos {
 		if (fechaFin != null)
 			evento.setFechaFin(fechaFin);
 		if (numPlazas != 0) {
-			//TODO: retrofit para cambiar numPlazas
+			// TODO: retrofit para cambiar numPlazas
 			if (evento.getOcupacion() != null && evento.getNumPlazas() > numPlazas) {
-					int numPlazasReservadas = servicioReservasAPI.validadReservas(idEvento);
-					if (numPlazas < numPlazasReservadas) {
-						throw new IllegalStateException("El número de plazas del evento no puede ser menor al número de plazas reservadas en el evento con id " + idEvento + ".");
-					}
+				int numPlazasReservadas = servicioReservasAPI.validadReservas(idEvento);
+				if (numPlazas < numPlazasReservadas) {
+					throw new IllegalStateException(
+							"El número de plazas del evento no puede ser menor al número de plazas reservadas en el evento con id "
+									+ idEvento + ".");
+				}
 			}
 			evento.setNumPlazas(numPlazas);
 		}
+
 		if (idEspacioFisico != null) {
 			Optional<EspacioFisico> espacioFisicoOptional = repositorioEspacio.findById(idEspacioFisico);
 			if (!espacioFisicoOptional.isPresent())
@@ -163,10 +165,10 @@ public class ServicioEventos implements IServicioEventos {
 
 	// GESTOR_EVENTOS
 	@Override
-	public void cancelarEvento(String idEvento) {
+	public void cancelarEvento(UUID idEvento) {
 
-		if (idEvento == null || idEvento.isEmpty())
-			throw new IllegalArgumentException("El id del evento no puede ser nulo o vacio.");
+		if (idEvento == null)
+			throw new IllegalArgumentException("El id del evento no puede ser nulo.");
 
 		Optional<Evento> eventoOptional = repositorioEvento.findById(idEvento);
 		if (!eventoOptional.isPresent())
@@ -192,15 +194,15 @@ public class ServicioEventos implements IServicioEventos {
 	}
 
 	@Override
-	public boolean isAlgunaOcupacion(String idEspacio) {
-		if (idEspacio == null || idEspacio.isEmpty())
-			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo o vacío.");
+	public boolean isAlgunaOcupacion(UUID idEspacio) {
+		if (idEspacio == null)
+			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo.");
 
 		return repositorioEspacio.getNumeroOcupaciones(idEspacio) > 0;
 	}
 
 	@Override
-	public List<String> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin,
+	public List<UUID> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin,
 			int capacidad) {
 		if (fechaInicio == null)
 			throw new IllegalArgumentException("La fecha de inicio no puede ser nula.");

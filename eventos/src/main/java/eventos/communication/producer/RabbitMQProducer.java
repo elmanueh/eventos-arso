@@ -1,6 +1,7 @@
 package eventos.communication.producer;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class RabbitMQProducer implements IEventProducer {
 	private RabbitTemplate rabbitTemplate;
 
 	@Override
-	public void publicarEventoCreado(String idEntidad, Evento entidad) {
+	public void publicarEventoCreado(UUID idEntidad, Evento entidad) {
 		RabbitEvent event = EventMapper.Domain2EventCrearEvento(entidad);
 		event.setIdEntidad(entidad.getId());
 		event.setFechaHora(LocalDateTime.now());
@@ -33,7 +34,7 @@ public class RabbitMQProducer implements IEventProducer {
 	}
 
 	@Override
-	public void publicarEventoModificado(String idEntidad, Evento entidad) {
+	public void publicarEventoModificado(UUID idEntidad, Evento entidad) {
 		RabbitEvent event = EventMapper.Domain2EventModificarEvento(entidad);
 		event.setIdEntidad(entidad.getId());
 		event.setFechaHora(LocalDateTime.now());
@@ -44,7 +45,7 @@ public class RabbitMQProducer implements IEventProducer {
 	}
 
 	@Override
-	public void publicarEventoCancelado(String idEntidad) {
+	public void publicarEventoCancelado(UUID idEntidad) {
 		RabbitEvent event = EventMapper.Domain2EventCancelarEvento(idEntidad);
 		event.setIdEntidad(idEntidad);
 		event.setFechaHora(LocalDateTime.now());

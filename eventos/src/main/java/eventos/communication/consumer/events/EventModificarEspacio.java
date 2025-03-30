@@ -1,7 +1,5 @@
 package eventos.communication.consumer.events;
 
-import java.time.LocalDateTime;
-
 import eventos.communication.RabbitEvent;
 
 public class EventModificarEspacio extends RabbitEvent {

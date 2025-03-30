@@ -1,5 +1,7 @@
 package eventos.servicio.reservas;
 
+import java.util.UUID;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -7,5 +9,5 @@ import retrofit2.http.Path;
 public interface ReservasRest {
 
 	@GET("reservas/evento/{idEvento}/plazasReservadas")
-	Call<Integer> obtenerPlazasReservadas(@Path("idEvento") String idEvento);
+	Call<Integer> obtenerPlazasReservadas(@Path("idEvento") UUID idEvento);
 }

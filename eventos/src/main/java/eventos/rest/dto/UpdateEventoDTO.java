@@ -1,5 +1,7 @@
 package eventos.rest.dto;
 
+import java.util.UUID;
+
 import javax.validation.constraints.Min;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,7 +18,7 @@ public class UpdateEventoDTO {
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	private String fechaFin;
 
-	private String espacioFisico;
+	private UUID espacioFisico;
 
 	public UpdateEventoDTO() {
 	}
@@ -53,11 +55,11 @@ public class UpdateEventoDTO {
 		this.fechaFin = fechaFin;
 	}
 
-	public String getEspacioFisico() {
+	public UUID getEspacioFisico() {
 		return espacioFisico;
 	}
 
-	public void setEspacioFisico(String espacioFisico) {
+	public void setEspacioFisico(UUID espacioFisico) {
 		this.espacioFisico = espacioFisico;
 	}
 
