@@ -14,5 +14,7 @@ public interface RepositorioReservas extends PagingAndSortingRepository<Reserva,
 	Page<Reserva> findByEventoId(UUID idEvento, Pageable pageable);
 
 	Integer sumPlazasReservadasByEventoId(UUID idEvento);
+	
+	Page<Reserva> findByIdUsuario(UUID idEvento, Pageable pageable);
 
 }

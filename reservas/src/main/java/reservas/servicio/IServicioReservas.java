@@ -18,4 +18,6 @@ public interface IServicioReservas {
 	Page<ReservaResumen> recuperarTodasReservas(UUID idEvento, Pageable pageable) throws EntidadNoEncontrada;
 
 	int recuperarNumPlazasReservadas(UUID idEvento) throws EntidadNoEncontrada;
+	
+	Page<ReservaResumen> recuperarReservasPorUsuario(UUID idUsuario, Pageable pageable) throws EntidadNoEncontrada;
 }
