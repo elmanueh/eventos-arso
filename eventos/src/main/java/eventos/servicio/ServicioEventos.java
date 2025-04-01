@@ -214,4 +214,12 @@ public class ServicioEventos implements IServicioEventos {
 		return repositorioEspacio.getEspaciosFisicoLibres(fechaInicio, fechaFin, capacidad);
 	}
 
+	@Override
+	public int numPlazasMayor(UUID idEspacioFisico) {
+		if (idEspacioFisico == null)
+			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo.");
+		
+		return repositorioEvento.getMaxNumPlazasByEspacioFisico(idEspacioFisico);
+	}
+
 }

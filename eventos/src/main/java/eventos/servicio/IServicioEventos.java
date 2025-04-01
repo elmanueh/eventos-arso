@@ -32,4 +32,6 @@ public interface IServicioEventos {
 
 	List<UUID> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin, int capacidad);
 
+	int numPlazasMayor(UUID idEspacioFisico);
+
 }

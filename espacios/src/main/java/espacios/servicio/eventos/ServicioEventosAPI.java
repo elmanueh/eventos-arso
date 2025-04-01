@@ -45,4 +45,13 @@ public class ServicioEventosAPI implements IServicioEventosAPI {
 		}
 	}
 
+	@Override
+	public int validarCapacidad(UUID idEspacioFisico) throws RetrofitException {
+		try {
+			return eventosRest.obtenerNumPlazasMayor(idEspacioFisico).execute().body().intValue();
+		} catch (IOException e) {
+			throw new RetrofitException("Error al consultar el número de plazas mayor de un evento en el espacio físico con id " + idEspacioFisico);
+		}
+	}
+
 }

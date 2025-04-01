@@ -89,7 +89,7 @@ public class ServicioEspacios implements IServicioEspacios {
 
 	@Override
 	public void modificarEspacioFisico(UUID idEspacioFisico, String nombre, int capacidad, String descripcion)
-			throws RepositorioException, EntidadNoEncontrada {
+			throws RepositorioException, EntidadNoEncontrada, RetrofitException, IllegalStateException {
 
 		if (idEspacioFisico == null)
 			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo.");
@@ -105,8 +105,13 @@ public class ServicioEspacios implements IServicioEspacios {
 
 			if (nombre != null)
 				espacioFisico.setNombre(nombre);
-			if (capacidad != 0)
+			if (capacidad != 0) {
+				int numPlazasMax = servicioEventosAPI.validarCapacidad(idEspacioFisico);
+				if (numPlazasMax > capacidad) {
+					throw new IllegalStateException("La capacidad del espacio físico con id " + idEspacioFisico + "no puede ser menor al número de plazas mayor de un evento.");
+				}
 				espacioFisico.setCapacidad(capacidad);
+			}
 			if (descripcion != null)
 				espacioFisico.setDescripcion(descripcion);
 

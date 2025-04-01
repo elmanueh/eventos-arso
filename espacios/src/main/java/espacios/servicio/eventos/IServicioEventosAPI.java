@@ -12,4 +12,6 @@ public interface IServicioEventosAPI {
 
 	List<UUID> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin, int capacidad)
 			throws RetrofitException;
+
+	int validarCapacidad(UUID idEspacioFisico) throws RetrofitException;
 }

@@ -22,7 +22,7 @@ public interface IServicioEspacios {
 			throws RepositorioException, EntidadNoEncontrada;
 
 	void modificarEspacioFisico(UUID idEspacioFisico, String nombre, int capacidad, String descripcion)
-			throws RepositorioException, EntidadNoEncontrada;
+			throws RepositorioException, EntidadNoEncontrada, RetrofitException, IllegalStateException;
 
 	void bajaEspacioFisico(UUID idEspacioFisico) throws RepositorioException, EntidadNoEncontrada, RetrofitException;
 

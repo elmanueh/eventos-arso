@@ -13,4 +13,6 @@ import eventos.modelo.Evento;
 public interface RepositorioEventos extends PagingAndSortingRepository<Evento, UUID> {
 
 	Page<Evento> getEventosDelMesPaginados(int mes, int año, Pageable pageable);
+
+	Integer getMaxNumPlazasByEspacioFisico(UUID idEspacioFisico);
 }

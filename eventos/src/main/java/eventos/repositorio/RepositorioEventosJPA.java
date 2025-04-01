@@ -15,5 +15,10 @@ public interface RepositorioEventosJPA extends RepositorioEventos, JpaRepository
 			+ "WHERE :mes BETWEEN EXTRACT(MONTH FROM e.ocupacion.fechaInicio) AND EXTRACT(MONTH FROM e.ocupacion.fechaFin) "
 			+ "AND :año BETWEEN EXTRACT(YEAR FROM e.ocupacion.fechaInicio) AND EXTRACT(YEAR FROM e.ocupacion.fechaFin)")
 	Page<Evento> getEventosDelMesPaginados(int mes, int año, Pageable pageable);
+	
+	@Query("SELECT MAX(e.numPlazas) FROM Evento e "
+			+ "WHERE e.cancelado = false "
+			+ "AND e.ocupacion.espacioFisico.id = :idEspacioFisico")
+    Integer getMaxNumPlazasByEspacioFisico(UUID idEspacioFisico);
 
 }

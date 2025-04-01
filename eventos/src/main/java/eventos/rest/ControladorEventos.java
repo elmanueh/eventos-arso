@@ -126,4 +126,9 @@ public class ControladorEventos {
 		return servicio.buscarEspaciosFisicosLibres(
 				LocalDateTime.parse(fechaInicio), LocalDateTime.parse(fechaFin), capacidad);
 	}
+	
+	@GetMapping("/espacio/{id}")
+	public ResponseEntity<Integer> obtenerNumPlazasMayor(@PathVariable UUID id) {
+		return ResponseEntity.ok(servicio.numPlazasMayor(id));
+	}
 }
