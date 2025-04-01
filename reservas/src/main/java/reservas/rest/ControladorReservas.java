@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,9 +60,19 @@ public class ControladorReservas implements ReservasApi {
 
 	@GetMapping("/{id}")
 	@PreAuthorize("hasAuthority('USUARIO')")
-	public ReservaResponseDTO getReserva(@PathVariable UUID id) throws EntidadNoEncontrada {
+	public EntityModel<ReservaResponseDTO> getReserva(@PathVariable UUID id) throws EntidadNoEncontrada {
 		Reserva reserva = servicio.recuperarReserva(id);
-		return ReservaMapper.toDTO(reserva);
+		ReservaResponseDTO reservaDTO = ReservaMapper.toDTO(reserva);
+		
+		// Envolver el DTO con EntityModel y agregar enlace self
+		EntityModel<ReservaResponseDTO> model = EntityModel.of(reservaDTO);
+		model.add(
+			 WebMvcLinkBuilder.linkTo(
+					 WebMvcLinkBuilder
+					 	.methodOn(ControladorReservas.class)
+					 	.getReserva(id))
+				 .withSelfRel());
+		return model;	
 	}
 
 	@GetMapping("/evento/{id}")

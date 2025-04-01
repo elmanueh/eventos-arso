@@ -35,7 +35,7 @@ public interface ReservasApi {
 			@ApiResponse(responseCode = "200", description = "Reserva encontrada exitosamente.", content = @Content(schema = @Schema(implementation = ReservaResponseDTO.class))),
 			@ApiResponse(responseCode = "404", description = "Reserva no encontrada. Esto ocurre si no existe una reserva con el identificador proporcionado.", content = @Content(schema = @Schema(implementation = MessageError.class)))
 	})
-	ReservaResponseDTO getReserva(
+	EntityModel<ReservaResponseDTO> getReserva(
 			@PathVariable(name = "Identificador único de la reserva", required = true) UUID id)
 			throws EntidadNoEncontrada;
 

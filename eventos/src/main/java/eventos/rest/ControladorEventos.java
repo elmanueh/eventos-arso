@@ -27,6 +27,7 @@ import org.springframework.data.web.PagedResourcesAssembler;
 
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 
 import eventos.modelo.Evento;
 import eventos.modelo.EventoCategoria;
@@ -58,9 +59,19 @@ public class ControladorEventos {
 
 	@GetMapping("/{id}")
 	@PreAuthorize("hasAnyAuthority('GESTOR_EVENTOS', 'USUARIO')")
-	public EventoResponseDTO getEvento(@PathVariable UUID id) throws EntidadNoEncontrada {
+	public EntityModel<EventoResponseDTO> getEvento(@PathVariable UUID id) throws EntidadNoEncontrada {
 		Evento evento = servicio.recuperarEvento(id);
-		return EventoMapper.toDTO(evento);
+		EventoResponseDTO eventoDTO = EventoMapper.toDTO(evento);
+		
+		// Envolver el DTO con EntityModel y agregar enlace self
+		EntityModel<EventoResponseDTO> model = EntityModel.of(eventoDTO);
+		model.add(
+			 WebMvcLinkBuilder.linkTo(
+					 WebMvcLinkBuilder
+					 	.methodOn(ControladorEventos.class)
+					 	.getEvento(id))
+				 .withSelfRel());
+		return model;	
 	}
 
 	@PostMapping()
