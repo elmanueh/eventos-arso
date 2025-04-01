@@ -1,5 +1,6 @@
 package espacios.repositorio;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,6 +21,10 @@ public class RepositorioAdHocJPAEspacioFisico extends RepositorioJPA<EspacioFisi
 
 	@Override
 	public List<EspacioFisico> getEspaciosFisicosByIds(List<UUID> ids) {
+		if (ids == null || ids.isEmpty()) {
+	        return new LinkedList<>();
+	    }
+		
 		EntityManager em = EntityManagerHelper.getEntityManager();
 
 		String queryString = "SELECT e FROM EspacioFisico e WHERE e.id IN :ids";
