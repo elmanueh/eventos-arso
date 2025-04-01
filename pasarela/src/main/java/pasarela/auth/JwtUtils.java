@@ -40,4 +40,13 @@ public class JwtUtils {
 		return cookie;
 	}
 
+	public static Cookie eliminarCookie() {
+		Cookie cookie = new Cookie("jwt", null);
+		cookie.setMaxAge(0);
+		cookie.setHttpOnly(true);
+	    cookie.setPath("/");
+
+		return cookie;
+	}
+
 }

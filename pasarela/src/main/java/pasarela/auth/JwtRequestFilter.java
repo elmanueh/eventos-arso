@@ -22,11 +22,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
             @NonNull FilterChain chain) throws IOException, ServletException {
 
-        // Evitar filtrado en la ruta de login
-        if (request.getServletPath().equals("/auth/login")) {
-            chain.doFilter(request, response);
-            return;
-        }
+        // Evitar filtrado en la ruta de login y logout
+    	if (request.getServletPath().equals("/auth/login") || request.getServletPath().equals("/auth/logout")) {
+    	    chain.doFilter(request, response);
+    	    return;
+    	}
 
         String token = null;
         if (request.getCookies() != null) {

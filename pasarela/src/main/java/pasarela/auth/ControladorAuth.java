@@ -47,6 +47,14 @@ public class ControladorAuth {
 
         return ResponseEntity.ok(authResponse);
     }
+    
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(HttpServletResponse response) {
+        response.addCookie(JwtUtils.eliminarCookie());
+
+        return ResponseEntity.ok().build();
+    }
+
 
     private Map<String, Object> verificarCredenciales(String username, String password) {
 
