@@ -15,6 +15,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtRequestFilter authenticationRequestFilter;
 
+    @Autowired
+    private SecuritySuccessHandler successHandler;
+
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
         // Deshabilita la protección CSRF y la autenticación básica
@@ -22,6 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
                 .and()
+                .oauth2Login().successHandler(successHandler).and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
