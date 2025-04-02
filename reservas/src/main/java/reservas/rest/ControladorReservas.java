@@ -63,16 +63,16 @@ public class ControladorReservas implements ReservasApi {
 	public EntityModel<ReservaResponseDTO> getReserva(@PathVariable UUID id) throws EntidadNoEncontrada {
 		Reserva reserva = servicio.recuperarReserva(id);
 		ReservaResponseDTO reservaDTO = ReservaMapper.toDTO(reserva);
-		
+
 		// Envolver el DTO con EntityModel y agregar enlace self
 		EntityModel<ReservaResponseDTO> model = EntityModel.of(reservaDTO);
 		model.add(
-			 WebMvcLinkBuilder.linkTo(
-					 WebMvcLinkBuilder
-					 	.methodOn(ControladorReservas.class)
-					 	.getReserva(id))
-				 .withSelfRel());
-		return model;	
+				WebMvcLinkBuilder.linkTo(
+						WebMvcLinkBuilder
+								.methodOn(ControladorReservas.class)
+								.getReserva(id))
+						.withSelfRel());
+		return model;
 	}
 
 	@GetMapping("/evento/{id}")
@@ -84,15 +84,17 @@ public class ControladorReservas implements ReservasApi {
 	}
 
 	@GetMapping("/evento/{idEvento}/plazasReservadas")
+	@PreAuthorize("permitAll")
 	public ResponseEntity<Integer> obtenerPlazasReservadas(@PathVariable UUID idEvento) throws EntidadNoEncontrada {
 		return ResponseEntity.ok(servicio.recuperarNumPlazasReservadas(idEvento));
 	}
-	
-    @GetMapping("/usuario/{idUsuario}")
-    @PreAuthorize("hasAuthority('USUARIO')")
-    public PagedModel<EntityModel<ReservaResumen>> getReservasPorUsuario(@PathVariable UUID idUsuario, Pageable pageable) throws EntidadNoEncontrada {
-    	Page<ReservaResumen> resultado = servicio.recuperarReservasPorUsuario(idUsuario, pageable);
-    	return pagedResourcesAssembler.toModel(resultado, reservaAssembler);
-    }
+
+	@GetMapping("/usuario/{idUsuario}")
+	@PreAuthorize("hasAuthority('USUARIO')")
+	public PagedModel<EntityModel<ReservaResumen>> getReservasPorUsuario(@PathVariable UUID idUsuario,
+			Pageable pageable) throws EntidadNoEncontrada {
+		Page<ReservaResumen> resultado = servicio.recuperarReservasPorUsuario(idUsuario, pageable);
+		return pagedResourcesAssembler.toModel(resultado, reservaAssembler);
+	}
 
 }

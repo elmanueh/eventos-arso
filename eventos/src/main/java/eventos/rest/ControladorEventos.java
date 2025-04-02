@@ -62,16 +62,16 @@ public class ControladorEventos {
 	public EntityModel<EventoResponseDTO> getEvento(@PathVariable UUID id) throws EntidadNoEncontrada {
 		Evento evento = servicio.recuperarEvento(id);
 		EventoResponseDTO eventoDTO = EventoMapper.toDTO(evento);
-		
+
 		// Envolver el DTO con EntityModel y agregar enlace self
 		EntityModel<EventoResponseDTO> model = EntityModel.of(eventoDTO);
 		model.add(
-			 WebMvcLinkBuilder.linkTo(
-					 WebMvcLinkBuilder
-					 	.methodOn(ControladorEventos.class)
-					 	.getEvento(id))
-				 .withSelfRel());
-		return model;	
+				WebMvcLinkBuilder.linkTo(
+						WebMvcLinkBuilder
+								.methodOn(ControladorEventos.class)
+								.getEvento(id))
+						.withSelfRel());
+		return model;
 	}
 
 	@PostMapping()
@@ -124,11 +124,13 @@ public class ControladorEventos {
 	}
 
 	@GetMapping("/ocupacion/{id}")
+	@PreAuthorize("permitAll")
 	public ResponseEntity<Boolean> isAlgunaOcupacion(@PathVariable UUID id) {
 		return ResponseEntity.ok(servicio.isAlgunaOcupacion(id));
 	}
 
 	@GetMapping("/espacioslibres")
+	@PreAuthorize("permitAll")
 	public List<UUID> buscarEspaciosFisicosLibres(
 			@RequestParam String fechaInicio,
 			@RequestParam String fechaFin,
@@ -137,16 +139,17 @@ public class ControladorEventos {
 		return servicio.buscarEspaciosFisicosLibres(
 				LocalDateTime.parse(fechaInicio), LocalDateTime.parse(fechaFin), capacidad);
 	}
-	
+
 	@GetMapping("/espacio/{id}")
+	@PreAuthorize("permitAll")
 	public ResponseEntity<Integer> obtenerNumPlazasMayor(@PathVariable UUID id) {
 		return ResponseEntity.ok(servicio.numPlazasMayor(id));
 	}
 
 	@GetMapping("/gestor/{gestor}")
-	@PreAuthorize("hasAnyAuthority('GESTOR_EVENTOS')")
+	@PreAuthorize("hasAuthority('GESTOR_EVENTOS')")
 	public PagedModel<EntityModel<EventoResumen>> getEventosPorGestor(@PathVariable String gestor, Pageable pageable) {
-	    Page<EventoResumen> resultado = servicio.recuperarEventosPorGestor(gestor, pageable);
+		Page<EventoResumen> resultado = servicio.recuperarEventosPorGestor(gestor, pageable);
 		return pagedResourcesAssembler.toModel(resultado, eventoResumenAssembler);
 	}
 

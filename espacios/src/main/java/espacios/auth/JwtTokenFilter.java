@@ -29,10 +29,10 @@ public class JwtTokenFilter implements ContainerRequestFilter {
 
 	@Override
 	public void filter(ContainerRequestContext requestContext) {
-		String token = null;
-	
 		String authorization = requestContext.getHeaderString("Authorization");
+		String token = null;
 
+		// Obtener el token del encabezado Authorization o de las cookies
 		if (authorization != null && authorization.startsWith("Bearer ")) {
 			token = authorization.substring("Bearer ".length()).trim();
 		} else if (servletRequest.getCookies() != null) {
@@ -43,36 +43,41 @@ public class JwtTokenFilter implements ContainerRequestFilter {
 			}
 		}
 
-		//TODO: esto creo que es innecesario
 		if (token == null) {
-			requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("No se adjunta el token correctamente").build());
+			requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED)
+					.entity("No se adjunta el token correctamente").build());
 			return;
 		}
 
 		try {
-
 			Map<String, Object> claims = JwtUtils.decodeToken(token);
 
-			if (claims != null) {;
-				String roles = (String) claims.get("roles");
+			if (claims == null) {
+				requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED)
+						.entity("Token inválido o expirado").build());
+				return;
+			}
 
-				// Convertir los roles a una lista de GrantedAuthority
-				Set<String> authorities = new HashSet<>();
-				for (String rol : roles.split(",")) {
-					authorities.add(rol);
-				}
+			String roles = (String) claims.get("roles");
 
-				servletRequest.setAttribute("claims", claims);
+			// Convertir los roles a una lista de GrantedAuthority
+			Set<String> authorities = new HashSet<>();
+			for (String rol : roles.split(",")) {
+				authorities.add(rol);
+			}
 
-				// Verificar roles si es necesario
-				if (resourceInfo.getResourceMethod().isAnnotationPresent(RolesAllowed.class)) {
-					String[] allowedRoles = resourceInfo.getResourceMethod().getAnnotation(RolesAllowed.class).value();
+			servletRequest.setAttribute("claims", claims);
 
-					if (authorities.stream().noneMatch(userRole -> Arrays.asList(allowedRoles).contains(userRole))) {
-						requestContext.abortWith(Response.status(Response.Status.FORBIDDEN).entity("No tiene rol de acceso").build());
-					}
+			// Verificar roles si es necesario
+			if (resourceInfo.getResourceMethod().isAnnotationPresent(RolesAllowed.class)) {
+				String[] allowedRoles = resourceInfo.getResourceMethod().getAnnotation(RolesAllowed.class).value();
+
+				if (authorities.stream().noneMatch(userRole -> Arrays.asList(allowedRoles).contains(userRole))) {
+					requestContext.abortWith(
+							Response.status(Response.Status.FORBIDDEN).entity("No tiene rol de acceso").build());
 				}
 			}
+
 		} catch (Exception e) {
 			requestContext.abortWith(
 					Response.status(Response.Status.UNAUTHORIZED).entity("Token inválido: " + e.getMessage()).build());
