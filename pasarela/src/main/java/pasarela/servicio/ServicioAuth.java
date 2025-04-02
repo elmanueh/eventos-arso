@@ -32,6 +32,11 @@ public class ServicioAuth implements IServicioAuth {
         Usuario user = usuarios.get(usuario);
         return user.getContraseña().equals(contraseña);
     }
+    
+    @Override
+    public boolean verificarCredenciales(String usuario) {
+        return usuarios.containsKey(usuario);
+    }
 
     @Override
     public String obtenerRoles(String usuario) {
@@ -42,5 +47,10 @@ public class ServicioAuth implements IServicioAuth {
     public UUID obtenerId(String usuario) {
         return usuarios.get(usuario).getId();
     }
+
+	@Override
+	public void crearUsuario(String usuario) {
+		usuarios.put(usuario, new Usuario(UUID.randomUUID(), usuario, null, "USUARIO"));
+	}
 
 }
