@@ -27,13 +27,22 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response, @NonNull FilterChain chain) throws IOException, ServletException {
 
         String token = null;
+        String authorization = request.getHeader("Authorization");
 
-        if (request.getCookies() != null) {
+		if (authorization != null && authorization.startsWith("Bearer ")) {
+			token = authorization.substring("Bearer ".length()).trim();
+		} else if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
                 if (cookie.getName().equals("jwt")) {
                     token = cookie.getValue();
                 }
             }
+        }
+        
+        //TODO: esto creo que es innecesario
+        if (token == null) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "No se adjunta el token correctamente.");
+            return;
         }
 
         if (token != null) {

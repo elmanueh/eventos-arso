@@ -1,4 +1,4 @@
-package auth;
+package espacios.auth;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -30,8 +30,12 @@ public class JwtTokenFilter implements ContainerRequestFilter {
 	@Override
 	public void filter(ContainerRequestContext requestContext) {
 		String token = null;
+	
+		String authorization = requestContext.getHeaderString("Authorization");
 
-		if (servletRequest.getCookies() != null) {
+		if (authorization != null && authorization.startsWith("Bearer ")) {
+			token = authorization.substring("Bearer ".length()).trim();
+		} else if (servletRequest.getCookies() != null) {
 			for (Cookie cookie : servletRequest.getCookies()) {
 				if (cookie.getName().equals("jwt")) {
 					token = cookie.getValue();
@@ -39,6 +43,7 @@ public class JwtTokenFilter implements ContainerRequestFilter {
 			}
 		}
 
+		//TODO: esto creo que es innecesario
 		if (token == null) {
 			requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("No se adjunta el token correctamente").build());
 			return;
@@ -72,5 +77,6 @@ public class JwtTokenFilter implements ContainerRequestFilter {
 			requestContext.abortWith(
 					Response.status(Response.Status.UNAUTHORIZED).entity("Token inválido: " + e.getMessage()).build());
 		}
+
 	}
 }

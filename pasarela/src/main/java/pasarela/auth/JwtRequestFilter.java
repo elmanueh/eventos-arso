@@ -29,7 +29,16 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     	}
 
         String token = null;
-        if (request.getCookies() != null) {
+
+        String authorization = request.getHeader("Authorization");
+
+		if (authorization != null && authorization.startsWith("Bearer ")) {
+			System.out.println("entro");
+			token = authorization.substring("Bearer ".length()).trim();
+			System.out.println(token);
+		}
+
+        if (request.getCookies() != null && token == null) {
             token = Arrays.stream(request.getCookies())
                     .filter(cookie -> cookie.getName().equals("jwt"))
                     .map(Cookie::getValue)
@@ -38,7 +47,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
 
         if (token == null) {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Se requiere autenticación");
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Se requiere autenticación.");
             return;
         }
 
