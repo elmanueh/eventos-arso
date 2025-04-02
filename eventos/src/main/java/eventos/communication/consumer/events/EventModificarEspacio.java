@@ -4,7 +4,6 @@ import eventos.communication.RabbitEvent;
 
 public class EventModificarEspacio extends RabbitEvent {
 
-	private String nombre;
 	private int capacidad;
 
 	public EventModificarEspacio() {
@@ -18,11 +17,4 @@ public class EventModificarEspacio extends RabbitEvent {
 		this.capacidad = capacidad;
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 }

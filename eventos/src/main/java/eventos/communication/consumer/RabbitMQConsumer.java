@@ -42,16 +42,13 @@ public class RabbitMQConsumer implements IEventConsumer {
 			switch (tipoEvento) {
 				case ESPACIO_CREADO:
 					EventCrearEspacio eventCreado = objectMapper.convertValue(eventData, EventCrearEspacio.class);
-					servicio.crearEspacio(eventCreado.getIdEntidad(), eventCreado.getNombre(),
-							eventCreado.getPropietario(), eventCreado.getDireccion(), eventCreado.isCancelado(),
-							eventCreado.getCapacidad());
+					servicio.crearEspacio(eventCreado.getIdEntidad(), eventCreado.isCancelado(), eventCreado.getCapacidad());
 					break;
 
 				case ESPACIO_MODIFICADO:
 					EventModificarEspacio eventModificado = objectMapper.convertValue(eventData,
 							EventModificarEspacio.class);
-					servicio.modificarEspacio(eventModificado.getIdEntidad(), eventModificado.getNombre(),
-							eventModificado.getCapacidad());
+					servicio.modificarEspacio(eventModificado.getIdEntidad(), eventModificado.getCapacidad());
 					break;
 				case ESPACIO_CAMBIAR_ESTADO:
 					EventCambiarEstadoEspacio eventCambiadoEstado = objectMapper.convertValue(eventData,

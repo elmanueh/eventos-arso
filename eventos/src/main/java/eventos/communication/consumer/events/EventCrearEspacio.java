@@ -4,37 +4,10 @@ import eventos.communication.RabbitEvent;
 
 public class EventCrearEspacio extends RabbitEvent {
 
-	private String nombre;
-	private String direccion;
-	private String propietario;
 	private boolean cancelado;
 	private int capacidad;
 
 	public EventCrearEspacio() {
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-
-	public String getPropietario() {
-		return propietario;
-	}
-
-	public void setPropietario(String propietario) {
-		this.propietario = propietario;
 	}
 
 	public int getCapacidad() {

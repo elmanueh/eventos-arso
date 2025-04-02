@@ -22,27 +22,22 @@ public class ServicioEspacios implements IServicioEspacios {
 		this.repositorioEspacios = repositorioEspacios;
 	}
 
-	public void crearEspacio(UUID idEspacio, String nombre, String propietario, String direccion, boolean cancelado,
-			int capacidad) {
+	public void crearEspacio(UUID idEspacio, boolean cancelado, int capacidad) {
 		EspacioFisico espacio = new EspacioFisico();
 		espacio.setId(idEspacio);
-		espacio.setNombre(nombre);
-		espacio.setPropietario(propietario);
-		espacio.setDireccion(direccion);
 		espacio.setCancelado(cancelado);
 		espacio.setCapacidad(capacidad);
 
 		repositorioEspacios.save(espacio);
 	}
 
-	public void modificarEspacio(UUID idEspacio, String nombre, int capacidad) {
+	public void modificarEspacio(UUID idEspacio, int capacidad) {
 		Optional<EspacioFisico> espacioOpt = repositorioEspacios.findById(idEspacio);
 
 		if (!espacioOpt.isPresent())
 			return;
 
 		EspacioFisico espacio = espacioOpt.get();
-		espacio.setNombre(nombre);
 		espacio.setCapacidad(capacidad);
 
 		repositorioEspacios.save(espacio);
