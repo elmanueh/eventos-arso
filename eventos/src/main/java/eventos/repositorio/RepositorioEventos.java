@@ -15,4 +15,6 @@ public interface RepositorioEventos extends PagingAndSortingRepository<Evento, U
 	Page<Evento> getEventosDelMesPaginados(int mes, int año, Pageable pageable);
 
 	Integer getMaxNumPlazasByEspacioFisico(UUID idEspacioFisico);
+	
+	Page<Evento> getEventosPorGestor(String gestor, Pageable pageable);
 }

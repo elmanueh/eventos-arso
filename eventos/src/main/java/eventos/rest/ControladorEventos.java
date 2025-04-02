@@ -142,4 +142,12 @@ public class ControladorEventos {
 	public ResponseEntity<Integer> obtenerNumPlazasMayor(@PathVariable UUID id) {
 		return ResponseEntity.ok(servicio.numPlazasMayor(id));
 	}
+
+	@GetMapping("/gestor/{gestor}")
+	@PreAuthorize("hasAnyAuthority('GESTOR_EVENTOS')")
+	public PagedModel<EntityModel<EventoResumen>> getEventosPorGestor(@PathVariable String gestor, Pageable pageable) {
+	    Page<EventoResumen> resultado = servicio.recuperarEventosPorGestor(gestor, pageable);
+		return pagedResourcesAssembler.toModel(resultado, eventoResumenAssembler);
+	}
+
 }

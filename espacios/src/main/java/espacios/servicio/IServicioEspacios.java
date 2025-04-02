@@ -30,4 +30,8 @@ public interface IServicioEspacios {
 
 	List<EspacioFisico> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin, int capacidad)
 			throws RepositorioException, RetrofitException;
+
+	List<EspacioFisico> recuperarEspaciosPorPropietario(String propietario);
+
+	List<EspacioFisico> recuperarTodosLosEspacios() throws RepositorioException;
 }

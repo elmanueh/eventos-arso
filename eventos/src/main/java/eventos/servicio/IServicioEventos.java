@@ -34,4 +34,6 @@ public interface IServicioEventos {
 
 	int numPlazasMayor(UUID idEspacioFisico);
 
+	Page<EventoResumen> recuperarEventosPorGestor(String gestor, Pageable pageable);
+
 }

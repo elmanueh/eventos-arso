@@ -181,4 +181,17 @@ public class ServicioEspacios implements IServicioEspacios {
 		return repositorioEspacioFisico.getEspaciosFisicosByIds(espaciosFisicosIds);
 	}
 
+	@Override
+	public List<EspacioFisico> recuperarEspaciosPorPropietario(String propietario) {
+		if (propietario == null)
+			throw new IllegalArgumentException("El propietario no puede ser nulo.");
+		
+		return repositorioEspacioFisico.getEspaciosFisicosByPropietario(propietario);
+	}
+
+	@Override
+	public List<EspacioFisico> recuperarTodosLosEspacios() throws RepositorioException {
+		return repositorioEspacioFisico.getAll();
+	}
+
 }

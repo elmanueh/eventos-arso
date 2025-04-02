@@ -222,4 +222,12 @@ public class ServicioEventos implements IServicioEventos {
 		return repositorioEvento.getMaxNumPlazasByEspacioFisico(idEspacioFisico);
 	}
 
+	@Override
+	public Page<EventoResumen> recuperarEventosPorGestor(String gestor, Pageable pageable) {
+		if (gestor == null)
+			throw new IllegalArgumentException("El gestor no puede ser nulo.");
+		
+		return repositorioEvento.findAll(pageable).map(EventoMapper::toResumen);
+	}
+
 }

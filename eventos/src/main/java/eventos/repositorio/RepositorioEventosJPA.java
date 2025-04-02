@@ -20,5 +20,8 @@ public interface RepositorioEventosJPA extends RepositorioEventos, JpaRepository
 			+ "WHERE e.cancelado = false "
 			+ "AND e.ocupacion.espacioFisico.id = :idEspacioFisico")
     Integer getMaxNumPlazasByEspacioFisico(UUID idEspacioFisico);
+	
+	@Query("SELECT e FROM Evento e WHERE e.organizador = :gestor")
+	Page<Evento> getEventosPorGestor(String gestor, Pageable pageable);
 
 }

@@ -147,4 +147,54 @@ public class ControladorEspacios {
         servicio.asignarPuntosDeInteres(id, puntosInteres);
         return Response.status(Response.Status.NO_CONTENT).build();
     }
+    
+    @GET
+    @Path("/propietario/{propietario}")
+    @RolesAllowed({ "PROPIETARIO_ESPACIOS" })
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getEspaciosPorPropietario(@PathParam("propietario") String propietario) throws Exception {
+        List<EspacioFisico> espacios = servicio.recuperarEspaciosPorPropietario(propietario);
+        
+        LinkedList<ResumenExtendido> extendido = new LinkedList<>();
+        
+        for (EspacioFisico espacioFisico : espacios) {
+            ResumenExtendido resumenExtendido = new ResumenExtendido();
+            resumenExtendido.setEspacioDTO(EspacioFisicoMapper.toResumenDTO(espacioFisico));
+
+            UUID id = espacioFisico.getId();
+            URI nuevaURL = this.uriInfo.getBaseUriBuilder().path(getClass()).path(id.toString()).build();
+            resumenExtendido.setUrl(nuevaURL.toString());
+
+            extendido.add(resumenExtendido);
+        }
+
+        Listado listado = new Listado();
+        listado.setEspacio(extendido);
+        return Response.ok(listado).build();
+    }
+    
+    @GET
+    @RolesAllowed({ "USUARIO" })
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllEspaciosFisicos() throws Exception {
+        List<EspacioFisico> espacios = servicio.recuperarTodosLosEspacios();
+        
+        LinkedList<ResumenExtendido> extendido = new LinkedList<>();
+        
+        for (EspacioFisico espacioFisico : espacios) {
+            ResumenExtendido resumenExtendido = new ResumenExtendido();
+            resumenExtendido.setEspacioDTO(EspacioFisicoMapper.toResumenDTO(espacioFisico));
+
+            UUID id = espacioFisico.getId();
+            URI nuevaURL = this.uriInfo.getBaseUriBuilder().path(getClass()).path(id.toString()).build();
+            resumenExtendido.setUrl(nuevaURL.toString());
+
+            extendido.add(resumenExtendido);
+        }
+
+        Listado listado = new Listado();
+        listado.setEspacio(extendido);
+        return Response.ok(listado).build();
+    }
+
 }

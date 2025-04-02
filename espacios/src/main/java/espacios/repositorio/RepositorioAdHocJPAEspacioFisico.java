@@ -38,4 +38,19 @@ public class RepositorioAdHocJPAEspacioFisico extends RepositorioJPA<EspacioFisi
 		return resultado;
 	}
 
+	@Override
+	public List<EspacioFisico> getEspaciosFisicosByPropietario(String propietario) {
+		 EntityManager em = EntityManagerHelper.getEntityManager();
+
+	    String queryString = "SELECT e FROM EspacioFisico e WHERE e.propietario = :propietario";
+
+	    TypedQuery<EspacioFisico> typedQuery = em.createQuery(queryString, EspacioFisico.class);
+	    typedQuery.setParameter("propietario", propietario);
+
+	    List<EspacioFisico> resultado = typedQuery.getResultList();
+	    EntityManagerHelper.closeEntityManager();
+
+	    return resultado;
+	}
+
 }
