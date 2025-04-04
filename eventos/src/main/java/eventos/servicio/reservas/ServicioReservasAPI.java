@@ -3,6 +3,7 @@ package eventos.servicio.reservas;
 import java.io.IOException;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import eventos.servicio.reservas.exception.RetrofitException;
@@ -14,9 +15,11 @@ public class ServicioReservasAPI implements IServicioReservasAPI {
 
 	private final Retrofit retrofit;
 	private final ReservasRest reservasRest;
+	private final String RESERVAS_URL;
 
-	public ServicioReservasAPI() {
-		retrofit = new Retrofit.Builder().baseUrl("http://localhost:8083/api/")
+	public ServicioReservasAPI(@Value("${RESERVAS_URL}") String reservasUrl) {
+		this.RESERVAS_URL = reservasUrl;
+		retrofit = new Retrofit.Builder().baseUrl(RESERVAS_URL)
 				.addConverterFactory(JacksonConverterFactory.create()).build();
 		reservasRest = retrofit.create(ReservasRest.class);
 	}

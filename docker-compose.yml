@@ -1,0 +1,93 @@
+version: '3.9'
+services:
+  pasarela:
+    container_name: pasarela
+    build: ./pasarela
+    ports:
+      - '8080:8080'
+    env_file:
+      - .env
+
+  espacios:
+    container_name: espacios
+    build: ./espacios
+    depends_on:
+      - mysql
+      - rabbitmq
+    volumes:
+      - .env:/app/.env
+    env_file:
+      - .env
+
+  eventos:
+    container_name: eventos
+    build: ./eventos
+    depends_on:
+      - mysql
+      - rabbitmq
+    env_file:
+      - .env
+
+  reservas:
+    container_name: reservas
+    build: ./reservas
+    depends_on:
+      - mongodb
+      - rabbitmq
+    env_file:
+      - .env
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./mysql-init.sql:/docker-entrypoint-initdb.d/mysql-init.sql
+      - ./docker-files/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USERNAME}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+
+  mongodb:
+    image: mongo:6
+    container_name: mongodb
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./docker-files/mongodb:/data/db
+    env_file:
+      - .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGODB_DATABASE}
+
+  mongo-express:
+    image: mongo-express:1.0.2
+    container_name: mongo-express
+    restart: always
+    ports:
+      - '8081:8081'
+    depends_on:
+      - mongodb
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGODB_USERNAME}
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGODB_PASSWORD}
+      - ME_CONFIG_BASICAUTH_USERNAME=${MONGODB_USERNAME}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${MONGODB_PASSWORD}
+      - ME_CONFIG_MONGODB_SERVER=${MONGODB_SERVER}
+
+  rabbitmq:
+    image: rabbitmq:4.0.7
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USERNAME}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}

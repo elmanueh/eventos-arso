@@ -20,7 +20,7 @@ public class RabbitMQConfig {
 	private static final String EXCHANGE_NAME = "bus";
 	// private static final String ESPACIOS_BINDING_KEY = "bus.espacios.#";
 	private static final Dotenv dotenv = Dotenv.load();
-	private static final String RABBITMQ_URI = dotenv.get("RABBITMQ_URI");
+	private static final String RABBITMQ_URL = dotenv.get("RABBITMQ_URL");
 
 	private Connection connection;
 	private Channel channel;
@@ -38,7 +38,7 @@ public class RabbitMQConfig {
 	public void startRabbitMQ() {
 		try {
 			ConnectionFactory factory = new ConnectionFactory();
-			factory.setUri(RABBITMQ_URI);
+			factory.setUri(RABBITMQ_URL);
 
 			connection = factory.newConnection();
 			channel = connection.createChannel();

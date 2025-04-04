@@ -1,8 +1,13 @@
 package espacios.utils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class EntityManagerHelper {
 	private static EntityManagerFactory entityManagerFactory;
@@ -10,11 +15,16 @@ public class EntityManagerHelper {
 	private static final ThreadLocal<EntityManager> entityManagerHolder;
 
 	static {
+		Dotenv dotenv = Dotenv.load();
 
-		entityManagerFactory = Persistence.createEntityManagerFactory("espacios");
+		Map<String, String> props = new HashMap<>();
+		props.put("javax.persistence.jdbc.user", dotenv.get("MYSQL_USERNAME"));
+		props.put("javax.persistence.jdbc.password", dotenv.get("MYSQL_PASSWORD"));
+		props.put("javax.persistence.jdbc.url", dotenv.get("MYSQL_URL_ESPACIOS"));
+
+		entityManagerFactory = Persistence.createEntityManagerFactory("espacios", props);
 
 		entityManagerHolder = new ThreadLocal<EntityManager>();
-
 	}
 
 	public static EntityManager getEntityManager() {

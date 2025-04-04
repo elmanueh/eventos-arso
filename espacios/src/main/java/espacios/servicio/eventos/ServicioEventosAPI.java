@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import espacios.servicio.eventos.exception.RetrofitException;
+import io.github.cdimascio.dotenv.Dotenv;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -13,9 +14,11 @@ public class ServicioEventosAPI implements IServicioEventosAPI {
 
 	private final Retrofit retrofit;
 	private final EventosRest eventosRest;
+	private static final Dotenv dotenv = Dotenv.load();
+	private final String EVENTOS_URL = dotenv.get("EVENTOS_URL");
 
 	public ServicioEventosAPI() {
-		retrofit = new Retrofit.Builder().baseUrl("http://localhost:8082/api/")
+		retrofit = new Retrofit.Builder().baseUrl(EVENTOS_URL)
 				.addConverterFactory(GsonConverterFactory.create()).build();
 		eventosRest = retrofit.create(EventosRest.class);
 	}
@@ -50,7 +53,9 @@ public class ServicioEventosAPI implements IServicioEventosAPI {
 		try {
 			return eventosRest.obtenerNumPlazasMayor(idEspacioFisico).execute().body().intValue();
 		} catch (IOException e) {
-			throw new RetrofitException("Error al consultar el número de plazas mayor de un evento en el espacio físico con id " + idEspacioFisico);
+			throw new RetrofitException(
+					"Error al consultar el número de plazas mayor de un evento en el espacio físico con id "
+							+ idEspacioFisico);
 		}
 	}
 
