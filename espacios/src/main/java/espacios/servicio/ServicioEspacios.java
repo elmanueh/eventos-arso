@@ -108,7 +108,7 @@ public class ServicioEspacios implements IServicioEspacios {
 			if (capacidad != 0) {
 				int numPlazasMax = servicioEventosAPI.validarCapacidad(idEspacioFisico);
 				if (numPlazasMax > capacidad) {
-					throw new IllegalStateException("La capacidad del espacio físico con id " + idEspacioFisico + "no puede ser menor al número de plazas mayor de un evento.");
+					throw new IllegalStateException("La capacidad del espacio físico con id " + idEspacioFisico + " no puede ser menor al número de plazas mayor de un evento.");
 				}
 				espacioFisico.setCapacidad(capacidad);
 			}
