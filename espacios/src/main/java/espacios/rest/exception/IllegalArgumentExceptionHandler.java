@@ -9,6 +9,6 @@ public class IllegalArgumentExceptionHandler implements ExceptionMapper<IllegalA
 
 	@Override
 	public Response toResponse(IllegalArgumentException arg0) {
-		return Response.status(Response.Status.BAD_REQUEST).entity(arg0.getMessage()).build();
+		return Response.status(Response.Status.BAD_REQUEST).entity(new MessageError(Response.Status.BAD_REQUEST, arg0.getMessage())).build();
 	}
 }

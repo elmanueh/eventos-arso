@@ -11,6 +11,6 @@ public class EntidadNoEncontradaExceptionHandler implements ExceptionMapper<Enti
 
 	@Override
 	public Response toResponse(EntidadNoEncontrada arg0) {
-		return Response.status(Response.Status.NOT_FOUND).entity(arg0.getMessage()).build();
+		return Response.status(Response.Status.NOT_FOUND).entity(new MessageError(Response.Status.NOT_FOUND, arg0.getMessage())).build();
 	}
 }

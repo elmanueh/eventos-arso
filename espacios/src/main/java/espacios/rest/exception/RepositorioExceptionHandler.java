@@ -11,6 +11,6 @@ public class RepositorioExceptionHandler implements ExceptionMapper<RepositorioE
 
 	@Override
 	public Response toResponse(RepositorioException arg0) {
-		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(arg0.getMessage()).build();
+		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(new MessageError(Response.Status.INTERNAL_SERVER_ERROR, arg0.getMessage())).build();
 	}
 }

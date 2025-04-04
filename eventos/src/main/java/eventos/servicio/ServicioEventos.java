@@ -52,7 +52,7 @@ public class ServicioEventos implements IServicioEventos {
 		Optional<Evento> resultado = repositorioEvento.findById(idEvento);
 
 		if (!resultado.isPresent())
-			throw new EntidadNoEncontrada("No existe encuesta con id: " + idEvento);
+			throw new EntidadNoEncontrada("No existe evento con id: " + idEvento);
 		return resultado.get();
 	}
 
