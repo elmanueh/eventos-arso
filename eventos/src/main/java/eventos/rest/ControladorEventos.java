@@ -124,13 +124,11 @@ public class ControladorEventos {
 	}
 
 	@GetMapping("/ocupacion/{id}")
-	@PreAuthorize("permitAll")
 	public ResponseEntity<Boolean> isAlgunaOcupacion(@PathVariable UUID id) {
 		return ResponseEntity.ok(servicio.isAlgunaOcupacion(id));
 	}
 
 	@GetMapping("/espacioslibres")
-	@PreAuthorize("permitAll")
 	public List<UUID> buscarEspaciosFisicosLibres(
 			@RequestParam String fechaInicio,
 			@RequestParam String fechaFin,
@@ -141,7 +139,6 @@ public class ControladorEventos {
 	}
 
 	@GetMapping("/espacio/{id}")
-	@PreAuthorize("permitAll")
 	public ResponseEntity<Integer> obtenerNumPlazasMayor(@PathVariable UUID id) {
 		return ResponseEntity.ok(servicio.numPlazasMayor(id));
 	}

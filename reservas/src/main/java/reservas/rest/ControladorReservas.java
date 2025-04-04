@@ -84,7 +84,6 @@ public class ControladorReservas implements ReservasApi {
 	}
 
 	@GetMapping("/evento/{idEvento}/plazasReservadas")
-	@PreAuthorize("permitAll")
 	public ResponseEntity<Integer> obtenerPlazasReservadas(@PathVariable UUID idEvento) throws EntidadNoEncontrada {
 		return ResponseEntity.ok(servicio.recuperarNumPlazasReservadas(idEvento));
 	}
