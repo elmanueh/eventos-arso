@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -165,14 +164,14 @@ public class ServicioEventos implements IServicioEventos {
 
 	// GESTOR_EVENTOS
 	@Override
-	public void cancelarEvento(UUID idEvento) {
+	public void cancelarEvento(UUID idEvento) throws EntidadNoEncontrada {
 
 		if (idEvento == null)
 			throw new IllegalArgumentException("El id del evento no puede ser nulo.");
 
 		Optional<Evento> eventoOptional = repositorioEvento.findById(idEvento);
 		if (!eventoOptional.isPresent())
-			throw new EntityNotFoundException("Error al encontrar el evento con id " + idEvento + ".");
+			throw new EntidadNoEncontrada("Error al encontrar el evento con id " + idEvento + ".");
 
 		Evento evento = eventoOptional.get();
 		evento.setCancelado();
@@ -218,7 +217,7 @@ public class ServicioEventos implements IServicioEventos {
 	public int numPlazasMayor(UUID idEspacioFisico) {
 		if (idEspacioFisico == null)
 			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo.");
-		
+
 		return repositorioEvento.getMaxNumPlazasByEspacioFisico(idEspacioFisico);
 	}
 
@@ -226,7 +225,7 @@ public class ServicioEventos implements IServicioEventos {
 	public Page<EventoResumen> recuperarEventosPorGestor(String gestor, Pageable pageable) {
 		if (gestor == null)
 			throw new IllegalArgumentException("El gestor no puede ser nulo.");
-		
+
 		return repositorioEvento.findAll(pageable).map(EventoMapper::toResumen);
 	}
 

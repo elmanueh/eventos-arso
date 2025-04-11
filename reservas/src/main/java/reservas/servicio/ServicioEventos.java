@@ -22,6 +22,7 @@ public class ServicioEventos implements IServicioEventos {
 		this.repositorioEventos = repositorioEventos;
 	}
 
+	@Override
 	public void crearEvento(UUID idEvento, int capacidad, boolean cancelado) {
 		Evento evento = new Evento();
 		evento.setId(idEvento);

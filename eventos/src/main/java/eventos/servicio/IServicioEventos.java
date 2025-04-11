@@ -24,7 +24,7 @@ public interface IServicioEventos {
 	void modificarEvento(UUID idEvento, String descripcion, LocalDateTime fechaInicio, LocalDateTime fechaFin,
 			int numPlazas, UUID idEspacioFisico) throws EntidadNoEncontrada, RetrofitException;
 
-	void cancelarEvento(UUID idEvento);
+	void cancelarEvento(UUID idEvento) throws EntidadNoEncontrada;
 
 	Page<EventoResumen> eventosDelMesPaginados(int mes, int año, Pageable pageable);
 
