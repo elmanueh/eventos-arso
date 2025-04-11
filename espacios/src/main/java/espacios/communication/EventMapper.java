@@ -29,9 +29,9 @@ public class EventMapper {
 		return event;
 	}
 
-	public static EventModificarEstadoEspacio Domain2EventModificarEstadoEspacio(boolean estado) {
+	public static EventModificarEstadoEspacio Domain2EventModificarEstadoEspacio(boolean cancelado) {
 		EventModificarEstadoEspacio event = new EventModificarEstadoEspacio();
-		event.setCancelado(estado);
+		event.setCancelado(cancelado);
 
 		return event;
 	}

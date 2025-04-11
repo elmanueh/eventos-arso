@@ -35,8 +35,8 @@ public class RabbitMQProducer implements IEventProducer {
 	}
 
 	@Override
-	public void publicarEspacioEstadoModificado(UUID idEntidad, boolean estado) {
-		RabbitEvent event = EventMapper.Domain2EventModificarEstadoEspacio(estado);
+	public void publicarEspacioEstadoModificado(UUID idEntidad, boolean cancelado) {
+		RabbitEvent event = EventMapper.Domain2EventModificarEstadoEspacio(cancelado);
 		event.setIdEntidad(idEntidad);
 		event.setFechaHora(LocalDateTime.now());
 		event.setTipoEvento(RabbitMQProducer.ESPACIO_ESTADO_MODIFICADO);

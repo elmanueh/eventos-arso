@@ -101,7 +101,6 @@ public class ServicioEventos implements IServicioEventos {
 
 			UUID id = repositorioEvento.save(evento).getId();
 
-			// TODO: publicar evento
 			eventosPublisher.publicarEventoCreado(id, evento);
 
 			return id;
@@ -135,7 +134,6 @@ public class ServicioEventos implements IServicioEventos {
 		if (fechaFin != null)
 			evento.setFechaFin(fechaFin);
 		if (numPlazas != 0) {
-			// TODO: retrofit para cambiar numPlazas
 			if (evento.getOcupacion() != null && evento.getNumPlazas() > numPlazas) {
 				int numPlazasReservadas = servicioReservasAPI.validadReservas(idEvento);
 				if (numPlazas < numPlazasReservadas) {
@@ -158,7 +156,6 @@ public class ServicioEventos implements IServicioEventos {
 
 		repositorioEvento.save(evento);
 
-		// TODO: publicar evento
 		eventosPublisher.publicarEventoModificado(idEvento, evento);
 	}
 
@@ -177,7 +174,6 @@ public class ServicioEventos implements IServicioEventos {
 		evento.setCancelado();
 		repositorioEvento.save(evento);
 
-		// TODO: publicar evento
 		eventosPublisher.publicarEventoCancelado(idEvento);
 	}
 
