@@ -49,9 +49,11 @@ public class RabbitMQConsumer implements IEventConsumer {
 				case EVENTO_MODIFICADO:
 					EventModificarEvento eventModificado = objectMapper.convertValue(eventData,
 							EventModificarEvento.class);
+							
 					servicio.modificarEvento(eventModificado.getIdEntidad(),
 							eventModificado.getNumPlazas());
 					break;
+
 				case EVENTO_CANCELADO:
 					EventCancelarEvento eventCancelado = objectMapper.convertValue(eventData,
 							EventCancelarEvento.class);
