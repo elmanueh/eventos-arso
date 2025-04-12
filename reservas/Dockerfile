@@ -1,5 +1,10 @@
-FROM maven:3.9.9
+FROM maven:3.9.9 AS build
 WORKDIR /app
 COPY . .
+RUN mvn clean package -DskipTests
+
+FROM openjdk:25-jdk-slim
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8083
-ENTRYPOINT ["mvn", "spring-boot:run"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
