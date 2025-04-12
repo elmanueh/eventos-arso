@@ -20,7 +20,7 @@ public class RabbitMQConsumer implements IEventConsumer {
 
 	public static final String ESPACIO_CREADO = "espacio.creado";
 	public static final String ESPACIO_MODIFICADO = "espacio.modificado";
-	public static final String ESPACIO_CAMBIAR_ESTADO = "espacio.cambiarEstado";
+	public static final String ESPACIO_CAMBIAR_ESTADO = "espacio.estado_modificado";
 
 	private final IServicioEspacios servicio;
 	private final ObjectMapper objectMapper;

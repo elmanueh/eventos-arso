@@ -10,16 +10,19 @@ import org.springframework.stereotype.Service;
 
 import reservas.modelo.Evento;
 import reservas.repositorio.RepositorioEventos;
+import reservas.repositorio.RepositorioReservas;
 
 @Service
 @Transactional
 public class ServicioEventos implements IServicioEventos {
 
 	private final RepositorioEventos repositorioEventos;
+	private final RepositorioReservas repositorioReservas;
 
 	@Autowired
-	public ServicioEventos(RepositorioEventos repositorioEventos) {
+	public ServicioEventos(RepositorioEventos repositorioEventos, RepositorioReservas repositorioReservas) {
 		this.repositorioEventos = repositorioEventos;
+		this.repositorioReservas = repositorioReservas;
 	}
 
 	@Override
@@ -39,7 +42,8 @@ public class ServicioEventos implements IServicioEventos {
 			return;
 
 		Evento evento = eventoOpt.get();
-		evento.setPlazasDisponibles(capacidad);
+		int plazasReservadas = repositorioReservas.sumPlazasReservadasByEventoId(idEvento);
+		evento.setPlazasDisponibles(capacidad - plazasReservadas);
 		repositorioEventos.save(evento);
 	}
 

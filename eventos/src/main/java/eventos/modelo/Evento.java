@@ -139,6 +139,14 @@ public class Evento {
 		ocupacion.setEspacioFisico(espacioFisico);
 	}
 
+	public LocalDateTime getFechaInicioOcupacion() {
+		return ocupacion.getFechaInicio();
+	}
+
+	public LocalDateTime getFechaFinOcupacion() {
+		return ocupacion.getFechaFin();
+	}
+
 	@Override
 	public String toString() {
 		return "Evento [Nombre=" + nombre + ", descripcion=" + descripcion + ", categoria=" + categoria + "]\n"

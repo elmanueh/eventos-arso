@@ -88,20 +88,19 @@ public class ServicioEventos implements IServicioEventos {
 			if (espacioFisico.isCancelado())
 				throw new IllegalStateException("El espacio físico con id " + idEspacioFisico + " está cancelado.");
 
+			if (repositorioEspacio.getNumeroOcupacionesPorRangoFechas(idEspacioFisico, fechaInicio, fechaFin) > 0)
+				throw new IllegalStateException(
+						"El espacio físico con id " + idEspacioFisico + " está ocupado en la fecha.");
+
 			if (numPlazas > espacioFisico.getCapacidad())
 				throw new IllegalStateException(
 						"El número de plazas supera la capacidad del espacio físico con id " + idEspacioFisico + ".");
-
-			if (isAlgunaOcupacion(idEspacioFisico))
-				throw new IllegalStateException(
-						"El espacio físico con id " + idEspacioFisico + " tiene ocupaciones en la fecha.");
 
 			Evento evento = new Evento(nombre, descripcion, organizador, numPlazas, categoria, fechaInicio, fechaFin,
 					espacioFisico);
 
 			UUID id = repositorioEvento.save(evento).getId();
 
-			// TODO: publicar evento
 			eventosPublisher.publicarEventoCreado(id, evento);
 
 			return id;
@@ -135,7 +134,6 @@ public class ServicioEventos implements IServicioEventos {
 		if (fechaFin != null)
 			evento.setFechaFin(fechaFin);
 		if (numPlazas != 0) {
-			// TODO: retrofit para cambiar numPlazas
 			if (evento.getOcupacion() != null && evento.getNumPlazas() > numPlazas) {
 				int numPlazasReservadas = servicioReservasAPI.validadReservas(idEvento);
 				if (numPlazas < numPlazasReservadas) {
@@ -152,13 +150,24 @@ public class ServicioEventos implements IServicioEventos {
 			if (!espacioFisicoOptional.isPresent())
 				throw new EntidadNoEncontrada("Error al encontrar el espacio físico con id " + idEspacioFisico + ".");
 
-			EspacioFisico espacio = espacioFisicoOptional.get();
-			evento.setEspacioFisico(espacio);
+			EspacioFisico espacioFisico = espacioFisicoOptional.get();
+
+			if (espacioFisico.isCancelado())
+				throw new IllegalStateException("El espacio físico con id " + idEspacioFisico + " está cancelado.");
+
+			if (repositorioEspacio.getNumeroOcupacionesPorRangoFechas(idEspacioFisico, evento.getFechaInicioOcupacion(), evento.getFechaFinOcupacion()) > 0)
+				throw new IllegalStateException(
+						"El espacio físico con id " + idEspacioFisico + " está ocupado en la fecha.");
+
+			if (numPlazas > espacioFisico.getCapacidad())
+				throw new IllegalStateException(
+						"El número de plazas supera la capacidad del espacio físico con id " + idEspacioFisico + ".");
+
+			evento.setEspacioFisico(espacioFisico);
 		}
 
 		repositorioEvento.save(evento);
 
-		// TODO: publicar evento
 		eventosPublisher.publicarEventoModificado(idEvento, evento);
 	}
 
@@ -177,7 +186,6 @@ public class ServicioEventos implements IServicioEventos {
 		evento.setCancelado();
 		repositorioEvento.save(evento);
 
-		// TODO: publicar evento
 		eventosPublisher.publicarEventoCancelado(idEvento);
 	}
 

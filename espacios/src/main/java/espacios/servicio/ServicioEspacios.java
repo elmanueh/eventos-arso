@@ -136,7 +136,7 @@ public class ServicioEspacios implements IServicioEspacios {
 				EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
 				espacioFisico.cerrar();
 				repositorioEspacioFisico.update(espacioFisico);
-				eventProducer.publicarEspacioEstadoModificado(idEspacioFisico, false);
+				eventProducer.publicarEspacioEstadoModificado(idEspacioFisico, true);
 			} catch (RepositorioException e) {
 				throw new RepositorioException(
 						"Error al dar de baja el espacio físico con id " + idEspacioFisico + ".");
@@ -156,7 +156,7 @@ public class ServicioEspacios implements IServicioEspacios {
 			EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
 			espacioFisico.activar();
 			repositorioEspacioFisico.update(espacioFisico);
-			eventProducer.publicarEspacioEstadoModificado(idEspacioFisico, true);
+			eventProducer.publicarEspacioEstadoModificado(idEspacioFisico, false);
 		} catch (RepositorioException e) {
 			throw new RepositorioException("Error al activar el espacio físico con id " + idEspacioFisico + ".");
 		} catch (EntidadNoEncontrada e) {
