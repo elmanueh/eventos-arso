@@ -14,5 +14,7 @@ import eventos.modelo.EspacioFisico;
 public interface RepositorioEspacios extends PagingAndSortingRepository<EspacioFisico, UUID> {
 	List<UUID> getEspaciosFisicoLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin, int numPlazas);
 
+	int getNumeroOcupacionesPorRangoFechas(UUID idEspacioFisico, LocalDateTime fechaInicio, LocalDateTime fechaFin);
+
 	int getNumeroOcupaciones(UUID idEspacioFisico);
 }

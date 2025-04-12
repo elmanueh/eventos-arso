@@ -16,6 +16,9 @@ public interface RepositorioEspaciosJPA extends RepositorioEspacios, JpaReposito
 			+ "o.fechaFin <= :fechaFin AND o.fechaInicio >= :fechaInicio)")
 	List<UUID> getEspaciosFisicoLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin, int capacidad);
 
+	@Query("SELECT COUNT(o.espacioFisico) FROM Ocupacion o WHERE o.espacioFisico.id = :idEspacioFisico AND o.fechaFin <= :fechaFin AND o.fechaInicio >= :fechaInicio")
+	int getNumeroOcupacionesPorRangoFechas(UUID idEspacioFisico, LocalDateTime fechaInicio, LocalDateTime fechaFin);
+
 	@Query("SELECT COUNT(o.espacioFisico) FROM Ocupacion o WHERE o.espacioFisico.id = :idEspacioFisico")
 	int getNumeroOcupaciones(UUID idEspacioFisico);
 }
