@@ -12,8 +12,8 @@ import eventos.modelo.Evento;
 public interface RepositorioEventosJPA extends RepositorioEventos, JpaRepository<Evento, UUID> {
 
 	@Query("SELECT e FROM Evento e "
-			+ "WHERE :mes BETWEEN EXTRACT(MONTH FROM e.ocupacion.fechaInicio) AND EXTRACT(MONTH FROM e.ocupacion.fechaFin) "
-			+ "AND :año BETWEEN EXTRACT(YEAR FROM e.ocupacion.fechaInicio) AND EXTRACT(YEAR FROM e.ocupacion.fechaFin)")
+			+ "WHERE (:mes = 0 OR :mes BETWEEN EXTRACT(MONTH FROM e.ocupacion.fechaInicio) AND EXTRACT(MONTH FROM e.ocupacion.fechaFin)) "
+			+ "AND (:año BETWEEN EXTRACT(YEAR FROM e.ocupacion.fechaInicio) AND EXTRACT(YEAR FROM e.ocupacion.fechaFin))")
 	Page<Evento> getEventosDelMesPaginados(int mes, int año, Pageable pageable);
 	
 	@Query("SELECT COALESCE(MAX(e.numPlazas), 0) FROM Evento e "

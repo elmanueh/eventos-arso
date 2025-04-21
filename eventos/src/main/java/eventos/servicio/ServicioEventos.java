@@ -192,8 +192,17 @@ public class ServicioEventos implements IServicioEventos {
 	// USUARIO
 	@Override
 	public Page<EventoResumen> eventosDelMesPaginados(int mes, int año, Pageable pageable) {
-		if (mes < 1 || mes > 12)
-			throw new IllegalArgumentException("El mes debe estar comprendido entre 1 y 12.");
+		if (mes == 0 && año == 0) {
+			return repositorioEvento.findAll(pageable).map(EventoMapper::toResumen);
+		}
+
+		if (mes != 0) {
+			if (mes < 1 || mes > 12)
+				throw new IllegalArgumentException("El mes debe estar comprendido entre 1 y 12.");
+			if (año == 0)
+				throw new IllegalArgumentException("Si se especifica el mes, el año es obligatorio.");
+		}
+
 		if (año < 0)
 			throw new IllegalArgumentException("El año no puede ser negativo.");
 

@@ -116,7 +116,8 @@ public class ControladorEventos {
 
 	@GetMapping()
 	@PreAuthorize("hasAnyAuthority('GESTOR_EVENTOS', 'USUARIO')")
-	public PagedModel<EntityModel<EventoResumen>> getlistadoPaginado(@RequestParam int mes, @RequestParam int año,
+	public PagedModel<EntityModel<EventoResumen>> getlistadoPaginado(@RequestParam(defaultValue = "0") int mes,
+			@RequestParam(defaultValue = "0") int año,
 			Pageable pageable) throws EntidadNoEncontrada {
 
 		Page<EventoResumen> resultado = servicio.eventosDelMesPaginados(mes, año, pageable);
