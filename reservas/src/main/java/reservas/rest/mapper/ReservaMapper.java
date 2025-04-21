@@ -11,9 +11,11 @@ public class ReservaMapper {
 
 	public static ReservaResponseDTO toDTO(Reserva reserva) {
 		ReservaResponseDTO dto = new ReservaResponseDTO();
+		dto.setId(reserva.getId());
 		dto.setIdUsuario(reserva.getIdUsuario());
 		dto.setPlazasReservadas(reserva.getPlazasReservadas());
 		dto.setCancelada(reserva.isCancelada());
+		dto.setEvento(reserva.getEvento().getId());
 
 		return dto;
 	}
