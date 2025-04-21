@@ -14,7 +14,7 @@ public class EspacioFisicoResponseDTO {
     private double latitud;
     private String descripcion;
     private String estado;
-    private LinkedList<String> puntosInteres;
+    private LinkedList<PuntoInteresDTO> puntosInteres;
 
     public EspacioFisicoResponseDTO() {
         puntosInteres = new LinkedList<>();
@@ -92,11 +92,11 @@ public class EspacioFisicoResponseDTO {
         this.estado = estado;
     }
 
-    public List<String> getPuntosInteres() {
+    public List<PuntoInteresDTO> getPuntosInteres() {
         return puntosInteres;
     }
 
-    public void setPuntosInteres(List<String> puntosInteres) {
+    public void setPuntosInteres(List<PuntoInteresDTO> puntosInteres) {
         this.puntosInteres = new LinkedList<>(puntosInteres);
     }
 

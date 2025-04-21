@@ -44,7 +44,8 @@ public class EspacioFisicoMapper {
         dto.setLatitud(espacio.getLatitud());
         dto.setDescripcion(espacio.getDescripcion());
         dto.setEstado(espacio.getEstado().toString());
-        dto.setPuntosInteres(espacio.getPuntosInteres().stream().map(p -> p.getNombre()).collect(Collectors.toList()));
+        dto.setPuntosInteres(
+                espacio.getPuntosInteres().stream().map(PuntoInteresMapper::toDTO).collect(Collectors.toList()));
         return dto;
     }
 

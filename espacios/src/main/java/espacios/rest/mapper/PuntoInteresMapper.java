@@ -16,4 +16,13 @@ public class PuntoInteresMapper {
         punto.setUrl(puntoDTO.getUrl());
         return punto;
     }
+
+    public static PuntoInteresDTO toDTO(PuntoInteres punto) {
+        PuntoInteresDTO dto = new PuntoInteresDTO();
+        dto.setNombre(punto.getNombre());
+        dto.setDescripcion(punto.getDescripcion());
+        dto.setDistancia(punto.getDistancia());
+        dto.setUrl(punto.getUrl());
+        return dto;
+    }
 }
