@@ -42,7 +42,6 @@ public class ServicioEventos implements IServicioEventos {
 		this.servicioReservasAPI = servicioReservasAPI;
 	}
 
-	// USUARIO
 	@Override
 	public Evento recuperarEvento(UUID idEvento) throws EntidadNoEncontrada {
 		if (idEvento == null)
@@ -55,7 +54,6 @@ public class ServicioEventos implements IServicioEventos {
 		return resultado.get();
 	}
 
-	// GESTOR_EVENTOS
 	@Override
 	public UUID altaEvento(String nombre, String descripcion, String organizador, EventoCategoria categoria,
 			LocalDateTime fechaInicio, LocalDateTime fechaFin, int numPlazas, UUID idEspacioFisico)
@@ -110,7 +108,6 @@ public class ServicioEventos implements IServicioEventos {
 		}
 	}
 
-	// GESTOR_EVENTOS
 	@Override
 	public void modificarEvento(UUID idEvento, String descripcion, LocalDateTime fechaInicio, LocalDateTime fechaFin,
 			int numPlazas, UUID idEspacioFisico) throws EntidadNoEncontrada, RetrofitException {
@@ -155,7 +152,8 @@ public class ServicioEventos implements IServicioEventos {
 			if (espacioFisico.isCancelado())
 				throw new IllegalStateException("El espacio físico con id " + idEspacioFisico + " está cancelado.");
 
-			if (repositorioEspacio.getNumeroOcupacionesPorRangoFechas(idEspacioFisico, evento.getFechaInicioOcupacion(), evento.getFechaFinOcupacion()) > 0)
+			if (repositorioEspacio.getNumeroOcupacionesPorRangoFechas(idEspacioFisico, evento.getFechaInicioOcupacion(),
+					evento.getFechaFinOcupacion()) > 0)
 				throw new IllegalStateException(
 						"El espacio físico con id " + idEspacioFisico + " está ocupado en la fecha.");
 
@@ -171,7 +169,6 @@ public class ServicioEventos implements IServicioEventos {
 		eventosPublisher.publicarEventoModificado(idEvento, evento);
 	}
 
-	// GESTOR_EVENTOS
 	@Override
 	public void cancelarEvento(UUID idEvento) throws EntidadNoEncontrada {
 
@@ -189,7 +186,6 @@ public class ServicioEventos implements IServicioEventos {
 		eventosPublisher.publicarEventoCancelado(idEvento);
 	}
 
-	// USUARIO
 	@Override
 	public Page<EventoResumen> eventosDelMesPaginados(int mes, int año, Pageable pageable) {
 		if (mes == 0 && año == 0) {
