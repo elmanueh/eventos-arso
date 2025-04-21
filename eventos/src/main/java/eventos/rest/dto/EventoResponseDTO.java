@@ -1,16 +1,28 @@
 package eventos.rest.dto;
 
+import java.util.UUID;
+
 public class EventoResponseDTO {
+	private UUID idEvento;
 	private String nombre;
 	private String descripcion;
 	private String organizador;
 	private int numPlazas;
 	private boolean cancelado;
 	private String categoria;
-
-	private boolean ocupado;
+	private String fechaInicio;
+	private String fechaFin;
+	private UUID espacioFisico;
 
 	public EventoResponseDTO() {
+	}
+
+	public UUID getIdEvento() {
+		return idEvento;
+	}
+
+	public void setIdEvento(UUID idEvento) {
+		this.idEvento = idEvento;
 	}
 
 	public String getNombre() {
@@ -61,12 +73,28 @@ public class EventoResponseDTO {
 		this.categoria = categoria;
 	}
 
-	public boolean isOcupado() {
-		return ocupado;
+	public String getFechaInicio() {
+		return fechaInicio;
 	}
 
-	public void setOcupado(boolean ocupado) {
-		this.ocupado = ocupado;
+	public void setFechaInicio(String fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public String getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaFin(String fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+
+	public UUID getEspacioFisico() {
+		return espacioFisico;
+	}
+
+	public void setEspacioFisico(UUID espacioFisico) {
+		this.espacioFisico = espacioFisico;
 	}
 
 }

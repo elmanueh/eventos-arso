@@ -11,13 +11,17 @@ public class EventoMapper {
 
 	public static EventoResponseDTO toDTO(Evento evento) {
 		EventoResponseDTO dto = new EventoResponseDTO();
+		dto.setIdEvento(evento.getId());
 		dto.setNombre(evento.getNombre());
 		dto.setDescripcion(evento.getDescripcion());
 		dto.setOrganizador(evento.getOrganizador());
 		dto.setNumPlazas(evento.getNumPlazas());
 		dto.setCancelado(evento.isCancelado());
 		dto.setCategoria(evento.getCategoria().name());
-		dto.setOcupado(evento.getOcupacion() != null && evento.getOcupacion().isActiva());
+
+		dto.setEspacioFisico(evento.isCancelado() ? null : evento.getOcupacion().getEspacioFisico().getId());
+		dto.setFechaInicio(evento.isCancelado() ? null : evento.getOcupacion().getFechaInicio().toString());
+		dto.setFechaFin(evento.isCancelado() ? null : evento.getOcupacion().getFechaFin().toString());
 
 		return dto;
 	}
