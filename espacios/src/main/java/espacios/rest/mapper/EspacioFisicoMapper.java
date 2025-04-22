@@ -53,7 +53,8 @@ public class EspacioFisicoMapper {
         ResumenEspacioFisicoResponseDTO dto = new ResumenEspacioFisicoResponseDTO();
         dto.setId(espacio.getId());
         dto.setNombre(espacio.getNombre());
-        dto.setPropietario(espacio.getPropietario());
+        dto.setDescripcion(espacio.getDescripcion());
+        dto.setCapacidad(espacio.getCapacidad());
         dto.setEstado(espacio.getEstado().toString());
         return dto;
     }

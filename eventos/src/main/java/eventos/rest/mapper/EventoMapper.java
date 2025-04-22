@@ -31,6 +31,8 @@ public class EventoMapper {
 		resumen.setId(evento.getId());
 		resumen.setNombre(evento.getNombre());
 		resumen.setDescripcion(evento.getDescripcion());
+		resumen.setCancelado(evento.isCancelado());
+		resumen.setNumPlazas(evento.getNumPlazas());
 
 		return resumen;
 	}

@@ -7,6 +7,8 @@ public class EventoResumen {
 	private UUID id;
 	private String nombre;
 	private String descripcion;
+	private boolean cancelado;
+	private int numPlazas;
 
 	public EventoResumen() {
 	}
@@ -33,6 +35,22 @@ public class EventoResumen {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public boolean isCancelado() {
+		return cancelado;
+	}
+
+	public void setCancelado(boolean cancelado) {
+		this.cancelado = cancelado;
+	}
+
+	public int getNumPlazas() {
+		return numPlazas;
+	}
+
+	public void setNumPlazas(int numPlazas) {
+		this.numPlazas = numPlazas;
 	}
 
 }
