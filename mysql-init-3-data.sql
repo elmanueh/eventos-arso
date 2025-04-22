@@ -129,19 +129,19 @@ INSERT INTO espacioFisico (id, cancelado, capacidad) VALUES
 ('4801040f-8df2-4a09-acb9-cc59bff0887c', false, 40),
 ('8efc625d-9507-4405-97a3-ee79495522d7', false, 100),
 
-('1e22a0c0-1a6e-4e0a-9c84-d6c0fcae0e11', FALSE, 50),
-('3g44c2e2-3c8g-5g2c-9g06-f8e2hecg2g33', FALSE, 15),
-('5i66e4g4-5e0i-7i4e-1i28-h0g4jgeg4i55', FALSE, 25),
-('7k88g6i6-7g2k-9k6g-3k40-j2i6ligi6k77', FALSE, 60),
+('1e22a0c0-1a6e-4e0a-9c84-d6c0fcae0e11', false, 50),
+('3g44c2e2-3c8g-5g2c-9g06-f8e2hecg2g33', false, 15),
+('5i66e4g4-5e0i-7i4e-1i28-h0g4jgeg4i55', false, 25),
+('7k88g6i6-7g2k-9k6g-3k40-j2i6ligi6k77', false, 60),
 
-('2f33b1d1-2b7f-4f1b-8f95-e7d1gdbf1f22', TRUE, 30),
-('4h55d3f3-4d9h-6h3d-0h17-g9f3ifdh3h44', TRUE, 100),
-('6j77f5h5-6f1j-8j5f-2j39-i1h5khfh5j66', TRUE, 200),
+('2f33b1d1-2b7f-4f1b-8f95-e7d1gdbf1f22', true, 30),
+('4h55d3f3-4d9h-6h3d-0h17-g9f3ifdh3h44', true, 100),
+('6j77f5h5-6f1j-8j5f-2j39-i1h5khfh5j66', true, 200),
 
-('8l99h7j7-8h3l-0h7h-4h51-k3j7mjhj7l88', FALSE, 40),
-('9m00i8k8-9i4m-1i8i-5i62-l4k8nkik8m99', FALSE, 16),
-('a1n11j9j-a1j5-2j9j-6j73-m5l9oljl9n00', FALSE, 60),
-('b2o22k0k-b2k6-3k0k-7k84-n6m0pmkm0o11', FALSE, 50);
+('8l99h7j7-8h3l-0h7h-4h51-k3j7mjhj7l88', false, 40),
+('9m00i8k8-9i4m-1i8i-5i62-l4k8nkik8m99', false, 16),
+('a1n11j9j-a1j5-2j9j-6j73-m5l9oljl9n00', false, 60),
+('b2o22k0k-b2k6-3k0k-7k84-n6m0pmkm0o11', false, 50);
 
 INSERT INTO ocupacion (id, fechaInicio, fechaFin, idEspacioFisico) VALUES
 ('d01e354f-07e4-4177-a517-e5f438df118a', '2025-06-01 09:00:00', '2025-06-01 12:00:00', 'f9b9b9a3-e45a-4da4-9b14-6ab01f311f9e'),
@@ -204,12 +204,12 @@ INSERT INTO evento (id, nombre, descripcion, organizador, plazas, cancelado, cat
 ('edabf476-c6a0-46fd-b5e6-322568fd1265', 'Gala de Beneficencia', 'Evento benéfico para recaudar fondos para organizaciones sin fines de lucro.', 'Charity Events', 40, true, 'OTROS', null),
 ('337d2145-e8d9-4012-83f2-50128907294d', 'Expo de Automóviles', 'Exposición de los últimos modelos de automóviles.', 'Auto Expo', 40, true, 'OTROS', null),
 
-('a1e11111-aaaa-1aaa-1aaa-bbbbbbbb0001', 'Conferencia sobre IA', 'Charla sobre avances en inteligencia artificial', 'admin', 100, FALSE, ACADEMICOS, 'occ1-0000-aaaa-bbbb-000000000001'),
-('c3e33333-cccc-3ccc-3ccc-dddddddd0003', 'Festival de Cine Independiente', 'Proyección de cortos y largometrajes', 'admin', 80, FALSE, ENTRETENIMIENTO, 'occ3-0000-cccc-dddd-000000000003'),
-('e5e55555-eeee-5eee-5eee-ffffeeee0005', 'Charla de Desarrollo Web', 'Introducción a tecnologías modernas de desarrollo web', 'admin', 40, FALSE, ACADEMICOS, 'occ5-0000-eeee-ffff-000000000005'),
-('g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007', 'Feria Cultural Internacional', 'Stands con comida, arte y costumbres del mundo', 'admin', 90, FALSE, CULTURALES, 'occ7-0000-gggg-hhhh-000000000007'),
+('a1e11111-aaaa-1aaa-1aaa-bbbbbbbb0001', 'Conferencia sobre IA', 'Charla sobre avances en inteligencia artificial', 'admin', 100, false, 'ACADEMICOS', 'occ1-0000-aaaa-bbbb-000000000001'),
+('c3e33333-cccc-3ccc-3ccc-dddddddd0003', 'Festival de Cine Independiente', 'Proyección de cortos y largometrajes', 'admin', 80, false, 'ENTRETENIMIENTO', 'occ3-0000-cccc-dddd-000000000003'),
+('e5e55555-eeee-5eee-5eee-ffffeeee0005', 'Charla de Desarrollo Web', 'Introducción a tecnologías modernas de desarrollo web', 'admin', 40, false,'ACADEMICO', 'occ5-0000-eeee-ffff-000000000005'),
+('g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007', 'Feria Cultural Internacional', 'Stands con comida, arte y costumbres del mundo', 'admin', 90, false, 'CULTURALES', 'occ7-0000-gggg-hhhh-000000000007'),
 
-('h8e88888-hhhh-1hhh-5hhh-iiiiiiii0008', 'Taller de Ilustración Digital', 'Aprende a crear ilustraciones en tablet', 'admin', 30, TRUE, CULTURALES, NULL),
-('i9e99999-iiii-2iii-6iii-jjjjjjjj0009', 'Campeonato Relámpago de Ajedrez', 'Competencia rápida en formato eliminatorio', 'admin', 16, TRUE, DEPORTES, NULL),
-('j0e00000-jjjj-3jjj-7jjj-kkkkkkkk0010', 'Encuentro de Startups', 'Red de networking para emprendedores', 'admin', 60, TRUE, ACADEMICOS, NULL),
-('k1e11112-kkkk-4kkk-8kkk-llllllll0011', 'Maratón de Series', 'Jornada de binge-watching colaborativo', 'admin', 50, TRUE, ENTRETENIMIENTO, NULL);
+('h8e88888-hhhh-1hhh-5hhh-iiiiiiii0008', 'Taller de Ilustración Digital', 'Aprende a crear ilustraciones en tablet', 'admin', 30, true, 'CULTURALES', null),
+('i9e99999-iiii-2iii-6iii-jjjjjjjj0009', 'Campeonato Relámpago de Ajedrez', 'Competencia rápida en formato eliminatorio', 'admin', 16, true, 'DEPORTES', null),
+('j0e00000-jjjj-3jjj-7jjj-kkkkkkkk0010', 'Encuentro de Startups', 'Red de networking para emprendedores', 'admin', 60, true, 'ACADEMICOS', null),
+('k1e11112-kkkk-4kkk-8kkk-llllllll0011', 'Maratón de Series', 'Jornada de binge-watching colaborativo', 'admin', 50, true, 'ENTRETENIMIENTO', null);
