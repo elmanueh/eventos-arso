@@ -39,7 +39,7 @@ INSERT INTO espacioFisico (id, nombre, propietario, capacidad, direccion, longit
 ('1e22a0c0-1a6e-4e0a-9c84-d6c0fcae0e11', 'Sala Multiusos A', 'admin', 50, 'Calle Sol 123, Madrid', -3.7038, 40.4168, 'Espacio amplio para talleres o charlas.', 'ACTIVO'),
 ('3g44c2e2-3c8g-5g2c-9g06-f8e2hecg2g33', 'Sala de reuniones norte', 'admin', 15, 'Calle Norte 77, Sevilla', -5.9845, 37.3891, 'Ideal para reuniones pequeñas o tutorías.', 'ACTIVO'),
 ('5i66e4g4-5e0i-7i4e-1i28-h0g4jgeg4i55', 'Sala de Informática', 'admin', 25, 'Calle Tecnología 5, Valencia', -0.3763, 39.4699, 'Sala con ordenadores y acceso a internet.', 'ACTIVO'),
-('7k88g6i6-7g2k-9k6g-3k40-j2i6ligi6k77', 'Sala de Exposiciones', 'admin', 60, 'Calle Museo 14, Málaga', -4.4214, 36.7213, 'Espacio para muestras, exposiciones o ferias.', 'ACTIVO');
+('7k88g6i6-7g2k-9k6g-3k40-j2i6ligi6k77', 'Sala de Exposiciones', 'admin', 60, 'Calle Museo 14, Málaga', -4.4214, 36.7213, 'Espacio para muestras, exposiciones o ferias.', 'ACTIVO'),
 
 ('6j77f5h5-6f1j-8j5f-2j39-i1h5khfh5j66', 'Auditorio Principal', 'admin', 200, 'Av. de las Artes 9, Zaragoza', -0.8877, 41.6488, 'Auditorio equipado con sonido y proyección.', 'CERRADO_TEMPORALMENTE'),
 ('4h55d3f3-4d9h-6h3d-0h17-g9f3ifdh3h44', 'Patio Central', 'admin', 100, 'Plaza Mayor 1, Salamanca', -5.6639, 40.9688, 'Espacio abierto para actividades recreativas.', 'CERRADO_TEMPORALMENTE'),
@@ -132,7 +132,7 @@ INSERT INTO espacioFisico (id, cancelado, capacidad) VALUES
 ('1e22a0c0-1a6e-4e0a-9c84-d6c0fcae0e11', FALSE, 50),
 ('3g44c2e2-3c8g-5g2c-9g06-f8e2hecg2g33', FALSE, 15),
 ('5i66e4g4-5e0i-7i4e-1i28-h0g4jgeg4i55', FALSE, 25),
-('7k88g6i6-7g2k-9k6g-3k40-j2i6ligi6k77', FALSE, 60);
+('7k88g6i6-7g2k-9k6g-3k40-j2i6ligi6k77', FALSE, 60),
 
 ('2f33b1d1-2b7f-4f1b-8f95-e7d1gdbf1f22', TRUE, 30),
 ('4h55d3f3-4d9h-6h3d-0h17-g9f3ifdh3h44', TRUE, 100),
