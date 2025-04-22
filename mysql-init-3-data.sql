@@ -34,7 +34,7 @@ INSERT INTO espacioFisico (id, nombre, propietario, capacidad, direccion, longit
 ('8465a32f-0a7c-49c6-918e-911e6010d04b', 'Parque Científico de Madrid', 'Parque Científico de Madrid', 80, 'Calle del Cardenal Herrera Oria 20, Madrid', -3.7259, 40.5146, 'Centro de investigación y desarrollo con múltiples opciones para eventos', 'ACTIVO'),
 ('ffed9986-2958-4348-b3ab-7360598a060a', 'BizBarcelona', 'BizBarcelona', 90, 'Carrer de Pau Claris 132, Barcelona', 2.1673, 41.3925, 'Espacio para emprendedores, startups y eventos de innovación', 'ACTIVO'),
 ('4801040f-8df2-4a09-acb9-cc59bff0887c', 'Espacio de Networking Valencia', 'Networking Valencia', 40, 'Carrer de València 10, Valencia', -0.3803, 39.4749, 'Espacio para eventos de networking y formación profesional', 'ACTIVO'),
-('8efc625d-9507-4405-97a3-ee79495522d7', 'Centro de Convenciones Zaragoza', 'Centro de Convenciones Zaragoza', 100, 'Carrer de Magisterio 34, Zaragoza', -0.8833, 41.6524, 'Gran centro de convenciones para eventos empresariales en Zaragoza', 'ACTIVO');
+('8efc625d-9507-4405-97a3-ee79495522d7', 'Centro de Convenciones Zaragoza', 'Centro de Convenciones Zaragoza', 100, 'Carrer de Magisterio 34, Zaragoza', -0.8833, 41.6524, 'Gran centro de convenciones para eventos empresariales en Zaragoza', 'ACTIVO'),
 
 ('1e22a0c0-1a6e-4e0a-9c84-d6c0fcae0e11', 'Sala Multiusos A', 'admin', 50, 'Calle Sol 123, Madrid', -3.7038, 40.4168, 'Espacio amplio para talleres o charlas.', 'ACTIVO'),
 ('3g44c2e2-3c8g-5g2c-9g06-f8e2hecg2g33', 'Sala de reuniones norte', 'admin', 15, 'Calle Norte 77, Sevilla', -5.9845, 37.3891, 'Ideal para reuniones pequeñas o tutorías.', 'ACTIVO'),
@@ -127,7 +127,7 @@ INSERT INTO espacioFisico (id, cancelado, capacidad) VALUES
 ('8465a32f-0a7c-49c6-918e-911e6010d04b', false, 80),
 ('ffed9986-2958-4348-b3ab-7360598a060a', false, 90),
 ('4801040f-8df2-4a09-acb9-cc59bff0887c', false, 40),
-('8efc625d-9507-4405-97a3-ee79495522d7', false, 100);
+('8efc625d-9507-4405-97a3-ee79495522d7', false, 100),
 
 ('1e22a0c0-1a6e-4e0a-9c84-d6c0fcae0e11', FALSE, 50),
 ('3g44c2e2-3c8g-5g2c-9g06-f8e2hecg2g33', FALSE, 15),
@@ -166,7 +166,7 @@ INSERT INTO ocupacion (id, fechaInicio, fechaFin, idEspacioFisico) VALUES
 ('3abed347-22f3-4b8a-9287-b69402e9dfb7', '2025-07-03 14:00:00', '2025-07-03 17:00:00', '087321ed-b8c5-4eac-95ff-68f302946183'),
 ('a2b39e5e-9715-4cf0-a7a3-4c5152b9f1f9', '2025-07-04 09:00:00', '2025-07-04 12:00:00', 'fd244de4-7822-43f6-a96c-0609641d4f9f'),
 ('eb28138f-d7d1-4ea9-a38f-bd4e68f72b3f', '2025-07-04 11:00:00', '2025-07-04 14:00:00', '0e7d1fa6-de9e-4b99-9b6a-69a556ee36fc'),
-('b10cd078-47cc-44a9-b672-e8392ffb6982', '2025-08-03 14:00:00', '2025-08-03 18:00:00', '20936e74-2a30-4ddd-a583-9fc2c8d0aaf2');
+('b10cd078-47cc-44a9-b672-e8392ffb6982', '2025-08-03 14:00:00', '2025-08-03 18:00:00', '20936e74-2a30-4ddd-a583-9fc2c8d0aaf2'),
 
 ('occ1-0000-aaaa-bbbb-000000000001', '2025-08-01 10:00:00', '2025-08-01 14:00:00', '1e22a0c0-1a6e-4e0a-9c84-d6c0fcae0e11'),
 ('occ3-0000-cccc-dddd-000000000003', '2025-08-05 13:00:00', '2025-08-05 16:00:00', '3g44c2e2-3c8g-5g2c-9g06-f8e2hecg2g33'),
@@ -202,12 +202,12 @@ INSERT INTO evento (id, nombre, descripcion, organizador, plazas, cancelado, cat
 ('462feb5e-d0a2-459a-ae9e-b72289ed774f', 'Torneo de Videojuegos', 'Competencia de videojuegos en diversos géneros.', 'Gamers League', 50, true, 'ENTRETENIMIENTO', null),
 ('e2cdd4ac-d6f8-4e74-9b79-c5f7133027a3', 'Festival de Música Electrónica', 'Festival de música electrónica con DJ internacionales.', 'Electronic Beats', 90, true, 'ENTRETENIMIENTO', null),
 ('edabf476-c6a0-46fd-b5e6-322568fd1265', 'Gala de Beneficencia', 'Evento benéfico para recaudar fondos para organizaciones sin fines de lucro.', 'Charity Events', 40, true, 'OTROS', null),
-('337d2145-e8d9-4012-83f2-50128907294d', 'Expo de Automóviles', 'Exposición de los últimos modelos de automóviles.', 'Auto Expo', 40, true, 'OTROS', null);
+('337d2145-e8d9-4012-83f2-50128907294d', 'Expo de Automóviles', 'Exposición de los últimos modelos de automóviles.', 'Auto Expo', 40, true, 'OTROS', null),
 
 ('a1e11111-aaaa-1aaa-1aaa-bbbbbbbb0001', 'Conferencia sobre IA', 'Charla sobre avances en inteligencia artificial', 'admin', 100, FALSE, ACADEMICOS, 'occ1-0000-aaaa-bbbb-000000000001'),
 ('c3e33333-cccc-3ccc-3ccc-dddddddd0003', 'Festival de Cine Independiente', 'Proyección de cortos y largometrajes', 'admin', 80, FALSE, ENTRETENIMIENTO, 'occ3-0000-cccc-dddd-000000000003'),
 ('e5e55555-eeee-5eee-5eee-ffffeeee0005', 'Charla de Desarrollo Web', 'Introducción a tecnologías modernas de desarrollo web', 'admin', 40, FALSE, ACADEMICOS, 'occ5-0000-eeee-ffff-000000000005'),
-('g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007', 'Feria Cultural Internacional', 'Stands con comida, arte y costumbres del mundo', 'admin', 90, FALSE, CULTURALES, 'occ7-0000-gggg-hhhh-000000000007');
+('g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007', 'Feria Cultural Internacional', 'Stands con comida, arte y costumbres del mundo', 'admin', 90, FALSE, CULTURALES, 'occ7-0000-gggg-hhhh-000000000007'),
 
 ('h8e88888-hhhh-1hhh-5hhh-iiiiiiii0008', 'Taller de Ilustración Digital', 'Aprende a crear ilustraciones en tablet', 'admin', 30, TRUE, CULTURALES, NULL),
 ('i9e99999-iiii-2iii-6iii-jjjjjjjj0009', 'Campeonato Relámpago de Ajedrez', 'Competencia rápida en formato eliminatorio', 'admin', 16, TRUE, DEPORTES, NULL),
