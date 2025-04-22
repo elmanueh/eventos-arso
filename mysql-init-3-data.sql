@@ -37,18 +37,18 @@ INSERT INTO espacioFisico (id, nombre, propietario, capacidad, direccion, longit
 ('8efc625d-9507-4405-97a3-ee79495522d7', 'Centro de Convenciones Zaragoza', 'Centro de Convenciones Zaragoza', 100, 'Carrer de Magisterio 34, Zaragoza', -0.8833, 41.6524, 'Gran centro de convenciones para eventos empresariales en Zaragoza', 'ACTIVO'),
 
 ('1e22a0c0-1a6e-4e0a-9c84-d6c0fcae0e11', 'Sala Multiusos A', 'admin', 50, 'Calle Sol 123, Madrid', -3.7038, 40.4168, 'Espacio amplio para talleres o charlas.', 'ACTIVO'),
-('3g44c2e2-3c8g-5g2c-9g06-f8e2hecg2g33', 'Sala de reuniones norte', 'admin', 15, 'Calle Norte 77, Sevilla', -5.9845, 37.3891, 'Ideal para reuniones pequeñas o tutorías.', 'ACTIVO'),
-('5i66e4g4-5e0i-7i4e-1i28-h0g4jgeg4i55', 'Sala de Informática', 'admin', 25, 'Calle Tecnología 5, Valencia', -0.3763, 39.4699, 'Sala con ordenadores y acceso a internet.', 'ACTIVO'),
-('7k88g6i6-7g2k-9k6g-3k40-j2i6ligi6k77', 'Sala de Exposiciones', 'admin', 60, 'Calle Museo 14, Málaga', -4.4214, 36.7213, 'Espacio para muestras, exposiciones o ferias.', 'ACTIVO'),
+('35d0fb15-01ef-4081-b0ba-16ae83aba7a4', 'Sala de reuniones norte', 'admin', 15, 'Calle Norte 77, Sevilla', -5.9845, 37.3891, 'Ideal para reuniones pequeñas o tutorías.', 'ACTIVO'),
+('47ce5fbf-38b6-4718-9b0e-edb3e80f5d71', 'Sala de Informática', 'admin', 25, 'Calle Tecnología 5, Valencia', -0.3763, 39.4699, 'Sala con ordenadores y acceso a internet.', 'ACTIVO'),
+('ee863eff-a57d-4e20-966a-bebee610bab7', 'Sala de Exposiciones', 'admin', 60, 'Calle Museo 14, Málaga', -4.4214, 36.7213, 'Espacio para muestras, exposiciones o ferias.', 'ACTIVO'),
 
-('6j77f5h5-6f1j-8j5f-2j39-i1h5khfh5j66', 'Auditorio Principal', 'admin', 200, 'Av. de las Artes 9, Zaragoza', -0.8877, 41.6488, 'Auditorio equipado con sonido y proyección.', 'CERRADO_TEMPORALMENTE'),
-('4h55d3f3-4d9h-6h3d-0h17-g9f3ifdh3h44', 'Patio Central', 'admin', 100, 'Plaza Mayor 1, Salamanca', -5.6639, 40.9688, 'Espacio abierto para actividades recreativas.', 'CERRADO_TEMPORALMENTE'),
-('2f33b1d1-2b7f-4f1b-8f95-e7d1gdbf1f22', 'Aula 204', 'admin', 30, 'Av. Universidad 45, Barcelona', 2.1734, 41.3851, 'Aula equipada con proyector y pizarra.', 'CERRADO_TEMPORALMENTE'),
+('53e88374-ae42-440d-a112-4bd87ba017ca', 'Auditorio Principal', 'admin', 200, 'Av. de las Artes 9, Zaragoza', -0.8877, 41.6488, 'Auditorio equipado con sonido y proyección.', 'CERRADO_TEMPORALMENTE'),
+('a7d0e20d-3c7e-4810-a38d-fec1eed4757f', 'Patio Central', 'admin', 100, 'Plaza Mayor 1, Salamanca', -5.6639, 40.9688, 'Espacio abierto para actividades recreativas.', 'CERRADO_TEMPORALMENTE'),
+('b6adc6f2-baee-4949-b571-dff32d98aaf0', 'Aula 204', 'admin', 30, 'Av. Universidad 45, Barcelona', 2.1734, 41.3851, 'Aula equipada con proyector y pizarra.', 'CERRADO_TEMPORALMENTE'),
 
-('8l99h7j7-8h3l-0h7h-4h51-k3j7mjhj7l88', 'Sala de Música', 'admin', 40, 'Calle Melodía 22, Bilbao', -2.9349, 43.2630, 'Sala equipada para ensayos y conciertos.', 'ACTIVO'),
-('9m00i8k8-9i4m-1i8i-5i62-l4k8nkik8m99', 'Laboratorio de Ciencias', 'admin', 16, 'Av. Ciencia 33, Granada', -3.5986, 37.1882, 'Laboratorio para prácticas científicas.', 'ACTIVO'),
-('a1n11j9j-a1j5-2j9j-6j73-m5l9oljl9n00', 'Sala de Arte', 'admin', 60, 'Calle Creatividad 44, Alicante', -0.4907, 38.3452, 'Espacio para talleres artísticos.', 'ACTIVO'),
-('b2o22k0k-b2k6-3k0k-7k84-n6m0pmkm0o11', 'Sala de Conferencias B', 'admin', 50, 'Calle Sabiduría 55, Murcia', -1.1307, 37.9922, 'Sala equipada para conferencias y charlas.', 'ACTIVO');
+('1d716e26-ef57-4100-af2b-9a36885030d8', 'Sala de Música', 'admin', 40, 'Calle Melodía 22, Bilbao', -2.9349, 43.2630, 'Sala equipada para ensayos y conciertos.', 'ACTIVO'),
+('8d4c297b-1b59-496f-8ea3-b569b3102b26', 'Laboratorio de Ciencias', 'admin', 16, 'Av. Ciencia 33, Granada', -3.5986, 37.1882, 'Laboratorio para prácticas científicas.', 'ACTIVO'),
+('aec5a693-58b3-4825-acb1-ab7366c7c017', 'Sala de Arte', 'admin', 60, 'Calle Creatividad 44, Alicante', -0.4907, 38.3452, 'Espacio para talleres artísticos.', 'ACTIVO'),
+('cd001efa-1c14-4e59-9875-530307b34226', 'Sala de Conferencias B', 'admin', 50, 'Calle Sabiduría 55, Murcia', -1.1307, 37.9922, 'Sala equipada para conferencias y charlas.', 'ACTIVO');
 
 INSERT INTO puntoInteres (id, nombre, descripcion, distancia, url) VALUES
 ('40304e72-c7b0-443a-868d-f1cf0ff42f96', 'Museo de Ciencia CosmoCaixa', 'Museo interactivo de ciencia, ideal para todos los públicos', 450.0, 'https://cosmocaixa.es'),
@@ -130,18 +130,18 @@ INSERT INTO espacioFisico (id, cancelado, capacidad) VALUES
 ('8efc625d-9507-4405-97a3-ee79495522d7', false, 100),
 
 ('1e22a0c0-1a6e-4e0a-9c84-d6c0fcae0e11', false, 50),
-('3g44c2e2-3c8g-5g2c-9g06-f8e2hecg2g33', false, 15),
-('5i66e4g4-5e0i-7i4e-1i28-h0g4jgeg4i55', false, 25),
-('7k88g6i6-7g2k-9k6g-3k40-j2i6ligi6k77', false, 60),
+('35d0fb15-01ef-4081-b0ba-16ae83aba7a4', false, 15),
+('47ce5fbf-38b6-4718-9b0e-edb3e80f5d71', false, 25),
+('ee863eff-a57d-4e20-966a-bebee610bab7', false, 60),
 
-('2f33b1d1-2b7f-4f1b-8f95-e7d1gdbf1f22', true, 30),
-('4h55d3f3-4d9h-6h3d-0h17-g9f3ifdh3h44', true, 100),
-('6j77f5h5-6f1j-8j5f-2j39-i1h5khfh5j66', true, 200),
+('b6adc6f2-baee-4949-b571-dff32d98aaf0', true, 30),
+('a7d0e20d-3c7e-4810-a38d-fec1eed4757f', true, 100),
+('53e88374-ae42-440d-a112-4bd87ba017ca', true, 200),
 
-('8l99h7j7-8h3l-0h7h-4h51-k3j7mjhj7l88', false, 40),
-('9m00i8k8-9i4m-1i8i-5i62-l4k8nkik8m99', false, 16),
-('a1n11j9j-a1j5-2j9j-6j73-m5l9oljl9n00', false, 60),
-('b2o22k0k-b2k6-3k0k-7k84-n6m0pmkm0o11', false, 50);
+('1d716e26-ef57-4100-af2b-9a36885030d8', false, 40),
+('8d4c297b-1b59-496f-8ea3-b569b3102b26', false, 16),
+('aec5a693-58b3-4825-acb1-ab7366c7c017', false, 60),
+('cd001efa-1c14-4e59-9875-530307b34226', false, 50);
 
 INSERT INTO ocupacion (id, fechaInicio, fechaFin, idEspacioFisico) VALUES
 ('d01e354f-07e4-4177-a517-e5f438df118a', '2025-06-01 09:00:00', '2025-06-01 12:00:00', 'f9b9b9a3-e45a-4da4-9b14-6ab01f311f9e'),
@@ -168,10 +168,10 @@ INSERT INTO ocupacion (id, fechaInicio, fechaFin, idEspacioFisico) VALUES
 ('eb28138f-d7d1-4ea9-a38f-bd4e68f72b3f', '2025-07-04 11:00:00', '2025-07-04 14:00:00', '0e7d1fa6-de9e-4b99-9b6a-69a556ee36fc'),
 ('b10cd078-47cc-44a9-b672-e8392ffb6982', '2025-08-03 14:00:00', '2025-08-03 18:00:00', '20936e74-2a30-4ddd-a583-9fc2c8d0aaf2'),
 
-('occ1-0000-aaaa-bbbb-000000000001', '2025-08-01 10:00:00', '2025-08-01 14:00:00', '1e22a0c0-1a6e-4e0a-9c84-d6c0fcae0e11'),
-('occ3-0000-cccc-dddd-000000000003', '2025-08-05 13:00:00', '2025-08-05 16:00:00', '3g44c2e2-3c8g-5g2c-9g06-f8e2hecg2g33'),
-('occ5-0000-eeee-ffff-000000000005', '2025-08-09 15:00:00', '2025-08-09 18:00:00', '5i66e4g4-5e0i-7i4e-1i28-h0g4jgeg4i55'),
-('occ7-0000-gggg-hhhh-000000000007', '2025-08-13 14:00:00', '2025-08-13 17:00:00', '7k88g6i6-7g2k-9k6g-3k40-j2i6ligi6k77');
+('c039b3de-e34f-4cf2-a4c7-8dc73e71ad50', '2025-08-01 10:00:00', '2025-08-01 14:00:00', '1e22a0c0-1a6e-4e0a-9c84-d6c0fcae0e11'),
+('6a653204-fbfa-4f9a-96d8-c4051304e776', '2025-08-05 13:00:00', '2025-08-05 16:00:00', '35d0fb15-01ef-4081-b0ba-16ae83aba7a4'),
+('82cd54d7-7a78-4c18-95d5-e897d946e94e', '2025-08-09 15:00:00', '2025-08-09 18:00:00', '47ce5fbf-38b6-4718-9b0e-edb3e80f5d71'),
+('c8021eac-195e-4174-b5be-0e441fb30d43', '2025-08-13 14:00:00', '2025-08-13 17:00:00', 'ee863eff-a57d-4e20-966a-bebee610bab7');
 
 INSERT INTO evento (id, nombre, descripcion, organizador, plazas, cancelado, categoria, idOcupacion) VALUES
 ('a1b0c40d-9c2f-4c3a-b2f5-5fa67eeb3758', 'Conferencia sobre Inteligencia Artificial', 'Evento académico sobre avances en inteligencia artificial.', 'Universidad de Ciencia', 30, false, 'ACADEMICOS', 'd01e354f-07e4-4177-a517-e5f438df118a'),
@@ -204,10 +204,10 @@ INSERT INTO evento (id, nombre, descripcion, organizador, plazas, cancelado, cat
 ('edabf476-c6a0-46fd-b5e6-322568fd1265', 'Gala de Beneficencia', 'Evento benéfico para recaudar fondos para organizaciones sin fines de lucro.', 'Charity Events', 40, true, 'OTROS', null),
 ('337d2145-e8d9-4012-83f2-50128907294d', 'Expo de Automóviles', 'Exposición de los últimos modelos de automóviles.', 'Auto Expo', 40, true, 'OTROS', null),
 
-('a1e11111-aaaa-1aaa-1aaa-bbbbbbbb0001', 'Conferencia sobre IA', 'Charla sobre avances en inteligencia artificial', 'admin', 100, false, 'ACADEMICOS', 'occ1-0000-aaaa-bbbb-000000000001'),
-('c3e33333-cccc-3ccc-3ccc-dddddddd0003', 'Festival de Cine Independiente', 'Proyección de cortos y largometrajes', 'admin', 80, false, 'ENTRETENIMIENTO', 'occ3-0000-cccc-dddd-000000000003'),
-('e5e55555-eeee-5eee-5eee-ffffeeee0005', 'Charla de Desarrollo Web', 'Introducción a tecnologías modernas de desarrollo web', 'admin', 40, false,'ACADEMICO', 'occ5-0000-eeee-ffff-000000000005'),
-('g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007', 'Feria Cultural Internacional', 'Stands con comida, arte y costumbres del mundo', 'admin', 90, false, 'CULTURALES', 'occ7-0000-gggg-hhhh-000000000007'),
+('a1e11111-aaaa-1aaa-1aaa-bbbbbbbb0001', 'Conferencia sobre IA', 'Charla sobre avances en inteligencia artificial', 'admin', 100, false, 'ACADEMICOS', 'c039b3de-e34f-4cf2-a4c7-8dc73e71ad50'),
+('c3e33333-cccc-3ccc-3ccc-dddddddd0003', 'Festival de Cine Independiente', 'Proyección de cortos y largometrajes', 'admin', 80, false, 'ENTRETENIMIENTO', '6a653204-fbfa-4f9a-96d8-c4051304e776'),
+('e5e55555-eeee-5eee-5eee-ffffeeee0005', 'Charla de Desarrollo Web', 'Introducción a tecnologías modernas de desarrollo web', 'admin', 40, false,'ACADEMICO', '82cd54d7-7a78-4c18-95d5-e897d946e94e'),
+('g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007', 'Feria Cultural Internacional', 'Stands con comida, arte y costumbres del mundo', 'admin', 90, false, 'CULTURALES', 'c8021eac-195e-4174-b5be-0e441fb30d43'),
 
 ('h8e88888-hhhh-1hhh-5hhh-iiiiiiii0008', 'Taller de Ilustración Digital', 'Aprende a crear ilustraciones en tablet', 'admin', 30, true, 'CULTURALES', null),
 ('i9e99999-iiii-2iii-6iii-jjjjjjjj0009', 'Campeonato Relámpago de Ajedrez', 'Competencia rápida en formato eliminatorio', 'admin', 16, true, 'DEPORTES', null),

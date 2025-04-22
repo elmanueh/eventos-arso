@@ -308,7 +308,7 @@ db.eventos.insertMany([
       {
         $ref: 'reservas',
         $id: 'ccc3ccc3-cccc-4ccc-cccc-cccccccc0003'
-      },
+      }
     ],
     _class: 'reservas.modelo.Evento'
   },
@@ -471,62 +471,62 @@ db.reservas.insertMany([
     _class: 'reservas.modelo.Reserva'
   },
 
-  { 
+  {
     _id: 'aaa1aaa1-aaaa-4aaa-aaaa-aaaaaaaa0001',
     idUsuario: 'd9428888-122b-4cbb-bcb9-33a3ee6b9e9b',
     plazasReservadas: 2,
     cancelada: false,
-    evento: { $ref: "eventos", $id: 'a1e11111-aaaa-1aaa-1aaa-bbbbbbbb0001' },
+    evento: { $ref: 'eventos', $id: 'a1e11111-aaaa-1aaa-1aaa-bbbbbbbb0001' },
     _class: 'reservas.modelo.Reserva'
   },
-  { 
+  {
     _id: 'bbb2bbb2-bbbb-5bbb-bbbb-bbbbbbbb0002',
     idUsuario: 'd9428888-122b-4cbb-bcb9-33a3ee6b9e9b',
     plazasReservadas: 1,
     cancelada: false,
-    evento: { $ref: "eventos", $id: 'c3e33333-cccc-3ccc-3ccc-dddddddd0003' },
+    evento: { $ref: 'eventos', $id: 'c3e33333-cccc-3ccc-3ccc-dddddddd0003' },
     _class: 'reservas.modelo.Reserva'
   },
-  { 
+  {
     _id: 'ddd4ddd4-dddd-4ddd-dddd-dddddddd0004',
     idUsuario: 'd9428888-122b-4cbb-bcb9-33a3ee6b9e9b',
     plazasReservadas: 4,
     cancelada: false,
-    evento: { $ref: "eventos", $id: 'g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007' },
+    evento: { $ref: 'eventos', $id: 'g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007' },
     _class: 'reservas.modelo.Reserva'
   },
 
-  { 
+  {
     _id: 'bbb2bbb2-bbbb-4bbb-bbbb-bbbbbbbb0002',
     idUsuario: '5f3d9d2a-63cc-4d3a-8c45-d56d7dbad2e3',
     plazasReservadas: 1,
     cancelada: false,
-    evento: { $ref: "eventos", $id: 'c3e33333-cccc-3ccc-3ccc-dddddddd0003' },
+    evento: { $ref: 'eventos', $id: 'c3e33333-cccc-3ccc-3ccc-dddddddd0003' },
     _class: 'reservas.modelo.Reserva'
   },
-  { 
+  {
     _id: 'eee5eee5-eeee-4eee-eeee-eeeeeeee0005',
     idUsuario: '5f3d9d2a-63cc-4d3a-8c45-d56d7dbad2e3',
     plazasReservadas: 2,
     cancelada: false,
-    evento: { $ref: "eventos", $id: 'g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007' },
+    evento: { $ref: 'eventos', $id: 'g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007' },
     _class: 'reservas.modelo.Reserva'
   },
 
-  { 
+  {
     _id: 'ccc3ccc3-cccc-4ccc-cccc-cccccccc0003',
     idUsuario: '6b1d3d79-a0e5-41c9-bb5e-9b90e9b0c5e1',
     plazasReservadas: 3,
     cancelada: false,
-    evento: { $ref: "eventos", $id: 'e5e55555-eeee-5eee-5eee-ffffeeee0005' },
+    evento: { $ref: 'eventos', $id: 'e5e55555-eeee-5eee-5eee-ffffeeee0005' },
     _class: 'reservas.modelo.Reserva'
   },
-  { 
+  {
     _id: 'fff6fff6-ffff-4fff-ffff-ffffffff0006',
     idUsuario: '6b1d3d79-a0e5-41c9-bb5e-9b90e9b0c5e1',
     plazasReservadas: 1,
     cancelada: false,
-    evento: { $ref: "eventos", $id: 'g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007' },
+    evento: { $ref: 'eventos', $id: 'g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007' },
     _class: 'reservas.modelo.Reserva'
   }
 ])
