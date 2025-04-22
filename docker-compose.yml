@@ -48,7 +48,9 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - ./mysql-init.sql:/docker-entrypoint-initdb.d/mysql-init.sql
+      - ./mysql-init-1-user.sql:/docker-entrypoint-initdb.d/mysql-init-1-user.sql:ro
+      - ./mysql-init-2-table.sql:/docker-entrypoint-initdb.d/mysql-init-2-table.sql:ro
+      - ./mysql-init-3-data.sql:/docker-entrypoint-initdb.d/mysql-init-3-data.sql:ro
       - ./docker-files/mysql:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
@@ -68,6 +70,7 @@ services:
     ports:
       - '27017:27017'
     volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
       - ./docker-files/mongodb:/data/db
     env_file:
       - .env
