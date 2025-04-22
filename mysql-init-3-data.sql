@@ -36,6 +36,20 @@ INSERT INTO espacioFisico (id, nombre, propietario, capacidad, direccion, longit
 ('4801040f-8df2-4a09-acb9-cc59bff0887c', 'Espacio de Networking Valencia', 'Networking Valencia', 40, 'Carrer de València 10, Valencia', -0.3803, 39.4749, 'Espacio para eventos de networking y formación profesional', 'ACTIVO'),
 ('8efc625d-9507-4405-97a3-ee79495522d7', 'Centro de Convenciones Zaragoza', 'Centro de Convenciones Zaragoza', 100, 'Carrer de Magisterio 34, Zaragoza', -0.8833, 41.6524, 'Gran centro de convenciones para eventos empresariales en Zaragoza', 'ACTIVO');
 
+('1e22a0c0-1a6e-4e0a-9c84-d6c0fcae0e11', 'Sala Multiusos A', 'admin', 50, 'Calle Sol 123, Madrid', -3.7038, 40.4168, 'Espacio amplio para talleres o charlas.', 'ACTIVO'),
+('3g44c2e2-3c8g-5g2c-9g06-f8e2hecg2g33', 'Sala de reuniones norte', 'admin', 15, 'Calle Norte 77, Sevilla', -5.9845, 37.3891, 'Ideal para reuniones pequeñas o tutorías.', 'ACTIVO'),
+('5i66e4g4-5e0i-7i4e-1i28-h0g4jgeg4i55', 'Sala de Informática', 'admin', 25, 'Calle Tecnología 5, Valencia', -0.3763, 39.4699, 'Sala con ordenadores y acceso a internet.', 'ACTIVO'),
+('7k88g6i6-7g2k-9k6g-3k40-j2i6ligi6k77', 'Sala de Exposiciones', 'admin', 60, 'Calle Museo 14, Málaga', -4.4214, 36.7213, 'Espacio para muestras, exposiciones o ferias.', 'ACTIVO');
+
+('6j77f5h5-6f1j-8j5f-2j39-i1h5khfh5j66', 'Auditorio Principal', 'admin', 200, 'Av. de las Artes 9, Zaragoza', -0.8877, 41.6488, 'Auditorio equipado con sonido y proyección.', 'CERRADO_TEMPORALMENTE'),
+('4h55d3f3-4d9h-6h3d-0h17-g9f3ifdh3h44', 'Patio Central', 'admin', 100, 'Plaza Mayor 1, Salamanca', -5.6639, 40.9688, 'Espacio abierto para actividades recreativas.', 'CERRADO_TEMPORALMENTE'),
+('2f33b1d1-2b7f-4f1b-8f95-e7d1gdbf1f22', 'Aula 204', 'admin', 30, 'Av. Universidad 45, Barcelona', 2.1734, 41.3851, 'Aula equipada con proyector y pizarra.', 'CERRADO_TEMPORALMENTE'),
+
+('8l99h7j7-8h3l-0h7h-4h51-k3j7mjhj7l88', 'Sala de Música', 'admin', 40, 'Calle Melodía 22, Bilbao', -2.9349, 43.2630, 'Sala equipada para ensayos y conciertos.', 'ACTIVO'),
+('9m00i8k8-9i4m-1i8i-5i62-l4k8nkik8m99', 'Laboratorio de Ciencias', 'admin', 16, 'Av. Ciencia 33, Granada', -3.5986, 37.1882, 'Laboratorio para prácticas científicas.', 'ACTIVO'),
+('a1n11j9j-a1j5-2j9j-6j73-m5l9oljl9n00', 'Sala de Arte', 'admin', 60, 'Calle Creatividad 44, Alicante', -0.4907, 38.3452, 'Espacio para talleres artísticos.', 'ACTIVO'),
+('b2o22k0k-b2k6-3k0k-7k84-n6m0pmkm0o11', 'Sala de Conferencias B', 'admin', 50, 'Calle Sabiduría 55, Murcia', -1.1307, 37.9922, 'Sala equipada para conferencias y charlas.', 'ACTIVO');
+
 INSERT INTO puntoInteres (id, nombre, descripcion, distancia, url) VALUES
 ('40304e72-c7b0-443a-868d-f1cf0ff42f96', 'Museo de Ciencia CosmoCaixa', 'Museo interactivo de ciencia, ideal para todos los públicos', 450.0, 'https://cosmocaixa.es'),
 ('bc2ad777-25c1-4c11-8868-4f38f99eb1a3', 'Parque de la Creueta del Coll', 'Zona verde con estanque y esculturas modernas', 320.0, 'https://ajuntament.barcelona.cat'),
@@ -115,6 +129,20 @@ INSERT INTO espacioFisico (id, cancelado, capacidad) VALUES
 ('4801040f-8df2-4a09-acb9-cc59bff0887c', false, 40),
 ('8efc625d-9507-4405-97a3-ee79495522d7', false, 100);
 
+('1e22a0c0-1a6e-4e0a-9c84-d6c0fcae0e11', FALSE, 50),
+('3g44c2e2-3c8g-5g2c-9g06-f8e2hecg2g33', FALSE, 15),
+('5i66e4g4-5e0i-7i4e-1i28-h0g4jgeg4i55', FALSE, 25),
+('7k88g6i6-7g2k-9k6g-3k40-j2i6ligi6k77', FALSE, 60);
+
+('2f33b1d1-2b7f-4f1b-8f95-e7d1gdbf1f22', TRUE, 30),
+('4h55d3f3-4d9h-6h3d-0h17-g9f3ifdh3h44', TRUE, 100),
+('6j77f5h5-6f1j-8j5f-2j39-i1h5khfh5j66', TRUE, 200),
+
+('8l99h7j7-8h3l-0h7h-4h51-k3j7mjhj7l88', FALSE, 40),
+('9m00i8k8-9i4m-1i8i-5i62-l4k8nkik8m99', FALSE, 16),
+('a1n11j9j-a1j5-2j9j-6j73-m5l9oljl9n00', FALSE, 60),
+('b2o22k0k-b2k6-3k0k-7k84-n6m0pmkm0o11', FALSE, 50);
+
 INSERT INTO ocupacion (id, fechaInicio, fechaFin, idEspacioFisico) VALUES
 ('d01e354f-07e4-4177-a517-e5f438df118a', '2025-06-01 09:00:00', '2025-06-01 12:00:00', 'f9b9b9a3-e45a-4da4-9b14-6ab01f311f9e'),
 ('f07406ea-3e49-48a3-b2b1-d0e28d0d421b', '2025-06-01 10:00:00', '2025-06-01 13:00:00', '4c1d80ec-f460-4072-b1b6-9c1cf87f994c'),
@@ -139,6 +167,11 @@ INSERT INTO ocupacion (id, fechaInicio, fechaFin, idEspacioFisico) VALUES
 ('a2b39e5e-9715-4cf0-a7a3-4c5152b9f1f9', '2025-07-04 09:00:00', '2025-07-04 12:00:00', 'fd244de4-7822-43f6-a96c-0609641d4f9f'),
 ('eb28138f-d7d1-4ea9-a38f-bd4e68f72b3f', '2025-07-04 11:00:00', '2025-07-04 14:00:00', '0e7d1fa6-de9e-4b99-9b6a-69a556ee36fc'),
 ('b10cd078-47cc-44a9-b672-e8392ffb6982', '2025-08-03 14:00:00', '2025-08-03 18:00:00', '20936e74-2a30-4ddd-a583-9fc2c8d0aaf2');
+
+('occ1-0000-aaaa-bbbb-000000000001', '2025-08-01 10:00:00', '2025-08-01 14:00:00', '1e22a0c0-1a6e-4e0a-9c84-d6c0fcae0e11'),
+('occ3-0000-cccc-dddd-000000000003', '2025-08-05 13:00:00', '2025-08-05 16:00:00', '3g44c2e2-3c8g-5g2c-9g06-f8e2hecg2g33'),
+('occ5-0000-eeee-ffff-000000000005', '2025-08-09 15:00:00', '2025-08-09 18:00:00', '5i66e4g4-5e0i-7i4e-1i28-h0g4jgeg4i55'),
+('occ7-0000-gggg-hhhh-000000000007', '2025-08-13 14:00:00', '2025-08-13 17:00:00', '7k88g6i6-7g2k-9k6g-3k40-j2i6ligi6k77');
 
 INSERT INTO evento (id, nombre, descripcion, organizador, plazas, cancelado, categoria, idOcupacion) VALUES
 ('a1b0c40d-9c2f-4c3a-b2f5-5fa67eeb3758', 'Conferencia sobre Inteligencia Artificial', 'Evento académico sobre avances en inteligencia artificial.', 'Universidad de Ciencia', 30, false, 'ACADEMICOS', 'd01e354f-07e4-4177-a517-e5f438df118a'),
@@ -170,3 +203,13 @@ INSERT INTO evento (id, nombre, descripcion, organizador, plazas, cancelado, cat
 ('e2cdd4ac-d6f8-4e74-9b79-c5f7133027a3', 'Festival de Música Electrónica', 'Festival de música electrónica con DJ internacionales.', 'Electronic Beats', 90, true, 'ENTRETENIMIENTO', null),
 ('edabf476-c6a0-46fd-b5e6-322568fd1265', 'Gala de Beneficencia', 'Evento benéfico para recaudar fondos para organizaciones sin fines de lucro.', 'Charity Events', 40, true, 'OTROS', null),
 ('337d2145-e8d9-4012-83f2-50128907294d', 'Expo de Automóviles', 'Exposición de los últimos modelos de automóviles.', 'Auto Expo', 40, true, 'OTROS', null);
+
+('a1e11111-aaaa-1aaa-1aaa-bbbbbbbb0001', 'Conferencia sobre IA', 'Charla sobre avances en inteligencia artificial', 'admin', 100, FALSE, ACADEMICOS, 'occ1-0000-aaaa-bbbb-000000000001'),
+('c3e33333-cccc-3ccc-3ccc-dddddddd0003', 'Festival de Cine Independiente', 'Proyección de cortos y largometrajes', 'admin', 80, FALSE, ENTRETENIMIENTO, 'occ3-0000-cccc-dddd-000000000003'),
+('e5e55555-eeee-5eee-5eee-ffffeeee0005', 'Charla de Desarrollo Web', 'Introducción a tecnologías modernas de desarrollo web', 'admin', 40, FALSE, ACADEMICOS, 'occ5-0000-eeee-ffff-000000000005'),
+('g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007', 'Feria Cultural Internacional', 'Stands con comida, arte y costumbres del mundo', 'admin', 90, FALSE, CULTURALES, 'occ7-0000-gggg-hhhh-000000000007');
+
+('h8e88888-hhhh-1hhh-5hhh-iiiiiiii0008', 'Taller de Ilustración Digital', 'Aprende a crear ilustraciones en tablet', 'admin', 30, TRUE, CULTURALES, NULL),
+('i9e99999-iiii-2iii-6iii-jjjjjjjj0009', 'Campeonato Relámpago de Ajedrez', 'Competencia rápida en formato eliminatorio', 'admin', 16, TRUE, DEPORTES, NULL),
+('j0e00000-jjjj-3jjj-7jjj-kkkkkkkk0010', 'Encuentro de Startups', 'Red de networking para emprendedores', 'admin', 60, TRUE, ACADEMICOS, NULL),
+('k1e11112-kkkk-4kkk-8kkk-llllllll0011', 'Maratón de Series', 'Jornada de binge-watching colaborativo', 'admin', 50, TRUE, ENTRETENIMIENTO, NULL);

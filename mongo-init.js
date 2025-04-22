@@ -5,7 +5,7 @@ db.createCollection('eventos')
 db.eventos.insertMany([
   {
     _id: 'a1b0c40d-9c2f-4c3a-b2f5-5fa67eeb3758',
-    plazasDisponibles: 30,
+    plazasDisponibles: 25,
     cancelado: false,
     reservas: [
       {
@@ -17,7 +17,7 @@ db.eventos.insertMany([
   },
   {
     _id: 'f5570b1f-4bfc-4f67-93e9-12140a0b7e12',
-    plazasDisponibles: 50,
+    plazasDisponibles: 40,
     cancelado: false,
     reservas: [
       {
@@ -36,7 +36,7 @@ db.eventos.insertMany([
   },
   {
     _id: 'b7c319d9-4102-4509-a7a7-d38f6b855aa6',
-    plazasDisponibles: 40,
+    plazasDisponibles: 37,
     cancelado: false,
     reservas: [
       {
@@ -48,7 +48,7 @@ db.eventos.insertMany([
   },
   {
     _id: '9d31509b-bd62-41c2-bb2f-084504b0177e',
-    plazasDisponibles: 50,
+    plazasDisponibles: 35,
     cancelado: false,
     reservas: [
       {
@@ -67,7 +67,7 @@ db.eventos.insertMany([
   },
   {
     _id: 'd0d7f883-e7c0-4fe1-94e4-e9ca16776e7e',
-    plazasDisponibles: 100,
+    plazasDisponibles: 92,
     cancelado: false,
     reservas: [
       {
@@ -79,7 +79,7 @@ db.eventos.insertMany([
   },
   {
     _id: 'fa21365f-8f89-4bfe-b91f-d00320f76e6e',
-    plazasDisponibles: 35,
+    plazasDisponibles: 15,
     cancelado: false,
     reservas: [
       {
@@ -91,7 +91,7 @@ db.eventos.insertMany([
   },
   {
     _id: '1f3a0a04-5a99-4744-9e7e-4351b8fcd210',
-    plazasDisponibles: 100,
+    plazasDisponibles: 97,
     cancelado: false,
     reservas: [
       {
@@ -103,44 +103,74 @@ db.eventos.insertMany([
   },
   {
     _id: 'cb1d407b-18e0-4b62-9a64-cfcb1ffebdb2',
-    plazasDisponibles: 45,
+    plazasDisponibles: 35,
     cancelado: false,
-    reservas: [],
+    reservas: [
+      {
+        $ref: 'reservas',
+        $id: 'ac40d4ea-dc2d-4779-91f7-78efbf5828f1'
+      }
+    ],
     _class: 'reservas.modelo.Evento'
   },
   {
     _id: 'cf78a67b-e607-41a7-b9f0-c0fe64329c4a',
-    plazasDisponibles: 25,
+    plazasDisponibles: 20,
     cancelado: false,
-    reservas: [],
+    reservas: [
+      {
+        $ref: 'reservas',
+        $id: '5446349b-2ab5-4b6b-9090-3706d710c833'
+      }
+    ],
     _class: 'reservas.modelo.Evento'
   },
   {
     _id: '0174cc84-99d1-46ac-a2c4-278f16317c0e',
-    plazasDisponibles: 70,
+    plazasDisponibles: 60,
     cancelado: false,
-    reservas: [],
+    reservas: [
+      {
+        $ref: 'reservas',
+        $id: 'bc85b58f-cc4c-4f8b-b8ec-eef88a787a45'
+      }
+    ],
     _class: 'reservas.modelo.Evento'
   },
   {
     _id: '1a337705-6d13-4672-bfbd-bf65a3e4e1ca',
-    plazasDisponibles: 60,
+    plazasDisponibles: 45,
     cancelado: false,
-    reservas: [],
+    reservas: [
+      {
+        $ref: 'reservas',
+        $id: 'a839ad58-b7f1-4c2d-bc1c-41f0ebad5ef2'
+      }
+    ],
     _class: 'reservas.modelo.Evento'
   },
   {
     _id: 'b3479c34-808e-4674-957d-09a7204285e5',
-    plazasDisponibles: 100,
+    plazasDisponibles: 95,
     cancelado: false,
-    reservas: [],
+    reservas: [
+      {
+        $ref: 'reservas',
+        $id: 'a4a59ea6-c301-47e0-9d9e-977340b71b72'
+      }
+    ],
     _class: 'reservas.modelo.Evento'
   },
   {
     _id: 'a2d2ea4d-b1f9-4b91-86cc-e1448f16c4e4',
-    plazasDisponibles: 60,
+    plazasDisponibles: 57,
     cancelado: false,
-    reservas: [],
+    reservas: [
+      {
+        $ref: 'reservas',
+        $id: 'f081bb24-bd9e-46f7-9e42-b9b7e7d7b595'
+      }
+    ],
     _class: 'reservas.modelo.Evento'
   },
   {
@@ -237,6 +267,96 @@ db.eventos.insertMany([
   {
     _id: '337d2145-e8d9-4012-83f2-50128907294d',
     plazasDisponibles: 40,
+    cancelado: true,
+    reservas: [],
+    _class: 'reservas.modelo.Evento'
+  },
+
+  {
+    _id: 'a1e11111-aaaa-1aaa-1aaa-bbbbbbbb0001',
+    plazasDisponibles: 98,
+    cancelado: false,
+    reservas: [
+      {
+        $ref: 'reservas',
+        $id: 'aaa1aaa1-aaaa-4aaa-aaaa-aaaaaaaa0001'
+      }
+    ],
+    _class: 'reservas.modelo.Evento'
+  },
+  {
+    _id: 'c3e33333-cccc-3ccc-3ccc-dddddddd0003',
+    plazasDisponibles: 78,
+    cancelado: false,
+    reservas: [
+      {
+        $ref: 'reservas',
+        $id: 'bbb2bbb2-bbbb-5bbb-bbbb-bbbbbbbb0002'
+      },
+      {
+        $ref: 'reservas',
+        $id: 'bbb2bbb2-bbbb-4bbb-bbbb-bbbbbbbb0002'
+      }
+    ],
+    _class: 'reservas.modelo.Evento'
+  },
+  {
+    _id: 'e5e55555-eeee-5eee-5eee-ffffeeee0005',
+    plazasDisponibles: 37,
+    cancelado: false,
+    reservas: [
+      {
+        $ref: 'reservas',
+        $id: 'ccc3ccc3-cccc-4ccc-cccc-cccccccc0003'
+      },
+    ],
+    _class: 'reservas.modelo.Evento'
+  },
+  {
+    _id: 'g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007',
+    plazasDisponibles: 83,
+    cancelado: false,
+    reservas: [
+      {
+        $ref: 'reservas',
+        $id: 'ddd4ddd4-dddd-4ddd-dddd-dddddddd0004'
+      },
+      {
+        $ref: 'reservas',
+        $id: 'fff6fff6-ffff-4fff-ffff-ffffffff0006'
+      },
+      {
+        $ref: 'reservas',
+        $id: 'eee5eee5-eeee-4eee-eeee-eeeeeeee0005'
+      }
+    ],
+    _class: 'reservas.modelo.Evento'
+  },
+
+  {
+    _id: 'h8e88888-hhhh-1hhh-5hhh-iiiiiiii0008',
+    plazasDisponibles: 30,
+    cancelado: true,
+    reservas: [],
+    _class: 'reservas.modelo.Evento'
+  },
+  {
+    _id: 'i9e99999-iiii-2iii-6iii-jjjjjjjj0009',
+    plazasDisponibles: 16,
+    cancelado: true,
+    reservas: [],
+    _class: 'reservas.modelo.Evento'
+  },
+  {
+    _id: 'j0e00000-jjjj-3jjj-7jjj-kkkkkkkk0010',
+    plazasDisponibles: 60,
+    cancelado: true,
+    reservas: [],
+    _class: 'reservas.modelo.Evento'
+  },
+  {
+    _id: 'k1e11112-kkkk-4kkk-8kkk-llllllll0011',
+    plazasDisponibles: 50,
     cancelado: true,
     reservas: [],
     _class: 'reservas.modelo.Evento'
@@ -349,26 +469,64 @@ db.reservas.insertMany([
     cancelada: false,
     evento: { $ref: 'eventos', $id: 'a2d2ea4d-b1f9-4b91-86cc-e1448f16c4e4' },
     _class: 'reservas.modelo.Reserva'
+  },
+
+  { 
+    _id: 'aaa1aaa1-aaaa-4aaa-aaaa-aaaaaaaa0001',
+    idUsuario: 'd9428888-122b-4cbb-bcb9-33a3ee6b9e9b',
+    plazasReservadas: 2,
+    cancelada: false,
+    evento: { $ref: "eventos", $id: 'a1e11111-aaaa-1aaa-1aaa-bbbbbbbb0001' },
+    _class: 'reservas.modelo.Reserva'
+  },
+  { 
+    _id: 'bbb2bbb2-bbbb-5bbb-bbbb-bbbbbbbb0002',
+    idUsuario: 'd9428888-122b-4cbb-bcb9-33a3ee6b9e9b',
+    plazasReservadas: 1,
+    cancelada: false,
+    evento: { $ref: "eventos", $id: 'c3e33333-cccc-3ccc-3ccc-dddddddd0003' },
+    _class: 'reservas.modelo.Reserva'
+  },
+  { 
+    _id: 'ddd4ddd4-dddd-4ddd-dddd-dddddddd0004',
+    idUsuario: 'd9428888-122b-4cbb-bcb9-33a3ee6b9e9b',
+    plazasReservadas: 4,
+    cancelada: false,
+    evento: { $ref: "eventos", $id: 'g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007' },
+    _class: 'reservas.modelo.Reserva'
+  },
+
+  { 
+    _id: 'bbb2bbb2-bbbb-4bbb-bbbb-bbbbbbbb0002',
+    idUsuario: '5f3d9d2a-63cc-4d3a-8c45-d56d7dbad2e3',
+    plazasReservadas: 1,
+    cancelada: false,
+    evento: { $ref: "eventos", $id: 'c3e33333-cccc-3ccc-3ccc-dddddddd0003' },
+    _class: 'reservas.modelo.Reserva'
+  },
+  { 
+    _id: 'eee5eee5-eeee-4eee-eeee-eeeeeeee0005',
+    idUsuario: '5f3d9d2a-63cc-4d3a-8c45-d56d7dbad2e3',
+    plazasReservadas: 2,
+    cancelada: false,
+    evento: { $ref: "eventos", $id: 'g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007' },
+    _class: 'reservas.modelo.Reserva'
+  },
+
+  { 
+    _id: 'ccc3ccc3-cccc-4ccc-cccc-cccccccc0003',
+    idUsuario: '6b1d3d79-a0e5-41c9-bb5e-9b90e9b0c5e1',
+    plazasReservadas: 3,
+    cancelada: false,
+    evento: { $ref: "eventos", $id: 'e5e55555-eeee-5eee-5eee-ffffeeee0005' },
+    _class: 'reservas.modelo.Reserva'
+  },
+  { 
+    _id: 'fff6fff6-ffff-4fff-ffff-ffffffff0006',
+    idUsuario: '6b1d3d79-a0e5-41c9-bb5e-9b90e9b0c5e1',
+    plazasReservadas: 1,
+    cancelada: false,
+    evento: { $ref: "eventos", $id: 'g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007' },
+    _class: 'reservas.modelo.Reserva'
   }
 ])
-
-db.reservas.find().forEach(function (reserva) {
-  var eventoId = reserva.evento.$id || reserva.evento.id || reserva.evento['$id']
-
-  print('Procesando reserva', reserva._id, 'para evento', eventoId)
-
-  var resultado = db.eventos.updateOne(
-    { _id: eventoId },
-    {
-      $push: {
-        reservas: {
-          $ref: 'reservas',
-          $id: reserva._id
-        }
-      },
-      $inc: { plazasDisponibles: -reserva.plazasReservadas }
-    }
-  )
-
-  printjson(resultado)
-})
