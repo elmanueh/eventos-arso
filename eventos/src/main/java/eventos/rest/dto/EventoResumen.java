@@ -9,6 +9,7 @@ public class EventoResumen {
 	private String descripcion;
 	private boolean cancelado;
 	private int numPlazas;
+	private String fechaInicio;
 
 	public EventoResumen() {
 	}
@@ -51,6 +52,14 @@ public class EventoResumen {
 
 	public void setNumPlazas(int numPlazas) {
 		this.numPlazas = numPlazas;
+	}
+
+	public String getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public void setFechaInicio(String fechaInicio) {
+		this.fechaInicio = fechaInicio;
 	}
 
 }
