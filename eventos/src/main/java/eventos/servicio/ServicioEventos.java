@@ -239,7 +239,7 @@ public class ServicioEventos implements IServicioEventos {
 		if (gestor == null)
 			throw new IllegalArgumentException("El gestor no puede ser nulo.");
 
-		return repositorioEvento.findAll(pageable).map(EventoMapper::toResumen);
+		return repositorioEvento.getEventosPorGestor(gestor, pageable).map(EventoMapper::toResumen);
 	}
 
 }
