@@ -19,9 +19,6 @@ public class ReservaResumen {
 	@Schema(description = "Indica si la reserva ha sido cancelada", example = "false")
 	private boolean cancelada;
 
-	@Schema(description = "Indica si el evento está activo", example = "true")
-	private boolean evento;
-
 	public ReservaResumen() {
 	}
 
@@ -55,14 +52,6 @@ public class ReservaResumen {
 
 	public void setCancelada(boolean cancelada) {
 		this.cancelada = cancelada;
-	}
-
-	public boolean isEvento() {
-		return evento;
-	}
-
-	public void setEvento(boolean evento) {
-		this.evento = evento;
 	}
 
 }

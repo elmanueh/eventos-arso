@@ -21,9 +21,6 @@ public class Reserva {
     @Field("plazasReservadas")
     private int plazasReservadas;
 
-    @Field("cancelada")
-    private boolean cancelada;
-
     @DBRef
     @Field("evento")
     private Evento evento;
@@ -57,11 +54,7 @@ public class Reserva {
     }
 
     public boolean isCancelada() {
-        return cancelada;
-    }
-
-    public void setCancelada(boolean cancelada) {
-        this.cancelada = cancelada;
+        return evento.isCancelado();
     }
 
     public Evento getEvento() {

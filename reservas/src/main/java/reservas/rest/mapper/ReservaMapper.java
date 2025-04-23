@@ -26,7 +26,6 @@ public class ReservaMapper {
 		resumen.setIdUsuario(reserva.getIdUsuario());
 		resumen.setPlazasReservadas(reserva.getPlazasReservadas());
 		resumen.setCancelada(reserva.isCancelada());
-		resumen.setEvento(reserva.getEvento() != null);
 
 		return resumen;
 	}
