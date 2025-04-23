@@ -47,7 +47,7 @@ public class ControladorAuth {
 
         return ResponseEntity.ok(authResponse);
     }
-    
+
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(HttpServletResponse response) {
         response.addCookie(JwtUtils.eliminarCookie());
@@ -55,14 +55,14 @@ public class ControladorAuth {
         return ResponseEntity.ok().build();
     }
 
-
     private Map<String, Object> verificarCredenciales(String username, String password) {
 
         if (!servicio.verificarCredenciales(username, password))
             return null;
 
         HashMap<String, Object> claims = new HashMap<String, Object>();
-        claims.put("sub", username);
+        claims.put("sub", servicio.obtenerId(username));
+        claims.put("username", username);
         claims.put("roles", servicio.obtenerRoles(username));
 
         return claims;
