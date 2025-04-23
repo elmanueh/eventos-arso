@@ -313,7 +313,7 @@ db.eventos.insertMany([
     _class: 'reservas.modelo.Evento'
   },
   {
-    _id: 'g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007',
+    _id: 'e5e55555-eeee-5eee-5eee-ffffeeee0006',
     plazasDisponibles: 83,
     cancelado: false,
     reservas: [
@@ -334,28 +334,28 @@ db.eventos.insertMany([
   },
 
   {
-    _id: 'h8e88888-hhhh-1hhh-5hhh-iiiiiiii0008',
+    _id: 'e5e55555-eeee-5eee-5eee-ffffeeee0007',
     plazasDisponibles: 30,
     cancelado: true,
     reservas: [],
     _class: 'reservas.modelo.Evento'
   },
   {
-    _id: 'i9e99999-iiii-2iii-6iii-jjjjjjjj0009',
+    _id: 'e5e55555-eeee-5eee-5eee-ffffeeee0008',
     plazasDisponibles: 16,
     cancelado: true,
     reservas: [],
     _class: 'reservas.modelo.Evento'
   },
   {
-    _id: 'j0e00000-jjjj-3jjj-7jjj-kkkkkkkk0010',
+    _id: 'e5e55555-eeee-5eee-5eee-ffffeeee0009',
     plazasDisponibles: 60,
     cancelado: true,
     reservas: [],
     _class: 'reservas.modelo.Evento'
   },
   {
-    _id: 'k1e11112-kkkk-4kkk-8kkk-llllllll0011',
+    _id: 'e5e55555-eeee-5eee-5eee-ffffeeee0010',
     plazasDisponibles: 50,
     cancelado: true,
     reservas: [],
@@ -492,7 +492,7 @@ db.reservas.insertMany([
     idUsuario: 'd9428888-122b-4cbb-bcb9-33a3ee6b9e9b',
     plazasReservadas: 4,
     cancelada: false,
-    evento: { $ref: 'eventos', $id: 'g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007' },
+    evento: { $ref: 'eventos', $id: 'e5e55555-eeee-5eee-5eee-ffffeeee0006' },
     _class: 'reservas.modelo.Reserva'
   },
 
@@ -509,7 +509,7 @@ db.reservas.insertMany([
     idUsuario: '5f3d9d2a-63cc-4d3a-8c45-d56d7dbad2e3',
     plazasReservadas: 2,
     cancelada: false,
-    evento: { $ref: 'eventos', $id: 'g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007' },
+    evento: { $ref: 'eventos', $id: 'e5e55555-eeee-5eee-5eee-ffffeeee0006' },
     _class: 'reservas.modelo.Reserva'
   },
 
@@ -526,7 +526,7 @@ db.reservas.insertMany([
     idUsuario: '6b1d3d79-a0e5-41c9-bb5e-9b90e9b0c5e1',
     plazasReservadas: 1,
     cancelada: false,
-    evento: { $ref: 'eventos', $id: 'g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007' },
+    evento: { $ref: 'eventos', $id: 'e5e55555-eeee-5eee-5eee-ffffeeee0006' },
     _class: 'reservas.modelo.Reserva'
   }
 ])

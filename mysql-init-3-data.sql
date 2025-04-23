@@ -206,10 +206,10 @@ INSERT INTO evento (id, nombre, descripcion, organizador, plazas, cancelado, cat
 
 ('a1e11111-aaaa-1aaa-1aaa-bbbbbbbb0001', 'Conferencia sobre IA', 'Charla sobre avances en inteligencia artificial', 'admin', 100, false, 'ACADEMICOS', 'c039b3de-e34f-4cf2-a4c7-8dc73e71ad50'),
 ('c3e33333-cccc-3ccc-3ccc-dddddddd0003', 'Festival de Cine Independiente', 'Proyección de cortos y largometrajes', 'admin', 80, false, 'ENTRETENIMIENTO', '6a653204-fbfa-4f9a-96d8-c4051304e776'),
-('e5e55555-eeee-5eee-5eee-ffffeeee0005', 'Charla de Desarrollo Web', 'Introducción a tecnologías modernas de desarrollo web', 'admin', 40, false,'ACADEMICO', '82cd54d7-7a78-4c18-95d5-e897d946e94e'),
-('g7e77777-gggg-7ggg-7ggg-hhhhhhhh0007', 'Feria Cultural Internacional', 'Stands con comida, arte y costumbres del mundo', 'admin', 90, false, 'CULTURALES', 'c8021eac-195e-4174-b5be-0e441fb30d43'),
+('e5e55555-eeee-5eee-5eee-ffffeeee0005', 'Charla de Desarrollo Web', 'Introducción a tecnologías modernas de desarrollo web', 'admin', 40, false,'ACADEMICOS', '82cd54d7-7a78-4c18-95d5-e897d946e94e'),
+('e5e55555-eeee-5eee-5eee-ffffeeee0006', 'Feria Cultural Internacional', 'Stands con comida, arte y costumbres del mundo', 'admin', 90, false, 'CULTURALES', 'c8021eac-195e-4174-b5be-0e441fb30d43'),
 
-('h8e88888-hhhh-1hhh-5hhh-iiiiiiii0008', 'Taller de Ilustración Digital', 'Aprende a crear ilustraciones en tablet', 'admin', 30, true, 'CULTURALES', null),
-('i9e99999-iiii-2iii-6iii-jjjjjjjj0009', 'Campeonato Relámpago de Ajedrez', 'Competencia rápida en formato eliminatorio', 'admin', 16, true, 'DEPORTES', null),
-('j0e00000-jjjj-3jjj-7jjj-kkkkkkkk0010', 'Encuentro de Startups', 'Red de networking para emprendedores', 'admin', 60, true, 'ACADEMICOS', null),
-('k1e11112-kkkk-4kkk-8kkk-llllllll0011', 'Maratón de Series', 'Jornada de binge-watching colaborativo', 'admin', 50, true, 'ENTRETENIMIENTO', null);
+('e5e55555-eeee-5eee-5eee-ffffeeee0007', 'Taller de Ilustración Digital', 'Aprende a crear ilustraciones en tablet', 'admin', 30, true, 'CULTURALES', null),
+('e5e55555-eeee-5eee-5eee-ffffeeee0008', 'Campeonato Relámpago de Ajedrez', 'Competencia rápida en formato eliminatorio', 'admin', 16, true, 'DEPORTES', null),
+('e5e55555-eeee-5eee-5eee-ffffeeee0009', 'Encuentro de Startups', 'Red de networking para emprendedores', 'admin', 60, true, 'ACADEMICOS', null),
+('e5e55555-eeee-5eee-5eee-ffffeeee0010', 'Maratón de Series', 'Jornada de binge-watching colaborativo', 'admin', 50, true, 'ENTRETENIMIENTO', null);
