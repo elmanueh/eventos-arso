@@ -27,6 +27,8 @@ public class ServicioAuth implements IServicioAuth {
         usuarios.put("admin",
                 new Usuario(UUID.fromString("d9428888-122b-4cbb-bcb9-33a3ee6b9e9b"), "admin", "admin123",
                         "GESTOR_EVENTOS,PROPIETARIO_ESPACIOS,USUARIO"));
+        usuarios.put("organizador", new Usuario(UUID.fromString("f47ac10b-58cc-4372-a567-0e02b2c3d479"), "organizador",
+                "organizador123", "GESTOR_EVENTOS,PROPIETARIO_ESPACIOS"));
     }
 
     @Override
