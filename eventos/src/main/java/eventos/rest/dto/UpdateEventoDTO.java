@@ -9,7 +9,7 @@ public class UpdateEventoDTO {
 
 	private String descripcion;
 
-	@Min(value = 1, message = "El número de plazas del evento debe ser mayor que 0")
+	@Min(value = 0, message = "El número de plazas del evento debe ser mayor que 0")
 	private int numPlazas;
 
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)

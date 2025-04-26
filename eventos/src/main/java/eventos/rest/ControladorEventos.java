@@ -97,7 +97,7 @@ public class ControladorEventos {
 				: null;
 
 		LocalDateTime fechaFin = eventoDTO.getFechaFin() != null
-				? LocalDateTime.parse(eventoDTO.getFechaInicio())
+				? LocalDateTime.parse(eventoDTO.getFechaFin())
 				: null;
 
 		servicio.modificarEvento(id, eventoDTO.getDescripcion(),

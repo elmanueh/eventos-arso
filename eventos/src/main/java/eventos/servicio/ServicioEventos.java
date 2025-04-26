@@ -76,6 +76,9 @@ public class ServicioEventos implements IServicioEventos {
 		if (idEspacioFisico == null)
 			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo.");
 
+		if (fechaFin.isBefore(fechaInicio))
+			throw new IllegalArgumentException("La fecha de fin no puede ser anterior a la fecha de inicio.");
+
 		try {
 			Optional<EspacioFisico> espacioFisicoOptional = repositorioEspacio.findById(idEspacioFisico);
 
@@ -126,10 +129,16 @@ public class ServicioEventos implements IServicioEventos {
 		Evento evento = eventoOptional.get();
 		if (descripcion != null)
 			evento.setDescripcion(descripcion);
-		if (fechaInicio != null)
+		if (fechaInicio != null) {
+			if (fechaInicio.isAfter(evento.getFechaFinOcupacion()))
+				throw new IllegalArgumentException("La fecha de inicio no puede ser posterior a la fecha de fin.");
 			evento.setFechaInicio(fechaInicio);
-		if (fechaFin != null)
+		}
+		if (fechaFin != null) {
+			if (fechaFin.isBefore(evento.getFechaInicioOcupacion()))
+				throw new IllegalArgumentException("La fecha de fin no puede ser anterior a la fecha de inicio.");
 			evento.setFechaFin(fechaFin);
+		}
 		if (numPlazas != 0) {
 			if (evento.getOcupacion() != null && evento.getNumPlazas() > numPlazas) {
 				int numPlazasReservadas = servicioReservasAPI.validadReservas(idEvento);
