@@ -34,6 +34,7 @@ public class EventoMapper {
 		resumen.setCancelado(evento.isCancelado());
 		resumen.setNumPlazas(evento.getNumPlazas());
 		resumen.setFechaInicio(evento.isCancelado() ? null : evento.getOcupacion().getFechaInicio().toString());
+		resumen.setFechaFin(evento.isCancelado() ? null : evento.getOcupacion().getFechaFin().toString());
 
 		return resumen;
 	}
