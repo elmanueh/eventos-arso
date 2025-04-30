@@ -14,6 +14,8 @@ public class EventoResponseDTO {
 	private String fechaFin;
 	private UUID espacioFisico;
 
+	private int numPlazasDisponibles;
+
 	public EventoResponseDTO() {
 	}
 
@@ -95,6 +97,14 @@ public class EventoResponseDTO {
 
 	public void setEspacioFisico(UUID espacioFisico) {
 		this.espacioFisico = espacioFisico;
+	}
+
+	public void setNumPlazasDisponibles(int numPlazasDisponibles) {
+		this.numPlazasDisponibles = numPlazasDisponibles;
+	}
+
+	public int getNumPlazasDisponibles() {
+		return numPlazasDisponibles;
 	}
 
 }

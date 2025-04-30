@@ -39,16 +39,19 @@ import eventos.rest.dto.UpdateEventoDTO;
 import eventos.rest.hateoas.EventoResumenAssembler;
 import eventos.rest.mapper.EventoMapper;
 import eventos.servicio.IServicioEventos;
+import eventos.servicio.reservas.IServicioReservasAPI;
 import eventos.servicio.reservas.exception.RetrofitException;
 
 @RestController
 @RequestMapping("/eventos")
 public class ControladorEventos {
 	private final IServicioEventos servicio;
+	private final IServicioReservasAPI servicioReservasAPI;
 
 	@Autowired
-	public ControladorEventos(IServicioEventos servicio) {
+	public ControladorEventos(IServicioEventos servicio, IServicioReservasAPI servicioReservasAPI) {
 		this.servicio = servicio;
+		this.servicioReservasAPI = servicioReservasAPI;
 	}
 
 	@Autowired
@@ -59,11 +62,13 @@ public class ControladorEventos {
 
 	@GetMapping("/{id}")
 	@PreAuthorize("hasAnyAuthority('GESTOR_EVENTOS', 'USUARIO')")
-	public EntityModel<EventoResponseDTO> getEvento(@PathVariable UUID id) throws EntidadNoEncontrada {
+	public EntityModel<EventoResponseDTO> getEvento(@PathVariable UUID id)
+			throws EntidadNoEncontrada, RetrofitException {
 		Evento evento = servicio.recuperarEvento(id);
 		EventoResponseDTO eventoDTO = EventoMapper.toDTO(evento);
 
-		// Envolver el DTO con EntityModel y agregar enlace self
+		eventoDTO.setNumPlazasDisponibles(servicioReservasAPI.validadReservas(id));
+
 		EntityModel<EventoResponseDTO> model = EntityModel.of(eventoDTO);
 		model.add(
 				WebMvcLinkBuilder.linkTo(
@@ -118,9 +123,14 @@ public class ControladorEventos {
 	@PreAuthorize("hasAnyAuthority('GESTOR_EVENTOS', 'USUARIO')")
 	public PagedModel<EntityModel<EventoResumen>> getlistadoPaginado(@RequestParam(defaultValue = "0") int mes,
 			@RequestParam(defaultValue = "0") int año,
-			Pageable pageable) throws EntidadNoEncontrada {
+			Pageable pageable) throws RetrofitException {
 
 		Page<EventoResumen> resultado = servicio.eventosDelMesPaginados(mes, año, pageable);
+
+		for (EventoResumen evento : resultado) {
+			evento.setNumPlazasDisponibles(servicioReservasAPI.validadReservas(evento.getId()));
+		}
+
 		return pagedResourcesAssembler.toModel(resultado, eventoResumenAssembler);
 	}
 
@@ -146,8 +156,14 @@ public class ControladorEventos {
 
 	@GetMapping("/gestor/{gestor}")
 	@PreAuthorize("hasAuthority('GESTOR_EVENTOS')")
-	public PagedModel<EntityModel<EventoResumen>> getEventosPorGestor(@PathVariable String gestor, Pageable pageable) {
+	public PagedModel<EntityModel<EventoResumen>> getEventosPorGestor(@PathVariable String gestor, Pageable pageable)
+			throws RetrofitException {
 		Page<EventoResumen> resultado = servicio.recuperarEventosPorGestor(gestor, pageable);
+
+		for (EventoResumen evento : resultado) {
+			evento.setNumPlazasDisponibles(servicioReservasAPI.validadReservas(evento.getId()));
+		}
+
 		return pagedResourcesAssembler.toModel(resultado, eventoResumenAssembler);
 	}
 

@@ -11,6 +11,8 @@ public class EventoResumen {
 	private int numPlazas;
 	private String fechaInicio;
 
+	private int numPlazasDisponibles;
+
 	public EventoResumen() {
 	}
 
@@ -60,6 +62,14 @@ public class EventoResumen {
 
 	public void setFechaInicio(String fechaInicio) {
 		this.fechaInicio = fechaInicio;
+	}
+
+	public int getNumPlazasDisponibles() {
+		return numPlazasDisponibles;
+	}
+
+	public void setNumPlazasDisponibles(int numPlazasDisponibles) {
+		this.numPlazasDisponibles = numPlazasDisponibles;
 	}
 
 }
