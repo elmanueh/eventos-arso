@@ -1,10 +1,14 @@
 package pasarela.auth;
 
 import java.time.Instant;
+import java.util.Base64;
 import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -31,6 +35,21 @@ public class JwtUtils {
 				.getBody();
 	}
 
+	public static Map<String, Object> decodeToken(String token) {
+
+		String[] chunks = token.split("\\.");
+
+		String payloadJson = new String(Base64.getUrlDecoder().decode(chunks[1]));
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			return objectMapper.readValue(payloadJson, new TypeReference<Map<String, Object>>() {
+			});
+		} catch (Exception e) {
+			throw new RuntimeException("Error decoding token", e);
+		}
+	}
+
 	public static Cookie crearCookie(String token) {
 		Cookie cookie = new Cookie("jwt", token);
 		cookie.setMaxAge((int) TIEMPO);
@@ -44,7 +63,7 @@ public class JwtUtils {
 		Cookie cookie = new Cookie("jwt", null);
 		cookie.setMaxAge(0);
 		cookie.setHttpOnly(true);
-	    cookie.setPath("/");
+		cookie.setPath("/");
 
 		return cookie;
 	}

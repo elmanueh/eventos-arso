@@ -85,7 +85,7 @@ public class ServicioReservas implements IServicioReservas {
 		Optional<Reserva> reservaOpt = repositorioReservas.findById(idReserva);
 
 		if (!reservaOpt.isPresent())
-			throw new EntidadNoEncontrada("No existe encuesta con id: " + idReserva);
+			throw new EntidadNoEncontrada("No existe reserva con id: " + idReserva);
 		return reservaOpt.get();
 	}
 
@@ -107,15 +107,15 @@ public class ServicioReservas implements IServicioReservas {
 		Integer totalPlazas = repositorioReservas.sumPlazasReservadasByEventoId(idEvento);
 		return (totalPlazas != null) ? totalPlazas : 0;
 	}
-	
-	 @Override
-	 public Page<ReservaResumen> recuperarReservasPorUsuario(UUID idUsuario, Pageable pageable) {
-		 if (idUsuario == null)
-				throw new IllegalArgumentException("idUsuario: no debe ser nulo");
-		 
-		 Page<ReservaResumen> reservas = repositorioReservas.findByIdUsuario(idUsuario, pageable)
-				 .map(ReservaMapper::toResumen);
-		 return reservas;
-	 }
+
+	@Override
+	public Page<ReservaResumen> recuperarReservasPorUsuario(UUID idUsuario, Pageable pageable) {
+		if (idUsuario == null)
+			throw new IllegalArgumentException("idUsuario: no debe ser nulo");
+
+		Page<ReservaResumen> reservas = repositorioReservas.findByIdUsuario(idUsuario, pageable)
+				.map(ReservaMapper::toResumen);
+		return reservas;
+	}
 
 }

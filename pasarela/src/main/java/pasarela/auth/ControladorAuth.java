@@ -1,13 +1,18 @@
 package pasarela.auth;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,6 +58,31 @@ public class ControladorAuth {
         response.addCookie(JwtUtils.eliminarCookie());
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<AuthResponseDto> obtenerUsuario(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        if (cookies == null)
+            return ResponseEntity.badRequest().build();
+
+        return Arrays.stream(cookies)
+                .filter(cookie -> "jwt".equals(cookie.getName()))
+                .map(Cookie::getValue)
+                .map(JwtUtils::decodeToken)
+                .map(claims -> {
+                    UUID idUsuario = UUID.fromString((String) claims.get("sub"));
+                    String nombreUsuario = (String) claims.get("username");
+                    String rolesUsuario = (String) claims.get("roles");
+
+                    AuthResponseDto authResponse = new AuthResponseDto();
+                    authResponse.setIdUsuario(idUsuario);
+                    authResponse.setNombreUsuario(nombreUsuario);
+                    authResponse.setRolesUsuario(rolesUsuario);
+                    return ResponseEntity.ok(authResponse);
+                })
+                .findFirst()
+                .orElse(ResponseEntity.badRequest().build());
     }
 
     private Map<String, Object> verificarCredenciales(String username, String password) {
