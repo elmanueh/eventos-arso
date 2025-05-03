@@ -141,7 +141,7 @@ public class ServicioEventos implements IServicioEventos {
 		}
 		if (numPlazas != 0) {
 			if (evento.getOcupacion() != null && evento.getNumPlazas() > numPlazas) {
-				int numPlazasReservadas = servicioReservasAPI.validadReservas(idEvento);
+				int numPlazasReservadas = servicioReservasAPI.obtenerPlazasReservadas(idEvento);
 				if (numPlazas < numPlazasReservadas) {
 					throw new IllegalStateException(
 							"El número de plazas del evento no puede ser menor al número de plazas reservadas en el evento con id "

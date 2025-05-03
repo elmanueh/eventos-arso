@@ -25,7 +25,7 @@ public class ServicioReservasAPI implements IServicioReservasAPI {
 	}
 
 	@Override
-	public int validadReservas(UUID idEvento) throws RetrofitException {
+	public int obtenerPlazasReservadas(UUID idEvento) throws RetrofitException {
 		try {
 			return reservasRest.obtenerPlazasReservadas(idEvento).execute().body();
 		} catch (IOException e) {

@@ -79,7 +79,7 @@ public class EventoResumen {
 	}
 
 	public void setNumPlazasDisponibles(int numPlazasDisponibles) {
-		this.numPlazasDisponibles = numPlazasDisponibles;
+		this.numPlazasDisponibles = numPlazas - numPlazasDisponibles;
 	}
 
 }

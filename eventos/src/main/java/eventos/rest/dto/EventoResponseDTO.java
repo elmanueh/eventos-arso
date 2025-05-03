@@ -100,7 +100,7 @@ public class EventoResponseDTO {
 	}
 
 	public void setNumPlazasDisponibles(int numPlazasDisponibles) {
-		this.numPlazasDisponibles = numPlazasDisponibles;
+		this.numPlazasDisponibles = numPlazas - numPlazasDisponibles;
 	}
 
 	public int getNumPlazasDisponibles() {

@@ -67,7 +67,7 @@ public class ControladorEventos {
 		Evento evento = servicio.recuperarEvento(id);
 		EventoResponseDTO eventoDTO = EventoMapper.toDTO(evento);
 
-		eventoDTO.setNumPlazasDisponibles(servicioReservasAPI.validadReservas(id));
+		eventoDTO.setNumPlazasDisponibles(servicioReservasAPI.obtenerPlazasReservadas(id));
 
 		EntityModel<EventoResponseDTO> model = EntityModel.of(eventoDTO);
 		model.add(
@@ -128,7 +128,7 @@ public class ControladorEventos {
 		Page<EventoResumen> resultado = servicio.eventosDelMesPaginados(mes, año, pageable);
 
 		for (EventoResumen evento : resultado) {
-			evento.setNumPlazasDisponibles(servicioReservasAPI.validadReservas(evento.getId()));
+			evento.setNumPlazasDisponibles(servicioReservasAPI.obtenerPlazasReservadas(evento.getId()));
 		}
 
 		return pagedResourcesAssembler.toModel(resultado, eventoResumenAssembler);
@@ -161,7 +161,7 @@ public class ControladorEventos {
 		Page<EventoResumen> resultado = servicio.recuperarEventosPorGestor(gestor, pageable);
 
 		for (EventoResumen evento : resultado) {
-			evento.setNumPlazasDisponibles(servicioReservasAPI.validadReservas(evento.getId()));
+			evento.setNumPlazasDisponibles(servicioReservasAPI.obtenerPlazasReservadas(evento.getId()));
 		}
 
 		return pagedResourcesAssembler.toModel(resultado, eventoResumenAssembler);
