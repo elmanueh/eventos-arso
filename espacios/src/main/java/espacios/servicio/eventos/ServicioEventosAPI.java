@@ -43,7 +43,6 @@ public class ServicioEventosAPI implements IServicioEventosAPI {
 
 			return response;
 		} catch (Exception e) {
-			System.out.println(e);
 			throw new ServicioEventosException("Error al buscar espacios físicos libres");
 		}
 	}
