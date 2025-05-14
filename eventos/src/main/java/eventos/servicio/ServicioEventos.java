@@ -79,7 +79,6 @@ public class ServicioEventos implements IServicioEventos {
 		if (fechaFin.isBefore(fechaInicio))
 			throw new IllegalArgumentException("La fecha de fin no puede ser anterior a la fecha de inicio.");
 
-		try {
 			Optional<EspacioFisico> espacioFisicoOptional = repositorioEspacio.findById(idEspacioFisico);
 
 			if (!espacioFisicoOptional.isPresent())
@@ -105,10 +104,6 @@ public class ServicioEventos implements IServicioEventos {
 			eventosPublisher.publicarEventoCreado(id, evento);
 
 			return id;
-		} catch (EntidadNoEncontrada e) {
-			throw new EntidadNoEncontrada("Error al encontrar el espacio físico con id "
-					+ idEspacioFisico + ".");
-		}
 	}
 
 	@Override

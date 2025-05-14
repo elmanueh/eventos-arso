@@ -56,14 +56,10 @@ public class ServicioEspacios implements IServicioEspacios {
 		EspacioFisico espacio = new EspacioFisico(nombre, propietario, capacidad, direccionPostal, latitud, longidud,
 				descripcion);
 
-		try {
 			UUID id = repositorioEspacioFisico.add(espacio);
 			eventProducer.publicarEspacioCreado(id, espacio);
 
 			return id;
-		} catch (RepositorioException e) {
-			throw new RepositorioException("Error al dar de alta el espacio físico con nombre " + nombre + ".");
-		}
 	}
 
 	@Override
@@ -75,16 +71,9 @@ public class ServicioEspacios implements IServicioEspacios {
 		if (puntosInteres == null || puntosInteres.isEmpty())
 			throw new IllegalArgumentException("La lista de puntos de interés no puede ser nula o vacía.");
 
-		try {
 			EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
 			espacioFisico.setPuntosInteres(puntosInteres);
 			repositorioEspacioFisico.update(espacioFisico);
-		} catch (RepositorioException e) {
-			throw new RepositorioException(
-					"Error al asignar los puntos de interés al espacio fisico con id " + idEspacioFisico + ".");
-		} catch (EntidadNoEncontrada e) {
-			throw new EntidadNoEncontrada("Error al encontrar el espacio físico con id " + idEspacioFisico + ".");
-		}
 	}
 
 	@Override
@@ -100,7 +89,6 @@ public class ServicioEspacios implements IServicioEspacios {
 		if (descripcion != null && descripcion.isEmpty())
 			throw new IllegalArgumentException("La descripción del espacio físico no puede ser vacía.");
 
-		try {
 			EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
 
 			if (nombre != null)
@@ -117,11 +105,6 @@ public class ServicioEspacios implements IServicioEspacios {
 
 			repositorioEspacioFisico.update(espacioFisico);
 			eventProducer.publicarEspacioModificado(espacioFisico.getId(), espacioFisico);
-		} catch (RepositorioException e) {
-			throw new RepositorioException("Error al modificar el espacio físico con id " + idEspacioFisico + ".");
-		} catch (EntidadNoEncontrada e) {
-			throw new EntidadNoEncontrada("Error al encontrar el espacio físico con id " + idEspacioFisico + ".");
-		}
 	}
 
 	@Override
@@ -132,17 +115,10 @@ public class ServicioEspacios implements IServicioEspacios {
 			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo.");
 
 		if (!servicioEventosAPI.isAlgunaOcupacion(idEspacioFisico)) {
-			try {
 				EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
 				espacioFisico.cerrar();
 				repositorioEspacioFisico.update(espacioFisico);
 				eventProducer.publicarEspacioEstadoModificado(idEspacioFisico, true);
-			} catch (RepositorioException e) {
-				throw new RepositorioException(
-						"Error al dar de baja el espacio físico con id " + idEspacioFisico + ".");
-			} catch (EntidadNoEncontrada e) {
-				throw new EntidadNoEncontrada("Error al encontrar el espacio físico con id " + idEspacioFisico + ".");
-			}
 		}
 	}
 
@@ -152,16 +128,10 @@ public class ServicioEspacios implements IServicioEspacios {
 		if (idEspacioFisico == null)
 			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo.");
 
-		try {
 			EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
 			espacioFisico.activar();
 			repositorioEspacioFisico.update(espacioFisico);
 			eventProducer.publicarEspacioEstadoModificado(idEspacioFisico, false);
-		} catch (RepositorioException e) {
-			throw new RepositorioException("Error al activar el espacio físico con id " + idEspacioFisico + ".");
-		} catch (EntidadNoEncontrada e) {
-			throw new EntidadNoEncontrada("Error al encontrar el espacio físico con id " + idEspacioFisico + ".");
-		}
 	}
 
 	@Override
