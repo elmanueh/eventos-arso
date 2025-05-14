@@ -40,7 +40,7 @@ import eventos.rest.hateoas.EventoResumenAssembler;
 import eventos.rest.mapper.EventoMapper;
 import eventos.servicio.IServicioEventos;
 import eventos.servicio.reservas.IServicioReservasAPI;
-import eventos.servicio.reservas.exception.RetrofitException;
+import eventos.servicio.reservas.exception.ServicioReservasException;
 
 @RestController
 @RequestMapping("/eventos")
@@ -63,7 +63,7 @@ public class ControladorEventos {
 	@GetMapping("/{id}")
 	@PreAuthorize("hasAnyAuthority('GESTOR_EVENTOS', 'USUARIO')")
 	public EntityModel<EventoResponseDTO> getEvento(@PathVariable UUID id)
-			throws EntidadNoEncontrada, RetrofitException {
+			throws EntidadNoEncontrada, ServicioReservasException {
 		Evento evento = servicio.recuperarEvento(id);
 		EventoResponseDTO eventoDTO = EventoMapper.toDTO(evento);
 
@@ -95,7 +95,7 @@ public class ControladorEventos {
 	@PatchMapping("/{id}")
 	@PreAuthorize("hasAuthority('GESTOR_EVENTOS')")
 	public ResponseEntity<Void> updateEvento(@PathVariable UUID id, @Valid @RequestBody UpdateEventoDTO eventoDTO)
-			throws EntidadNoEncontrada, RetrofitException {
+			throws EntidadNoEncontrada, ServicioReservasException {
 
 		LocalDateTime fechaInicio = eventoDTO.getFechaInicio() != null
 				? LocalDateTime.parse(eventoDTO.getFechaInicio())
@@ -123,7 +123,7 @@ public class ControladorEventos {
 	@PreAuthorize("hasAnyAuthority('GESTOR_EVENTOS', 'USUARIO')")
 	public PagedModel<EntityModel<EventoResumen>> getlistadoPaginado(@RequestParam(defaultValue = "0") int mes,
 			@RequestParam(defaultValue = "0") int año,
-			Pageable pageable) throws RetrofitException {
+			Pageable pageable) throws ServicioReservasException {
 
 		Page<EventoResumen> resultado = servicio.eventosDelMesPaginados(mes, año, pageable);
 
@@ -157,7 +157,7 @@ public class ControladorEventos {
 	@GetMapping("/gestor/{gestor}")
 	@PreAuthorize("hasAuthority('GESTOR_EVENTOS')")
 	public PagedModel<EntityModel<EventoResumen>> getEventosPorGestor(@PathVariable String gestor, Pageable pageable)
-			throws RetrofitException {
+			throws ServicioReservasException {
 		Page<EventoResumen> resultado = servicio.recuperarEventosPorGestor(gestor, pageable);
 
 		for (EventoResumen evento : resultado) {

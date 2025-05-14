@@ -6,7 +6,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import eventos.servicio.reservas.exception.RetrofitException;
+import eventos.servicio.reservas.exception.ServicioReservasException;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
@@ -25,11 +25,11 @@ public class ServicioReservasAPI implements IServicioReservasAPI {
 	}
 
 	@Override
-	public int obtenerPlazasReservadas(UUID idEvento) throws RetrofitException {
+	public int obtenerPlazasReservadas(UUID idEvento) throws ServicioReservasException {
 		try {
 			return reservasRest.obtenerPlazasReservadas(idEvento).execute().body();
 		} catch (IOException e) {
-			throw new RetrofitException("Error al consultar las plazas reservadas del evento con id " + idEvento);
+			throw new ServicioReservasException("Error al consultar las plazas reservadas del evento con id " + idEvento);
 		}
 	}
 

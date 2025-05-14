@@ -11,7 +11,7 @@ import eventos.modelo.Evento;
 import eventos.modelo.EventoCategoria;
 import eventos.repositorio.exception.EntidadNoEncontrada;
 import eventos.rest.dto.EventoResumen;
-import eventos.servicio.reservas.exception.RetrofitException;
+import eventos.servicio.reservas.exception.ServicioReservasException;
 
 public interface IServicioEventos {
 
@@ -22,7 +22,7 @@ public interface IServicioEventos {
 			throws EntidadNoEncontrada;
 
 	void modificarEvento(UUID idEvento, String descripcion, LocalDateTime fechaInicio, LocalDateTime fechaFin,
-			int numPlazas, UUID idEspacioFisico) throws EntidadNoEncontrada, RetrofitException;
+			int numPlazas, UUID idEspacioFisico) throws EntidadNoEncontrada, ServicioReservasException;
 
 	void cancelarEvento(UUID idEvento) throws EntidadNoEncontrada;
 

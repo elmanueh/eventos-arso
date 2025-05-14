@@ -14,7 +14,7 @@ import espacios.repositorio.exception.EntidadNoEncontrada;
 import espacios.repositorio.exception.RepositorioException;
 import espacios.servicio.core.FactoriaServicios;
 import espacios.servicio.eventos.IServicioEventosAPI;
-import espacios.servicio.eventos.exception.RetrofitException;
+import espacios.servicio.eventos.exception.ServicioEventosException;
 
 public class ServicioEspacios implements IServicioEspacios {
 
@@ -89,7 +89,7 @@ public class ServicioEspacios implements IServicioEspacios {
 
 	@Override
 	public void modificarEspacioFisico(UUID idEspacioFisico, String nombre, int capacidad, String descripcion)
-			throws RepositorioException, EntidadNoEncontrada, RetrofitException, IllegalStateException {
+			throws RepositorioException, EntidadNoEncontrada, ServicioEventosException, IllegalStateException {
 
 		if (idEspacioFisico == null)
 			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo.");
@@ -126,7 +126,7 @@ public class ServicioEspacios implements IServicioEspacios {
 
 	@Override
 	public void bajaEspacioFisico(UUID idEspacioFisico)
-			throws RepositorioException, EntidadNoEncontrada, RetrofitException {
+			throws RepositorioException, EntidadNoEncontrada, ServicioEventosException {
 
 		if (idEspacioFisico == null)
 			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo.");
@@ -166,7 +166,7 @@ public class ServicioEspacios implements IServicioEspacios {
 
 	@Override
 	public List<EspacioFisico> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin,
-			int capacidad) throws RepositorioException, RetrofitException {
+			int capacidad) throws RepositorioException, ServicioEventosException {
 
 		if (fechaInicio == null)
 			throw new IllegalArgumentException("La fecha de inicio no puede ser nula.");

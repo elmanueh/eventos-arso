@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-import espacios.servicio.eventos.exception.RetrofitException;
+import espacios.servicio.eventos.exception.ServicioEventosException;
 import io.github.cdimascio.dotenv.Dotenv;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -24,18 +24,18 @@ public class ServicioEventosAPI implements IServicioEventosAPI {
 	}
 
 	@Override
-	public boolean isAlgunaOcupacion(UUID idEspacio) throws RetrofitException {
+	public boolean isAlgunaOcupacion(UUID idEspacio) throws ServicioEventosException {
 		try {
 			Boolean response = eventosRest.isAlgunaOcupacion(idEspacio).execute().body();
 			return response.booleanValue();
 		} catch (IOException e) {
-			throw new RetrofitException("Error al consultar la ocupación del espacio físico con id " + idEspacio);
+			throw new ServicioEventosException("Error al consultar la ocupación del espacio físico con id " + idEspacio);
 		}
 	}
 
 	@Override
 	public List<UUID> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin,
-			int capacidad) throws RetrofitException {
+			int capacidad) throws ServicioEventosException {
 		try {
 			List<UUID> response = eventosRest
 					.buscarEspaciosFisicosLibres(fechaInicio.toString(), fechaFin.toString(), capacidad)
@@ -44,16 +44,16 @@ public class ServicioEventosAPI implements IServicioEventosAPI {
 			return response;
 		} catch (Exception e) {
 			System.out.println(e);
-			throw new RetrofitException("Error al buscar espacios físicos libres");
+			throw new ServicioEventosException("Error al buscar espacios físicos libres");
 		}
 	}
 
 	@Override
-	public int validarCapacidad(UUID idEspacioFisico) throws RetrofitException {
+	public int validarCapacidad(UUID idEspacioFisico) throws ServicioEventosException {
 		try {
 			return eventosRest.obtenerNumPlazasMayor(idEspacioFisico).execute().body().intValue();
 		} catch (IOException e) {
-			throw new RetrofitException(
+			throw new ServicioEventosException(
 					"Error al consultar el número de plazas mayor de un evento en el espacio físico con id "
 							+ idEspacioFisico);
 		}

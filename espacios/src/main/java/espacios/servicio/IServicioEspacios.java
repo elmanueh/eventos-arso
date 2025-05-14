@@ -9,7 +9,7 @@ import espacios.modelo.EspacioFisico;
 import espacios.modelo.PuntoInteres;
 import espacios.repositorio.exception.EntidadNoEncontrada;
 import espacios.repositorio.exception.RepositorioException;
-import espacios.servicio.eventos.exception.RetrofitException;
+import espacios.servicio.eventos.exception.ServicioEventosException;
 
 public interface IServicioEspacios {
 
@@ -22,14 +22,14 @@ public interface IServicioEspacios {
 			throws RepositorioException, EntidadNoEncontrada;
 
 	void modificarEspacioFisico(UUID idEspacioFisico, String nombre, int capacidad, String descripcion)
-			throws RepositorioException, EntidadNoEncontrada, RetrofitException, IllegalStateException;
+			throws RepositorioException, EntidadNoEncontrada, ServicioEventosException, IllegalStateException;
 
-	void bajaEspacioFisico(UUID idEspacioFisico) throws RepositorioException, EntidadNoEncontrada, RetrofitException;
+	void bajaEspacioFisico(UUID idEspacioFisico) throws RepositorioException, EntidadNoEncontrada, ServicioEventosException;
 
 	void activarEspacioFisico(UUID idEspacioFisico) throws RepositorioException, EntidadNoEncontrada;
 
 	List<EspacioFisico> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin, int capacidad)
-			throws RepositorioException, RetrofitException;
+			throws RepositorioException, ServicioEventosException;
 
 	List<EspacioFisico> recuperarEspaciosPorPropietario(String propietario);
 

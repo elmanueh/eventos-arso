@@ -22,7 +22,7 @@ import eventos.repositorio.exception.EntidadNoEncontrada;
 import eventos.rest.dto.EventoResumen;
 import eventos.rest.mapper.EventoMapper;
 import eventos.servicio.reservas.IServicioReservasAPI;
-import eventos.servicio.reservas.exception.RetrofitException;
+import eventos.servicio.reservas.exception.ServicioReservasException;
 
 @Service
 @Transactional
@@ -113,7 +113,7 @@ public class ServicioEventos implements IServicioEventos {
 
 	@Override
 	public void modificarEvento(UUID idEvento, String descripcion, LocalDateTime fechaInicio, LocalDateTime fechaFin,
-			int numPlazas, UUID idEspacioFisico) throws EntidadNoEncontrada, RetrofitException {
+			int numPlazas, UUID idEspacioFisico) throws EntidadNoEncontrada, ServicioReservasException {
 
 		if (idEvento == null)
 			throw new IllegalArgumentException("El id del evento no puede ser nulo.");

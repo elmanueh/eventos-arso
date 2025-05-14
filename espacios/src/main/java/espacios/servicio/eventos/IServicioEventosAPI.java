@@ -4,14 +4,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-import espacios.servicio.eventos.exception.RetrofitException;
+import espacios.servicio.eventos.exception.ServicioEventosException;
 
 public interface IServicioEventosAPI {
 
-	boolean isAlgunaOcupacion(UUID idEspacio) throws RetrofitException;
+	boolean isAlgunaOcupacion(UUID idEspacio) throws ServicioEventosException;
 
 	List<UUID> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin, int capacidad)
-			throws RetrofitException;
+			throws ServicioEventosException;
 
-	int validarCapacidad(UUID idEspacioFisico) throws RetrofitException;
+	int validarCapacidad(UUID idEspacioFisico) throws ServicioEventosException;
 }
