@@ -11,6 +11,7 @@ public class ServicioEventosExceptionHandler implements ExceptionMapper<Servicio
 
 	@Override
 	public Response toResponse(ServicioEventosException arg0) {
-		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(new MessageError(Response.Status.INTERNAL_SERVER_ERROR, arg0.getMessage())).build();
+		return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+				.entity(new MessageError(Response.Status.INTERNAL_SERVER_ERROR, arg0.getMessage())).build();
 	}
 }

@@ -1,8 +1,9 @@
 package espacios.utils;
 
+import java.util.UUID;
+
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
-import java.util.UUID;
 
 @Converter(autoApply = true)
 public class UUIDConverter implements AttributeConverter<UUID, String> {

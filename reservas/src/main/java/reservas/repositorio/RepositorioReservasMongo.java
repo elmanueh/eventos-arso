@@ -13,5 +13,6 @@ public interface RepositorioReservasMongo extends RepositorioReservas, MongoRepo
             "{ $group: { _id: null, totalPlazas: { $sum: '$plazasReservadas' } } }",
             "{ $project: { _id: 0, totalPlazas: '$totalPlazas' } }"
     })
+    @Override
     Integer sumPlazasReservadasByEventoId(UUID idEvento);
 }

@@ -56,10 +56,10 @@ public class ServicioEspacios implements IServicioEspacios {
 		EspacioFisico espacio = new EspacioFisico(nombre, propietario, capacidad, direccionPostal, latitud, longidud,
 				descripcion);
 
-			UUID id = repositorioEspacioFisico.add(espacio);
-			eventProducer.publicarEspacioCreado(id, espacio);
+		UUID id = repositorioEspacioFisico.add(espacio);
+		eventProducer.publicarEspacioCreado(id, espacio);
 
-			return id;
+		return id;
 	}
 
 	@Override
@@ -71,9 +71,9 @@ public class ServicioEspacios implements IServicioEspacios {
 		if (puntosInteres == null || puntosInteres.isEmpty())
 			throw new IllegalArgumentException("La lista de puntos de interés no puede ser nula o vacía.");
 
-			EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
-			espacioFisico.setPuntosInteres(puntosInteres);
-			repositorioEspacioFisico.update(espacioFisico);
+		EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
+		espacioFisico.setPuntosInteres(puntosInteres);
+		repositorioEspacioFisico.update(espacioFisico);
 	}
 
 	@Override
@@ -89,22 +89,23 @@ public class ServicioEspacios implements IServicioEspacios {
 		if (descripcion != null && descripcion.isEmpty())
 			throw new IllegalArgumentException("La descripción del espacio físico no puede ser vacía.");
 
-			EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
+		EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
 
-			if (nombre != null)
-				espacioFisico.setNombre(nombre);
-			if (capacidad != 0) {
-				int numPlazasMax = servicioEventosAPI.validarCapacidad(idEspacioFisico);
-				if (numPlazasMax > capacidad) {
-					throw new IllegalStateException("La capacidad del espacio físico con id " + idEspacioFisico + " no puede ser menor al número de plazas mayor de un evento.");
-				}
-				espacioFisico.setCapacidad(capacidad);
+		if (nombre != null)
+			espacioFisico.setNombre(nombre);
+		if (capacidad != 0) {
+			int numPlazasMax = servicioEventosAPI.validarCapacidad(idEspacioFisico);
+			if (numPlazasMax > capacidad) {
+				throw new IllegalStateException("La capacidad del espacio físico con id " + idEspacioFisico
+						+ " no puede ser menor al número de plazas mayor de un evento.");
 			}
-			if (descripcion != null)
-				espacioFisico.setDescripcion(descripcion);
+			espacioFisico.setCapacidad(capacidad);
+		}
+		if (descripcion != null)
+			espacioFisico.setDescripcion(descripcion);
 
-			repositorioEspacioFisico.update(espacioFisico);
-			eventProducer.publicarEspacioModificado(espacioFisico.getId(), espacioFisico);
+		repositorioEspacioFisico.update(espacioFisico);
+		eventProducer.publicarEspacioModificado(espacioFisico.getId(), espacioFisico);
 	}
 
 	@Override
@@ -115,10 +116,10 @@ public class ServicioEspacios implements IServicioEspacios {
 			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo.");
 
 		if (!servicioEventosAPI.isAlgunaOcupacion(idEspacioFisico)) {
-				EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
-				espacioFisico.cerrar();
-				repositorioEspacioFisico.update(espacioFisico);
-				eventProducer.publicarEspacioEstadoModificado(idEspacioFisico, true);
+			EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
+			espacioFisico.cerrar();
+			repositorioEspacioFisico.update(espacioFisico);
+			eventProducer.publicarEspacioEstadoModificado(idEspacioFisico, true);
 		}
 	}
 
@@ -128,10 +129,10 @@ public class ServicioEspacios implements IServicioEspacios {
 		if (idEspacioFisico == null)
 			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo.");
 
-			EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
-			espacioFisico.activar();
-			repositorioEspacioFisico.update(espacioFisico);
-			eventProducer.publicarEspacioEstadoModificado(idEspacioFisico, false);
+		EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
+		espacioFisico.activar();
+		repositorioEspacioFisico.update(espacioFisico);
+		eventProducer.publicarEspacioEstadoModificado(idEspacioFisico, false);
 	}
 
 	@Override
@@ -155,7 +156,7 @@ public class ServicioEspacios implements IServicioEspacios {
 	public List<EspacioFisico> recuperarEspaciosPorPropietario(String propietario) {
 		if (propietario == null)
 			throw new IllegalArgumentException("El propietario no puede ser nulo.");
-		
+
 		return repositorioEspacioFisico.getEspaciosFisicosByPropietario(propietario);
 	}
 

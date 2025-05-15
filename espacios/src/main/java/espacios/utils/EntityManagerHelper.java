@@ -10,7 +10,7 @@ import javax.persistence.Persistence;
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class EntityManagerHelper {
-	private static EntityManagerFactory entityManagerFactory;
+	private static final EntityManagerFactory entityManagerFactory;
 
 	private static final ThreadLocal<EntityManager> entityManagerHolder;
 
@@ -24,7 +24,7 @@ public class EntityManagerHelper {
 
 		entityManagerFactory = Persistence.createEntityManagerFactory("espacios", props);
 
-		entityManagerHolder = new ThreadLocal<EntityManager>();
+		entityManagerHolder = new ThreadLocal<>();
 	}
 
 	public static EntityManager getEntityManager() {

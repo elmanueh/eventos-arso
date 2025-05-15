@@ -3,10 +3,9 @@ package eventos.servicio;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import eventos.modelo.EspacioFisico;
 import eventos.repositorio.RepositorioEspacios;
@@ -22,6 +21,7 @@ public class ServicioEspacios implements IServicioEspacios {
 		this.repositorioEspacios = repositorioEspacios;
 	}
 
+	@Override
 	public void crearEspacio(UUID idEspacio, boolean cancelado, int capacidad) {
 		EspacioFisico espacio = new EspacioFisico();
 		espacio.setId(idEspacio);
@@ -31,6 +31,7 @@ public class ServicioEspacios implements IServicioEspacios {
 		repositorioEspacios.save(espacio);
 	}
 
+	@Override
 	public void modificarEspacio(UUID idEspacio, int capacidad) {
 		Optional<EspacioFisico> espacioOpt = repositorioEspacios.findById(idEspacio);
 
@@ -43,6 +44,7 @@ public class ServicioEspacios implements IServicioEspacios {
 		repositorioEspacios.save(espacio);
 	}
 
+	@Override
 	public void cambiarEstadoEspacio(UUID idEspacio, boolean isCancelado) {
 		Optional<EspacioFisico> espacioOpt = repositorioEspacios.findById(idEspacio);
 

@@ -24,7 +24,8 @@ public interface IServicioEspacios {
 	void modificarEspacioFisico(UUID idEspacioFisico, String nombre, int capacidad, String descripcion)
 			throws RepositorioException, EntidadNoEncontrada, ServicioEventosException, IllegalStateException;
 
-	void bajaEspacioFisico(UUID idEspacioFisico) throws RepositorioException, EntidadNoEncontrada, ServicioEventosException;
+	void bajaEspacioFisico(UUID idEspacioFisico)
+			throws RepositorioException, EntidadNoEncontrada, ServicioEventosException;
 
 	void activarEspacioFisico(UUID idEspacioFisico) throws RepositorioException, EntidadNoEncontrada;
 

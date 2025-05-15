@@ -24,10 +24,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import reservas.modelo.Reserva;
 import reservas.repositorio.exception.EntidadNoEncontrada;
+import reservas.rest.dto.CreateReservaDTO;
 import reservas.rest.dto.ReservaResponseDTO;
 import reservas.rest.dto.ReservaResumen;
 import reservas.rest.hateoas.ReservaResumenAssembler;
-import reservas.rest.dto.CreateReservaDTO;
 import reservas.rest.mapper.ReservaMapper;
 import reservas.servicio.IServicioReservas;
 
@@ -49,6 +49,7 @@ public class ControladorReservas implements ReservasApi {
 
 	@PostMapping()
 	@PreAuthorize("hasAuthority('USUARIO')")
+	@Override
 	public ResponseEntity<Void> createReserva(@Valid @RequestBody CreateReservaDTO reservaDTO)
 			throws EntidadNoEncontrada {
 
@@ -60,6 +61,7 @@ public class ControladorReservas implements ReservasApi {
 
 	@GetMapping("/{id}")
 	@PreAuthorize("hasAuthority('USUARIO')")
+	@Override
 	public EntityModel<ReservaResponseDTO> getReserva(@PathVariable UUID id) throws EntidadNoEncontrada {
 		Reserva reserva = servicio.recuperarReserva(id);
 		ReservaResponseDTO reservaDTO = ReservaMapper.toDTO(reserva);
@@ -77,6 +79,7 @@ public class ControladorReservas implements ReservasApi {
 
 	@GetMapping("/evento/{id}")
 	@PreAuthorize("hasAuthority('GESTOR_EVENTOS')")
+	@Override
 	public PagedModel<EntityModel<ReservaResumen>> getListadoPaginado(@PathVariable UUID id, Pageable pageable)
 			throws EntidadNoEncontrada {
 		Page<ReservaResumen> resultado = servicio.recuperarTodasReservas(id, pageable);
@@ -84,12 +87,14 @@ public class ControladorReservas implements ReservasApi {
 	}
 
 	@GetMapping("/evento/{idEvento}/plazasReservadas")
+	@Override
 	public ResponseEntity<Integer> obtenerPlazasReservadas(@PathVariable UUID idEvento) throws EntidadNoEncontrada {
 		return ResponseEntity.ok(servicio.recuperarNumPlazasReservadas(idEvento));
 	}
 
 	@GetMapping("/usuario/{idUsuario}")
 	@PreAuthorize("hasAuthority('USUARIO')")
+	@Override
 	public PagedModel<EntityModel<ReservaResumen>> getReservasPorUsuario(@PathVariable UUID idUsuario,
 			Pageable pageable) throws EntidadNoEncontrada {
 		Page<ReservaResumen> resultado = servicio.recuperarReservasPorUsuario(idUsuario, pageable);

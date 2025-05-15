@@ -23,18 +23,18 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             @NonNull FilterChain chain) throws IOException, ServletException {
 
         // Evitar filtrado en la ruta de login y logout
-    	if (request.getServletPath().equals("/auth/login") || request.getServletPath().equals("/auth/logout")) {
-    	    chain.doFilter(request, response);
-    	    return;
-    	}
+        if (request.getServletPath().equals("/auth/login") || request.getServletPath().equals("/auth/logout")) {
+            chain.doFilter(request, response);
+            return;
+        }
 
         String token = null;
 
         String authorization = request.getHeader("Authorization");
 
-		if (authorization != null && authorization.startsWith("Bearer ")) {
-			token = authorization.substring("Bearer ".length()).trim();
-		} else if (request.getCookies() != null) {
+        if (authorization != null && authorization.startsWith("Bearer ")) {
+            token = authorization.substring("Bearer ".length()).trim();
+        } else if (request.getCookies() != null) {
             token = Arrays.stream(request.getCookies())
                     .filter(cookie -> cookie.getName().equals("jwt"))
                     .map(Cookie::getValue)
@@ -56,7 +56,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 return;
             }
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "El token JWT no es correcto");
             return;
         }

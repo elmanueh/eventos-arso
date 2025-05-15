@@ -5,7 +5,7 @@ import java.util.Map;
 import javax.ws.rs.core.Response.Status;
 
 public class MessageError {
-	
+
 	private String status;
 	private String error;
 	private String message;
@@ -16,7 +16,7 @@ public class MessageError {
 		this.error = status.getReasonPhrase();
 		this.message = message;
 	}
-	
+
 	public MessageError(Status httpStatus, String message, Map<String, String> validationErrors) {
 		this(httpStatus, message);
 		this.validationErrors = validationErrors;

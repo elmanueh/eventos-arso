@@ -25,13 +25,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
             @NonNull FilterChain chain) throws IOException, ServletException {
-    	
-    	if (request.getServletPath().matches("^/eventos/ocupacion/.+$") 
-    			|| request.getServletPath().matches("^/eventos/espacioslibres$") 
-    			|| request.getServletPath().matches("^/eventos/espacio/.+$")) {
-    	    chain.doFilter(request, response);
-    	    return;
-    	}
+
+        if (request.getServletPath().matches("^/eventos/ocupacion/.+$")
+                || request.getServletPath().matches("^/eventos/espacioslibres$")
+                || request.getServletPath().matches("^/eventos/espacio/.+$")) {
+            chain.doFilter(request, response);
+            return;
+        }
 
         String authorization = request.getHeader("Authorization");
         String token = null;

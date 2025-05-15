@@ -90,7 +90,7 @@ public class ControladorAuth {
         if (!servicio.verificarCredenciales(username, password))
             return null;
 
-        HashMap<String, Object> claims = new HashMap<String, Object>();
+        HashMap<String, Object> claims = new HashMap<>();
         claims.put("sub", servicio.obtenerId(username));
         claims.put("username", username);
         claims.put("roles", servicio.obtenerRoles(username));

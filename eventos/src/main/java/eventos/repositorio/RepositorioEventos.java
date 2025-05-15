@@ -4,8 +4,8 @@ import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import eventos.modelo.Evento;
 
@@ -15,6 +15,6 @@ public interface RepositorioEventos extends PagingAndSortingRepository<Evento, U
 	Page<Evento> getEventosDelMesPaginados(int mes, int año, Pageable pageable);
 
 	Integer getMaxNumPlazasByEspacioFisico(UUID idEspacioFisico);
-	
+
 	Page<Evento> getEventosPorGestor(String gestor, Pageable pageable);
 }

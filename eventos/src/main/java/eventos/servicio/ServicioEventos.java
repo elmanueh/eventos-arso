@@ -8,8 +8,8 @@ import java.util.UUID;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import eventos.communication.producer.IEventProducer;
@@ -79,31 +79,31 @@ public class ServicioEventos implements IServicioEventos {
 		if (fechaFin.isBefore(fechaInicio))
 			throw new IllegalArgumentException("La fecha de fin no puede ser anterior a la fecha de inicio.");
 
-			Optional<EspacioFisico> espacioFisicoOptional = repositorioEspacio.findById(idEspacioFisico);
+		Optional<EspacioFisico> espacioFisicoOptional = repositorioEspacio.findById(idEspacioFisico);
 
-			if (!espacioFisicoOptional.isPresent())
-				throw new EntidadNoEncontrada("Error al encontrar el evento con id " + idEspacioFisico + ".");
-			EspacioFisico espacioFisico = espacioFisicoOptional.get();
+		if (!espacioFisicoOptional.isPresent())
+			throw new EntidadNoEncontrada("Error al encontrar el evento con id " + idEspacioFisico + ".");
+		EspacioFisico espacioFisico = espacioFisicoOptional.get();
 
-			if (espacioFisico.isCancelado())
-				throw new IllegalStateException("El espacio físico con id " + idEspacioFisico + " está cancelado.");
+		if (espacioFisico.isCancelado())
+			throw new IllegalStateException("El espacio físico con id " + idEspacioFisico + " está cancelado.");
 
-			if (repositorioEspacio.getNumeroOcupacionesPorRangoFechas(idEspacioFisico, fechaInicio, fechaFin) > 0)
-				throw new IllegalStateException(
-						"El espacio físico con id " + idEspacioFisico + " está ocupado en la fecha.");
+		if (repositorioEspacio.getNumeroOcupacionesPorRangoFechas(idEspacioFisico, fechaInicio, fechaFin) > 0)
+			throw new IllegalStateException(
+					"El espacio físico con id " + idEspacioFisico + " está ocupado en la fecha.");
 
-			if (numPlazas > espacioFisico.getCapacidad())
-				throw new IllegalStateException(
-						"El número de plazas supera la capacidad del espacio físico con id " + idEspacioFisico + ".");
+		if (numPlazas > espacioFisico.getCapacidad())
+			throw new IllegalStateException(
+					"El número de plazas supera la capacidad del espacio físico con id " + idEspacioFisico + ".");
 
-			Evento evento = new Evento(nombre, descripcion, organizador, numPlazas, categoria, fechaInicio, fechaFin,
-					espacioFisico);
+		Evento evento = new Evento(nombre, descripcion, organizador, numPlazas, categoria, fechaInicio, fechaFin,
+				espacioFisico);
 
-			UUID id = repositorioEvento.save(evento).getId();
+		UUID id = repositorioEvento.save(evento).getId();
 
-			eventosPublisher.publicarEventoCreado(id, evento);
+		eventosPublisher.publicarEventoCreado(id, evento);
 
-			return id;
+		return id;
 	}
 
 	@Override

@@ -62,9 +62,7 @@ public class JwtTokenFilter implements ContainerRequestFilter {
 
 			// Convertir los roles a una lista de GrantedAuthority
 			Set<String> authorities = new HashSet<>();
-			for (String rol : roles.split(",")) {
-				authorities.add(rol);
-			}
+			authorities.addAll(Arrays.asList(roles.split(",")));
 
 			servletRequest.setAttribute("claims", claims);
 

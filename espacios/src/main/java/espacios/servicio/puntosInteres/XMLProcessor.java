@@ -1,16 +1,21 @@
 package espacios.servicio.puntosInteres;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.LinkedList;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import espacios.modelo.PuntoInteres;
-
-import java.io.StringReader;
 
 public class XMLProcessor {
 
@@ -43,8 +48,8 @@ public class XMLProcessor {
 				listaPuntos.add(punto);
 			}
 
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (IOException | NumberFormatException | ParserConfigurationException | DOMException | SAXException e) {
+
 		}
 
 		// Devolver la lista de puntos de interés

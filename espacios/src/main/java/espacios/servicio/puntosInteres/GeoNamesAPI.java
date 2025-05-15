@@ -1,5 +1,6 @@
 package espacios.servicio.puntosInteres;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -8,9 +9,9 @@ import java.net.http.HttpResponse;
 public class GeoNamesAPI {
 
     // Método para hacer la solicitud a la API de GeoNames
-    public static String getPuntosInteresCercanos(double lat, double longi) {
-        String urlString = "http://api.geonames.org/findNearbyWikipedia?username=elmanueh&lang=ES&lat=" + lat + "&lng="
-                + longi;
+    public static String getPuntosInteresCercanos(double latitud, double longitud) {
+        String urlString = "http://api.geonames.org/findNearbyWikipedia?username=elmanueh&lang=ES&latitud=" + latitud
+                + "&lng=" + longitud;
 
         try {
             // Crear el cliente HttpClient
@@ -27,8 +28,7 @@ public class GeoNamesAPI {
 
             // Retornar el cuerpo de la respuesta
             return response.body();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException | InterruptedException e) {
             return null;
         }
     }

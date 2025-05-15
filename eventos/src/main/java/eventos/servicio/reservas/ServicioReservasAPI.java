@@ -29,7 +29,8 @@ public class ServicioReservasAPI implements IServicioReservasAPI {
 		try {
 			return reservasRest.obtenerPlazasReservadas(idEvento).execute().body();
 		} catch (IOException e) {
-			throw new ServicioReservasException("Error al consultar las plazas reservadas del evento con id " + idEvento);
+			throw new ServicioReservasException(
+					"Error al consultar las plazas reservadas del evento con id " + idEvento);
 		}
 	}
 

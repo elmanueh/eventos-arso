@@ -25,11 +25,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
             @NonNull FilterChain chain) throws IOException, ServletException {
-    	
-    	if (request.getServletPath().matches("/reservas/evento/.+/plazasReservadas")) {
-    	    chain.doFilter(request, response);
-    	    return;
-    	}
+
+        if (request.getServletPath().matches("/reservas/evento/.+/plazasReservadas")) {
+            chain.doFilter(request, response);
+            return;
+        }
 
         String authorization = request.getHeader("Authorization");
         String token = null;

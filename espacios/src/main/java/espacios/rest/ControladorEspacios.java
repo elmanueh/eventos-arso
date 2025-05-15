@@ -1,21 +1,19 @@
 package espacios.rest;
 
 import java.net.URI;
-
-import java.util.stream.Collectors;
-
 import java.time.LocalDateTime;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
-import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
-import javax.ws.rs.PATCH;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -28,20 +26,20 @@ import javax.ws.rs.core.UriInfo;
 import espacios.modelo.EspacioFisico;
 import espacios.modelo.EspacioFisicoEstado;
 import espacios.modelo.PuntoInteres;
-import espacios.servicio.IServicioEspacios;
-import espacios.servicio.core.FactoriaServicios;
 import espacios.rest.dto.CreateEspacioFisicoDTO;
 import espacios.rest.dto.Listado;
+import espacios.rest.dto.Listado.ResumenExtendido;
 import espacios.rest.dto.PuntoInteresDTO;
 import espacios.rest.dto.UpdateEspacioFisicoDTO;
-import espacios.rest.dto.Listado.ResumenExtendido;
 import espacios.rest.mapper.EspacioFisicoMapper;
 import espacios.rest.mapper.PuntoInteresMapper;
+import espacios.servicio.IServicioEspacios;
+import espacios.servicio.core.FactoriaServicios;
 
 @Path("espaciosfisicos")
 public class ControladorEspacios {
 
-    private IServicioEspacios servicio = FactoriaServicios.getServicio(IServicioEspacios.class);
+    private final IServicioEspacios servicio = FactoriaServicios.getServicio(IServicioEspacios.class);
 
     @Context
     private UriInfo uriInfo;

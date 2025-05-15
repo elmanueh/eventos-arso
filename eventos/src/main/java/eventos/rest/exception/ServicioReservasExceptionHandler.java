@@ -9,7 +9,7 @@ import eventos.servicio.reservas.exception.ServicioReservasException;
 
 @ControllerAdvice
 public class ServicioReservasExceptionHandler {
-	
+
 	@ExceptionHandler(ServicioReservasException.class)
 	public ResponseEntity<MessageError> handleNotFoundException(ServicioReservasException ex) {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

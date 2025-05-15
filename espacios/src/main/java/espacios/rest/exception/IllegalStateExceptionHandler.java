@@ -9,6 +9,7 @@ public class IllegalStateExceptionHandler implements ExceptionMapper<IllegalStat
 
 	@Override
 	public Response toResponse(IllegalStateException arg0) {
-		return Response.status(Response.Status.CONFLICT).entity(new MessageError(Response.Status.CONFLICT, arg0.getMessage())).build();
+		return Response.status(Response.Status.CONFLICT)
+				.entity(new MessageError(Response.Status.CONFLICT, arg0.getMessage())).build();
 	}
 }

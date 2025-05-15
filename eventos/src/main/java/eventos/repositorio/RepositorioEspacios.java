@@ -1,12 +1,11 @@
 package eventos.repositorio;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import eventos.modelo.EspacioFisico;
 

@@ -26,10 +26,10 @@ public class ServicioEventosAPI implements IServicioEventosAPI {
 	@Override
 	public boolean isAlgunaOcupacion(UUID idEspacio) throws ServicioEventosException {
 		try {
-			Boolean response = eventosRest.isAlgunaOcupacion(idEspacio).execute().body();
-			return response.booleanValue();
+			return eventosRest.isAlgunaOcupacion(idEspacio).execute().body();
 		} catch (IOException e) {
-			throw new ServicioEventosException("Error al consultar la ocupación del espacio físico con id " + idEspacio);
+			throw new ServicioEventosException(
+					"Error al consultar la ocupación del espacio físico con id " + idEspacio);
 		}
 	}
 
@@ -42,7 +42,7 @@ public class ServicioEventosAPI implements IServicioEventosAPI {
 					.execute().body();
 
 			return response;
-		} catch (Exception e) {
+		} catch (IOException e) {
 			throw new ServicioEventosException("Error al buscar espacios físicos libres");
 		}
 	}
@@ -50,7 +50,7 @@ public class ServicioEventosAPI implements IServicioEventosAPI {
 	@Override
 	public int validarCapacidad(UUID idEspacioFisico) throws ServicioEventosException {
 		try {
-			return eventosRest.obtenerNumPlazasMayor(idEspacioFisico).execute().body().intValue();
+			return eventosRest.obtenerNumPlazasMayor(idEspacioFisico).execute().body();
 		} catch (IOException e) {
 			throw new ServicioEventosException(
 					"Error al consultar el número de plazas mayor de un evento en el espacio físico con id "

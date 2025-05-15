@@ -16,7 +16,6 @@ public class RabbitMQStartupListener implements ServletContextListener {
 			rabbitMQ = RabbitMQConfig.getInstance();
 			rabbitMQ.startRabbitMQ();
 		} catch (Exception e) {
-			e.printStackTrace();
 			System.err.println("Error al inicializar RabbitMQ: " + e.getMessage());
 		}
 	}

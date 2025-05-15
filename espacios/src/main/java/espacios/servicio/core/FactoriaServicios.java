@@ -1,21 +1,17 @@
 package espacios.servicio.core;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
 import espacios.utils.PropertiesReader;
 
-/*
- * Factoría que encapsula la implementación de un servicio.
- * 
- * Utiliza un fichero de propiedades para cargar la implementación.
- */
-
 public class FactoriaServicios {
 
     private static final String PROPERTIES = "servicios.properties";
 
-    private static Map<Class<?>, Object> servicios = new HashMap<>();
+    private static final Map<Class<?>, Object> servicios = new HashMap<>();
 
     @SuppressWarnings("unchecked")
     public static <T> T getServicio(Class<T> servicio) {
@@ -31,8 +27,8 @@ public class FactoriaServicios {
                 return instancia;
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException | ClassNotFoundException | IllegalAccessException | IllegalArgumentException
+                | InstantiationException | NoSuchMethodException | SecurityException | InvocationTargetException e) {
             throw new RuntimeException("No se ha podido obtener la implementación del servicio: " + servicio.getName());
         }
 

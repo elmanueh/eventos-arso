@@ -47,4 +47,20 @@ public interface ReservasApi {
 			@PathVariable(name = "Identificador único del recurso relacionado", required = true) UUID id,
 			Pageable pageable) throws EntidadNoEncontrada;
 
+	@Operation(summary = "Obtener plazas reservadas", description = "Obtiene el número de plazas reservadas para un evento específico.", responses = {
+			@ApiResponse(responseCode = "200", description = "Número de plazas reservadas obtenido exitosamente.", content = @Content(schema = @Schema(implementation = Integer.class))),
+			@ApiResponse(responseCode = "404", description = "Entidad no encontrada. Esto ocurre si no se encuentra el evento relacionado.", content = @Content(schema = @Schema(implementation = MessageError.class)))
+	})
+	ResponseEntity<Integer> obtenerPlazasReservadas(
+			@PathVariable(name = "Identificador único del recurso relacionado", required = true) UUID idEvento)
+			throws EntidadNoEncontrada;
+
+	@Operation(summary = "Listar reservas por usuario", description = "Obtiene un listado paginado de reservas asociadas a un usuario específico.", responses = {
+			@ApiResponse(responseCode = "200", description = "Listado de reservas obtenido exitosamente.", content = @Content(schema = @Schema(implementation = PagedModel.class))),
+			@ApiResponse(responseCode = "404", description = "Entidad no encontrada. Esto ocurre si no se encuentra el usuario relacionado para listar las reservas.", content = @Content(schema = @Schema(implementation = MessageError.class)))
+	})
+	PagedModel<EntityModel<ReservaResumen>> getReservasPorUsuario(
+			@PathVariable(name = "Identificador único del recurso relacionado", required = true) UUID idUsuario,
+			Pageable pageable)
+			throws EntidadNoEncontrada;
 }

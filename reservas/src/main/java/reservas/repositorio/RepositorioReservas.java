@@ -4,8 +4,8 @@ import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import reservas.modelo.Reserva;
 
@@ -14,7 +14,7 @@ public interface RepositorioReservas extends PagingAndSortingRepository<Reserva,
 	Page<Reserva> findByEventoId(UUID idEvento, Pageable pageable);
 
 	Integer sumPlazasReservadasByEventoId(UUID idEvento);
-	
+
 	Page<Reserva> findByIdUsuario(UUID idEvento, Pageable pageable);
 
 }

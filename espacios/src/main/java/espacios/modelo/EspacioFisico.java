@@ -74,7 +74,7 @@ public class EspacioFisico implements Identificable {
 		this.descripcion = descripcion;
 
 		this.estado = EspacioFisicoEstado.ACTIVO;
-		this.puntosInteres = new LinkedList<PuntoInteres>();
+		this.puntosInteres = new LinkedList<>();
 	}
 
 	@PrePersist
@@ -84,10 +84,12 @@ public class EspacioFisico implements Identificable {
 		}
 	}
 
+	@Override
 	public UUID getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(UUID id) {
 		this.id = id;
 	}
@@ -133,7 +135,7 @@ public class EspacioFisico implements Identificable {
 	}
 
 	public List<PuntoInteres> getPuntosInteres() {
-		return new LinkedList<PuntoInteres>(puntosInteres);
+		return new LinkedList<>(puntosInteres);
 	}
 
 	public void setPuntosInteres(LinkedList<PuntoInteres> puntosInteres) {
@@ -173,7 +175,7 @@ public class EspacioFisico implements Identificable {
 	}
 
 	public String getNombrePuntosInteresByDistancia() {
-		LinkedList<PuntoInteres> puntosInteresAux = new LinkedList<PuntoInteres>(puntosInteres);
+		LinkedList<PuntoInteres> puntosInteresAux = new LinkedList<>(puntosInteres);
 		puntosInteresAux.sort((p1, p2) -> Double.compare(p1.getDistancia(), p2.getDistancia()));
 		return puntosInteresAux.stream().map(p -> p.toString()).collect(Collectors.joining(""));
 	}

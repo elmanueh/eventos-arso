@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 import espacios.modelo.EspacioFisico;
 import espacios.rest.dto.CreateEspacioFisicoDTO;
 import espacios.rest.dto.EspacioFisicoResponseDTO;
-import espacios.rest.dto.UpdateEspacioFisicoDTO;
 import espacios.rest.dto.ResumenEspacioFisicoResponseDTO;
+import espacios.rest.dto.UpdateEspacioFisicoDTO;
 
 public class EspacioFisicoMapper {
 

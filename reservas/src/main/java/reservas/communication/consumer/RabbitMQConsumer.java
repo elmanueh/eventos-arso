@@ -49,7 +49,7 @@ public class RabbitMQConsumer implements IEventConsumer {
 				case EVENTO_MODIFICADO:
 					EventModificarEvento eventModificado = objectMapper.convertValue(eventData,
 							EventModificarEvento.class);
-							
+
 					servicio.modificarEvento(eventModificado.getIdEntidad(),
 							eventModificado.getNumPlazas());
 					break;
@@ -61,7 +61,7 @@ public class RabbitMQConsumer implements IEventConsumer {
 					break;
 			}
 
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			System.out.println("Error al procesar el evento: " + e.getMessage());
 		}
 

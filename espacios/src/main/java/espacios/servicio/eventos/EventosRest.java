@@ -18,7 +18,7 @@ public interface EventosRest {
 			@Query("fechaInicio") String fechaInicio,
 			@Query("fechaFin") String fechaFin,
 			@Query("capacidad") int capacidad);
-	
+
 	@GET("eventos/espacio/{id}")
 	Call<Integer> obtenerNumPlazasMayor(@Path("id") UUID idEspacioFisico);
 }

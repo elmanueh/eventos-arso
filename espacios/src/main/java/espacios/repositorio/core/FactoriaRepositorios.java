@@ -1,5 +1,8 @@
 package espacios.repositorio.core;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
 import espacios.utils.PropertiesReader;
 
 public class FactoriaRepositorios {
@@ -13,8 +16,8 @@ public class FactoriaRepositorios {
 			PropertiesReader properties = new PropertiesReader(PROPERTIES);
 			String clase = properties.getProperty(entidad.getName());
 			return (R) Class.forName(clase).getConstructor().newInstance();
-		} catch (Exception e) {
-			e.printStackTrace(); // útil para depuración
+		} catch (IOException | ClassNotFoundException | IllegalAccessException | IllegalArgumentException
+				| InstantiationException | NoSuchMethodException | SecurityException | InvocationTargetException e) {
 			throw new RuntimeException("No se ha podido obtener el repositorio para la entidad: " + entidad.getName());
 		}
 

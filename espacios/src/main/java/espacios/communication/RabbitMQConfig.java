@@ -1,6 +1,9 @@
 package espacios.communication;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeoutException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,7 +45,8 @@ public class RabbitMQConfig {
 
 			connection = factory.newConnection();
 			channel = connection.createChannel();
-		} catch (Exception e) {
+		} catch (IOException | URISyntaxException | KeyManagementException | NoSuchAlgorithmException
+				| TimeoutException e) {
 			throw new RuntimeException("Error al conectar con RabbitMQ", e);
 		}
 	}
@@ -54,7 +58,6 @@ public class RabbitMQConfig {
 			if (connection != null)
 				connection.close();
 		} catch (IOException | TimeoutException e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -66,7 +69,7 @@ public class RabbitMQConfig {
 			String mensaje = objectMapper.writeValueAsString(event);
 			channel.basicPublish(EXCHANGE_NAME, generarRoutingKey(event.getTipoEvento()),
 					new AMQP.BasicProperties.Builder().build(), mensaje.getBytes());
-		} catch (Exception e) {
+		} catch (IOException e) {
 			throw new RuntimeException("Error al publicar el evento", e);
 		}
 	}

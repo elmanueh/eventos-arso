@@ -22,9 +22,9 @@ public class RepositorioAdHocJPAEspacioFisico extends RepositorioJPA<EspacioFisi
 	@Override
 	public List<EspacioFisico> getEspaciosFisicosByIds(List<UUID> ids) {
 		if (ids == null || ids.isEmpty()) {
-	        return new LinkedList<>();
-	    }
-		
+			return new LinkedList<>();
+		}
+
 		EntityManager em = EntityManagerHelper.getEntityManager();
 
 		String queryString = "SELECT e FROM EspacioFisico e WHERE e.id IN :ids";
@@ -40,17 +40,17 @@ public class RepositorioAdHocJPAEspacioFisico extends RepositorioJPA<EspacioFisi
 
 	@Override
 	public List<EspacioFisico> getEspaciosFisicosByPropietario(String propietario) {
-		 EntityManager em = EntityManagerHelper.getEntityManager();
+		EntityManager em = EntityManagerHelper.getEntityManager();
 
-	    String queryString = "SELECT e FROM EspacioFisico e WHERE e.propietario = :propietario";
+		String queryString = "SELECT e FROM EspacioFisico e WHERE e.propietario = :propietario";
 
-	    TypedQuery<EspacioFisico> typedQuery = em.createQuery(queryString, EspacioFisico.class);
-	    typedQuery.setParameter("propietario", propietario);
+		TypedQuery<EspacioFisico> typedQuery = em.createQuery(queryString, EspacioFisico.class);
+		typedQuery.setParameter("propietario", propietario);
 
-	    List<EspacioFisico> resultado = typedQuery.getResultList();
-	    EntityManagerHelper.closeEntityManager();
+		List<EspacioFisico> resultado = typedQuery.getResultList();
+		EntityManagerHelper.closeEntityManager();
 
-	    return resultado;
+		return resultado;
 	}
 
 }

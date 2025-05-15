@@ -42,7 +42,8 @@ public class RabbitMQConsumer implements IEventConsumer {
 			switch (tipoEvento) {
 				case ESPACIO_CREADO:
 					EventCrearEspacio eventCreado = objectMapper.convertValue(eventData, EventCrearEspacio.class);
-					servicio.crearEspacio(eventCreado.getIdEntidad(), eventCreado.isCancelado(), eventCreado.getCapacidad());
+					servicio.crearEspacio(eventCreado.getIdEntidad(), eventCreado.isCancelado(),
+							eventCreado.getCapacidad());
 					break;
 
 				case ESPACIO_MODIFICADO:
@@ -59,7 +60,7 @@ public class RabbitMQConsumer implements IEventConsumer {
 
 			}
 
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			System.out.println("Error al procesar el evento: " + e.getMessage());
 		}
 
