@@ -115,12 +115,15 @@ public class ServicioEspacios implements IServicioEspacios {
 		if (idEspacioFisico == null)
 			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo.");
 
-		if (!servicioEventosAPI.isAlgunaOcupacion(idEspacioFisico)) {
-			EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
-			espacioFisico.cerrar();
-			repositorioEspacioFisico.update(espacioFisico);
-			eventProducer.publicarEspacioEstadoModificado(idEspacioFisico, true);
+		if (servicioEventosAPI.isAlgunaOcupacion(idEspacioFisico)) {
+			throw new IllegalStateException("El espacio físico con id " + idEspacioFisico
+					+ " no puede ser dado de baja porque tiene eventos activos.");
 		}
+
+		EspacioFisico espacioFisico = repositorioEspacioFisico.getById(idEspacioFisico);
+		espacioFisico.cerrar();
+		repositorioEspacioFisico.update(espacioFisico);
+		eventProducer.publicarEspacioEstadoModificado(idEspacioFisico, true);
 	}
 
 	@Override
