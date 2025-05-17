@@ -74,11 +74,13 @@ public class ControladorAuth {
                     UUID idUsuario = UUID.fromString((String) claims.get("sub"));
                     String nombreUsuario = (String) claims.get("username");
                     String rolesUsuario = (String) claims.get("roles");
+                    String avatarUrl = (String) claims.get("avatar_url");
 
                     AuthResponseDto authResponse = new AuthResponseDto();
                     authResponse.setIdUsuario(idUsuario);
                     authResponse.setNombreUsuario(nombreUsuario);
                     authResponse.setRolesUsuario(rolesUsuario);
+                    authResponse.setAvatarUrl(avatarUrl);
                     return ResponseEntity.ok(authResponse);
                 })
                 .findFirst()

@@ -7,6 +7,7 @@ public class AuthResponseDto {
     private UUID idUsuario;
     private String nombreUsuario;
     private String rolesUsuario;
+    private String avatarUrl;
 
     public AuthResponseDto() {
     }
@@ -41,6 +42,14 @@ public class AuthResponseDto {
 
     public void setRolesUsuario(String rolesUsuario) {
         this.rolesUsuario = rolesUsuario;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
 }

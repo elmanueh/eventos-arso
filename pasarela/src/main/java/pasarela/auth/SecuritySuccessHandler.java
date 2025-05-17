@@ -3,6 +3,7 @@ package pasarela.auth;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,9 +38,10 @@ public class SecuritySuccessHandler implements AuthenticationSuccessHandler {
 		if (claims != null) {
 			AuthResponseDto authResponse = new AuthResponseDto();
 			authResponse.setToken(JwtUtils.generateToken(claims));
-			authResponse.setIdUsuario(servicio.obtenerId(usuario.getName()));
-			authResponse.setNombreUsuario(usuario.getAttribute("name"));
-			authResponse.setRolesUsuario(servicio.obtenerRoles(usuario.getName()));
+			authResponse.setIdUsuario(UUID.fromString(claims.get("sub").toString()));
+			authResponse.setNombreUsuario(claims.get("username").toString());
+			authResponse.setRolesUsuario(claims.get("roles").toString());
+			authResponse.setAvatarUrl(claims.get("avatar_url").toString());
 
 			ObjectMapper objectMapper = new ObjectMapper();
 
@@ -51,12 +53,14 @@ public class SecuritySuccessHandler implements AuthenticationSuccessHandler {
 
 	private Map<String, Object> fetchUserInfo(DefaultOAuth2User usuario) {
 		if (!servicio.verificarCredenciales(usuario.getName())) {
-			servicio.crearUsuario(usuario.getName(), usuario.getAttribute("name"));
+			servicio.crearUsuario(usuario.getName(), usuario.getAttribute("login"));
 		}
 
 		HashMap<String, Object> claims = new HashMap<>();
-		claims.put("sub", usuario.getName());
+		claims.put("sub", servicio.obtenerId(usuario.getName()));
 		claims.put("roles", servicio.obtenerRoles(usuario.getName()));
+		claims.put("username", usuario.getAttribute("login"));
+		claims.put("avatar_url", usuario.getAttribute("avatar_url"));
 
 		return claims;
 	}
