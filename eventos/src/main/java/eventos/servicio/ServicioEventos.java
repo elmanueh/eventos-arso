@@ -125,15 +125,27 @@ public class ServicioEventos implements IServicioEventos {
 		if (descripcion != null)
 			evento.setDescripcion(descripcion);
 		if (fechaInicio != null) {
-			if (fechaInicio.isAfter(evento.getFechaFinOcupacion()))
-				throw new IllegalArgumentException("La fecha de inicio no puede ser posterior a la fecha de fin.");
+			if (fechaFin != null) {
+				if (fechaInicio.isAfter(fechaFin))
+					throw new IllegalArgumentException("La fecha de inicio no puede ser posterior a la fecha de fin.");
+			} else {
+				if (fechaInicio.isAfter(evento.getFechaFinOcupacion()))
+					throw new IllegalArgumentException(
+							"La fecha de inicio no puede ser posterior a la fecha de fin.");
+			}
 			evento.setFechaInicio(fechaInicio);
 		}
 		if (fechaFin != null) {
-			if (fechaFin.isBefore(evento.getFechaInicioOcupacion()))
-				throw new IllegalArgumentException("La fecha de fin no puede ser anterior a la fecha de inicio.");
+			if (fechaInicio != null) {
+				if (fechaFin.isBefore(fechaInicio))
+					throw new IllegalArgumentException("La fecha de fin no puede ser anterior a la fecha de inicio.");
+			} else {
+				if (fechaFin.isBefore(evento.getFechaInicioOcupacion()))
+					throw new IllegalArgumentException("La fecha de fin no puede ser anterior a la fecha de inicio.");
+			}
 			evento.setFechaFin(fechaFin);
 		}
+
 		if (numPlazas != 0) {
 			if (evento.getOcupacion() != null && evento.getNumPlazas() > numPlazas) {
 				int numPlazasReservadas = servicioReservasAPI.obtenerPlazasReservadas(idEvento);
@@ -166,6 +178,15 @@ public class ServicioEventos implements IServicioEventos {
 						"El número de plazas supera la capacidad del espacio físico con id " + idEspacioFisico + ".");
 
 			evento.setEspacioFisico(espacioFisico);
+		} else {
+			if (fechaInicio != null || fechaFin != null) {
+				if (repositorioEspacio.getNumeroOcupacionesPorRangoFechasEnEvento(
+						evento.getOcupacion().getEspacioFisico().getId(),
+						evento.getFechaInicioOcupacion(), evento.getFechaFinOcupacion(), evento.getId()) > 0)
+					throw new IllegalStateException(
+							"El espacio físico con id " + evento.getOcupacion().getEspacioFisico().getId()
+									+ " está ocupado en la fecha.");
+			}
 		}
 
 		repositorioEvento.save(evento);

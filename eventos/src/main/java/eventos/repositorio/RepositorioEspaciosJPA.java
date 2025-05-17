@@ -21,6 +21,12 @@ public interface RepositorioEspaciosJPA extends RepositorioEspacios, JpaReposito
 	@Override
 	int getNumeroOcupacionesPorRangoFechas(UUID idEspacioFisico, LocalDateTime fechaInicio, LocalDateTime fechaFin);
 
+	@Query("SELECT COUNT(o) FROM Evento e JOIN e.ocupacion o WHERE o.espacioFisico.id = :idEspacioFisico AND o.fechaInicio < :fechaFin AND o.fechaFin > :fechaInicio AND e.id != :idEvento")
+	@Override
+	int getNumeroOcupacionesPorRangoFechasEnEvento(UUID idEspacioFisico, LocalDateTime fechaInicio,
+			LocalDateTime fechaFin,
+			UUID idEvento);
+
 	@Query("SELECT COUNT(o.espacioFisico) FROM Ocupacion o WHERE o.espacioFisico.id = :idEspacioFisico")
 	@Override
 	int getNumeroOcupaciones(UUID idEspacioFisico);

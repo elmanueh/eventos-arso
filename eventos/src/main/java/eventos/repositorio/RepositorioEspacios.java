@@ -15,5 +15,8 @@ public interface RepositorioEspacios extends PagingAndSortingRepository<EspacioF
 
 	int getNumeroOcupacionesPorRangoFechas(UUID idEspacioFisico, LocalDateTime fechaInicio, LocalDateTime fechaFin);
 
+	int getNumeroOcupacionesPorRangoFechasEnEvento(UUID idEspacioFisico, LocalDateTime fechaInicio, LocalDateTime fechaFin,
+			UUID idEvento);
+
 	int getNumeroOcupaciones(UUID idEspacioFisico);
 }
