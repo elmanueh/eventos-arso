@@ -11,7 +11,7 @@ public class EventoMapper {
 
 	public static EventoResponseDTO toDTO(Evento evento) {
 		EventoResponseDTO dto = new EventoResponseDTO();
-		dto.setIdEvento(evento.getId());
+		dto.setId(evento.getId());
 		dto.setNombre(evento.getNombre());
 		dto.setDescripcion(evento.getDescripcion());
 		dto.setOrganizador(evento.getOrganizador());

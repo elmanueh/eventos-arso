@@ -3,7 +3,7 @@ package eventos.rest.dto;
 import java.util.UUID;
 
 public class EventoResponseDTO {
-	private UUID idEvento;
+	private UUID id;
 	private String nombre;
 	private String descripcion;
 	private String organizador;
@@ -19,12 +19,12 @@ public class EventoResponseDTO {
 	public EventoResponseDTO() {
 	}
 
-	public UUID getIdEvento() {
-		return idEvento;
+	public UUID getId() {
+		return id;
 	}
 
-	public void setIdEvento(UUID idEvento) {
-		this.idEvento = idEvento;
+	public void setId(UUID id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
