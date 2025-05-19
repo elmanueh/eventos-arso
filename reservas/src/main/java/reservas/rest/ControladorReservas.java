@@ -53,7 +53,7 @@ public class ControladorReservas implements ReservasApi {
 	public ResponseEntity<Void> createReserva(@Valid @RequestBody CreateReservaDTO reservaDTO)
 			throws EntidadNoEncontrada {
 
-		UUID id = servicio.reservar(reservaDTO.getIdEvento(), reservaDTO.getIdUsuario(), reservaDTO.getNumPlazas());
+		UUID id = servicio.reservar(reservaDTO.getIdEvento(), reservaDTO.getIdUsuario(), reservaDTO.getPlazasReservadas());
 
 		URI nuevaURL = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
 		return ResponseEntity.created(nuevaURL).build();
