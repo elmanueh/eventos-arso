@@ -332,6 +332,20 @@ db.eventos.insertMany([
     ],
     _class: 'reservas.modelo.Evento'
   },
+  {
+    _id: 'e5e55555-eeee-5eee-5eee-ffffeeee0004',
+    plazasDisponibles: 50,
+    cancelado: false,
+    reservas: [],
+    _class: 'reservas.modelo.Evento'
+  },
+  {
+    _id: 'e5e55555-eeee-5eee-5eee-ffffeeee0002',
+    plazasDisponibles: 200,
+    cancelado: false,
+    reservas: [],
+    _class: 'reservas.modelo.Evento'
+  },
 
   {
     _id: 'e5e55555-eeee-5eee-5eee-ffffeeee0007',
