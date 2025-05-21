@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -56,7 +57,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 return;
             }
 
-        } catch (IOException e) {
+        } catch (JwtException e) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "El token JWT no es correcto");
             return;
         }

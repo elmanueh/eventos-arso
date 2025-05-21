@@ -18,7 +18,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JwtUtils {
 
 	private static final String SECRETO = "secreto";
-	private static final long TIEMPO = 3600; // 1 hora
+	private static final long TIEMPO = 60 * 60 * 24; // 1 dia
 
 	public static String generateToken(Map<String, Object> claims) {
 		Date caducidad = Date.from(Instant.now().plusSeconds(TIEMPO));
