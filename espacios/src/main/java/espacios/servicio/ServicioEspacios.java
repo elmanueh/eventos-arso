@@ -31,6 +31,10 @@ public class ServicioEspacios implements IServicioEspacios {
 	@Override
 	public EspacioFisico recuperarEspacioFisico(UUID idEspacioFisico)
 			throws RepositorioException, EntidadNoEncontrada {
+
+		if (idEspacioFisico == null)
+			throw new IllegalArgumentException("El id del espacio físico no puede ser nulo.");
+
 		return repositorioEspacioFisico.getById(idEspacioFisico);
 	}
 
