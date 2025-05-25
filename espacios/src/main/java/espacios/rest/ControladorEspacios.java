@@ -2,6 +2,7 @@ package espacios.rest;
 
 import java.net.URI;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -110,9 +111,22 @@ public class ControladorEspacios {
     public Response buscarEspaciosFisicosLibres(@QueryParam("fechainicio") String fechaInicio,
             @QueryParam("fechafin") String fechaFin, @QueryParam("capacidad") int capacidad) throws Exception {
 
-        List<EspacioFisico> espaciosFisicosLibres = servicio.buscarEspaciosFisicosLibres(
-                LocalDateTime.parse(fechaInicio),
-                LocalDateTime.parse(fechaFin), capacidad);
+        LocalDateTime fechaInicioParsed;
+        LocalDateTime fechaFinParsed;
+        try {
+            fechaInicioParsed = LocalDateTime.parse(fechaInicio);
+        } catch (DateTimeParseException e) {
+            fechaInicioParsed = null;
+        }
+
+        try {
+            fechaFinParsed = LocalDateTime.parse(fechaFin);
+        } catch (DateTimeParseException e) {
+            fechaFinParsed = null;
+        }
+
+        List<EspacioFisico> espaciosFisicosLibres = servicio.buscarEspaciosFisicosLibres(fechaInicioParsed,
+                fechaFinParsed, capacidad);
 
         LinkedList<ResumenExtendido> extendido = new LinkedList<>();
 
